@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LLHM"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivityNewUser">
+
+
+    <TextView
+        android:id="@+id/textViewNewUserTitle"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="\nCreate New User"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:id="@+id/LLH1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editTextFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="18sp"
+            android:hint="Enter Full Name"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LLH2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+
+
+        <EditText
+            android:id="@+id/editTextTextEmailAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="18sp"
+            android:hint="Enter Email"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/LLH4"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/editTextPhoneNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="18sp"
+            android:hint="Enter Phone No"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LLH6"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/editTextNewUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="18sp"
+            android:hint="Enter Username"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LLH7"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+
+
+        <EditText
+            android:id="@+id/editTextNewUserPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="Enter Password"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewMessage"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:textColor="@color/design_default_color_error"
+        android:textSize="18sp" />
+
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="198dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="#2A4262"
+            android:onClick="saveNewUserButton"
+            android:text="Save" />
+
+
+</LinearLayout>

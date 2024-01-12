@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="#0223355F"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp">
+
+    <TextView
+        android:id="@+id/cake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:gravity="center"
+        android:text="@string/my_habits"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <ListView
+        android:id="@+id/HabitlistView"
+        android:layout_width="361dp"
+        android:layout_height="595dp"
+        android:layout_below="@+id/cake"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:clipToPadding="false"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="0.5dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="32dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/basketFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/plus"
+        app:backgroundTint="#223355"
+        android:onClick="addHabitButton"/>
+
+</RelativeLayout>

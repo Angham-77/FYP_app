@@ -1,0 +1,46 @@
+<!-- activity_add_habit.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="#223355"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Habit Name Input -->
+    <EditText
+        android:id="@+id/editTextHabitName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Habit Name" />
+
+    <EditText
+        android:id="@+id/editTextHabitStartDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Start Date" />
+
+    <Button
+        android:id="@+id/buttonSaveHabit"
+        android:layout_width="198dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#2A4262"
+        android:text="Save Habit"
+        android:onClick="saveNewHabitButton"/>
+
+    <Button
+        android:id="@+id/buttonViewHabit"
+        android:layout_width="198dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#2A4262"
+        android:text="View Habit"
+        android:onClick="viewHabitButton"/>
+    <TextView
+        android:id="@+id/textViewMessageHabit"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:textColor="@color/design_default_color_error"
+        android:textSize="18sp" />
+
+</LinearLayout>
