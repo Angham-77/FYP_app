@@ -38,7 +38,7 @@
         android:paddingBottom="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/basketFab"
+        android:id="@+id/addFloatingBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -47,8 +47,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/plus"
+        android:src="@drawable/icons8_plus_30"
         app:backgroundTint="#223355"
-        android:onClick="addHabitButton"/>
+        android:onClick="addHabitButton"
+        app:tint="@null"/>
 
 </RelativeLayout>

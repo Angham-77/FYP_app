@@ -21,48 +21,30 @@ class MainActivityNewUser : AppCompatActivity() {
         val UserUserName  = findViewById<EditText>(R.id.editTextNewUserName).text.toString()
         val UserPassword  = findViewById<EditText>(R.id.editTextNewUserPassword).text.toString()
         val UserPhoneNo = findViewById<EditText>(R.id.editTextPhoneNo).text.toString()
-        var UserIsActive = 0
+        //var UserIsActive = 0
+
 
         val message = findViewById<TextView>(R.id.textViewMessage)
+        val validationResult = UserInputValidator().validateNewUserInput(UserfullName, UserEmail, UserPhoneNo, UserUserName, UserPassword)
 
-        /*check Male or Female*/
-       // val rg = findViewById<RadioGroup>(R.id.radioGroupActivity)
-     //   val rb = findViewById<RadioButton>(rg.checkedRadioButtonId)
-     //   if(rb.text.toString() == "Male")
-      //      UserIsActive = 0
-      //  else UserIsActive = 1
-//
-        // if not empty, covert age to integer,  otherwise zero
-        // val userAge = if(age.isEmpty()) 0 else age.toInt()
-
-        if(UserfullName.isEmpty() ) // First and last name are required
-        // Toast.makeText(this,"First name and last name are required!",Toast.LENGTH_LONG).show()
-            message.text = "First name and last name are required!"
-        else if(UserUserName.isEmpty() || UserPassword.isEmpty() ) // // User name and password are required
-        //  Toast.makeText(this,"User name and Password are required!",Toast.LENGTH_LONG).show()
-            message.text = "User name and Password are required!"
-        else { // Save data
-            // Create object
-            // Hash the password using PasswordHasher
+        if (validationResult == "Valid") {
+            // Save data
             val hashedPassword = PasswordHasher.hashPassword(UserPassword)
-            println("Hashed Password: $hashedPassword")
-
-            // Create object with hashed password
-            val newUser = User(-1, UserfullName, UserEmail, UserPhoneNo, UserUserName, hashedPassword, UserIsActive)
-            //save data
+            val newUser = User(-1, UserfullName, UserEmail, UserPhoneNo, UserUserName, hashedPassword, 0)
             val mydatabase = DataBaseHelper(this)
             val result = mydatabase.addUser(newUser)
 
-            when(result) {
-
-                -1 -> message.text = "Error on creating new account"
+            when (result) {
+                -1 -> message.text = "Error on creating a new account"
                 -2 -> message.text = "Error can not open/create database"
                 -3 -> message.text = "User name is already exist"
-                else ->  {
-                    message.text = "Your details has been add to the database successfully "
-                    findViewById<Button>(R.id. buttonSave).isEnabled = false
+                else -> {
+                    message.text = "Your details have been added to the database successfully"
+                    findViewById<Button>(R.id.buttonSave).isEnabled = false
                 }
             }
+        } else {
+            message.text = validationResult
         }
     }
 }

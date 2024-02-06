@@ -37,7 +37,7 @@
             android:id="@+id/RemoveHabitBtn"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            android:backgroundTint="#474444"
+            android:backgroundTint="#2A4262"
             android:onClick="addToOrderClick"
             android:text="Remove" />
 

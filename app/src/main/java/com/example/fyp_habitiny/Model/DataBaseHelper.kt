@@ -216,10 +216,37 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         val success  =  db.insert(HabitTableName, null, cv)
 
         db.close()
-        if (success.toInt() == -1) return success.toInt() //Error, adding new user
+        if (success.toInt() == -1) return success.toInt() //Error, adding new habit
         else return success.toInt() //1
 
     }
+  /* fun addHabit(habit: Habit): Long {
+       val db: SQLiteDatabase
+       try {
+           db = this.writableDatabase
+       } catch(e: SQLiteException) {
+           e.printStackTrace()
+           return -2L // Indicate database access error
+       }
+
+       val cv = ContentValues()
+       cv.put(Habit_Column_Name, habit.habitName)
+       cv.put(Habit_Column_StartDate, habit.habitStartDate)
+
+       val rowId: Long
+       try {
+           rowId = db.insert(HabitTableName, null, cv)
+       } catch (e: SQLiteException) {
+           e.printStackTrace()
+           db.close()
+           return -3L // Indicate error during insert
+       } finally {
+           db.close()
+       }
+
+       return rowId // Directly return the row ID of the newly inserted habit or -1 if error occurred
+   }*/
+
 
     private fun checkUserName(user: User): Int {
 
@@ -282,7 +309,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
     }
 
-    @SuppressLint("Range")
+  /*  @SuppressLint("Range")
     fun getHabit(): List<Habit> {
         val productList = mutableListOf<Habit>()
         val db: SQLiteDatabase
@@ -310,7 +337,45 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         db.close()
 
         return productList
-    }
+    }*/
+  @SuppressLint("Range")
+  fun getHabit(): List<Habit> {
+      val productList = mutableListOf<Habit>()
+      val db: SQLiteDatabase
 
+      try {
+          db = this.readableDatabase
+      } catch (e: SQLiteException) {
+          // Handle the exception as needed
+          return emptyList()
+      }
+
+      val sqlStatement = "SELECT * FROM $HabitTableName"
+      val cursor: Cursor = db.rawQuery(sqlStatement, null)
+
+      while (cursor.moveToNext()) {
+          val id = cursor.getInt(cursor.getColumnIndex(Habit_Column_ID)) // Retrieve the habit ID
+          val habitName = cursor.getString(cursor.getColumnIndex(Habit_Column_Name))
+          val habitStartDate = cursor.getString(cursor.getColumnIndex(Habit_Column_StartDate))
+          val habitStatus = cursor.getInt(cursor.getColumnIndex(Habit_Column_HabitStatus)) // Assuming you want to retrieve this as well
+
+          val habit = Habit(id, 0, habitName, habitStartDate, habitStatus) // Use the actual ID
+          productList.add(habit)
+      }
+
+      cursor.close()
+      db.close()
+
+      return productList
+  }
+
+    fun deleteHabit(habitId: Int): Boolean {
+        val db = this.writableDatabase
+        val selection = "$Habit_Column_ID = ?" // Use = for an exact match
+        val selectionArgs = arrayOf(habitId.toString())
+        val deletedRows = db.delete(HabitTableName, selection, selectionArgs)
+        db.close()
+        return deletedRows > 0
+    }
 
 }
