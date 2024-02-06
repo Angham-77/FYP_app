@@ -13,6 +13,14 @@
         android:theme="@style/Theme.FYP_Habitiny"
         tools:targetApi="31">
         <activity
+            android:name=".MainAcitivy_bottom_nav_view"
+            android:exported="true"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".MainActivityBottomNav"
+            android:exported="true"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".MainActivityAddNewHabit"
             android:exported="true"
             android:parentActivityName=".MainActivtyMyHabit"/>

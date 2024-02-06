@@ -3,6 +3,7 @@ package com.example.fyp_habitiny
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -10,15 +11,18 @@ import android.widget.Toast
 import com.example.fyp_habitiny.Model.DataBaseHelper
 import com.example.fyp_habitiny.Model.User
 import com.example.fyp_habitiny.Model.PasswordHasher
+import com.example.fyp_habitiny.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
     }
+
     fun loginButton(view: View) {
-        val message = findViewById<TextView>(R.id.textViewMessage)
+        val message = findViewById<TextView>(R.id.textViewMessageMainActivity)
         val userName = findViewById<EditText>(R.id.editTextUserName).text.toString()
         val userPassword = findViewById<EditText>(R.id.editTextPassword).text.toString()
 

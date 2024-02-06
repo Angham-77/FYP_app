@@ -3,6 +3,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="button_color">#2A4262</color>
+    <color name="nav_grey">#B9B9B9</color>
     <color name="light_grey">#D3D3D3</color>
+
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FF000000</color>
+    <color name="colorAccent">#D3D3D3</color>
+
+
 
 </resources>

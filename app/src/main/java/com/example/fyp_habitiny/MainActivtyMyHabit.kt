@@ -28,8 +28,5 @@ class MainActivtyMyHabit : AppCompatActivity() {
         val intent = Intent(this, MainActivityAddNewHabit::class.java)
         startActivity(intent)
     }
-    fun viewHabitButton(view: View) {
-        val intent = Intent(this, MainActivityAddNewHabit::class.java)
-        startActivity(intent)
-    }
+
 }
