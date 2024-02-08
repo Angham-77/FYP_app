@@ -19,6 +19,41 @@
         android:layout_height="wrap_content"
         android:hint="Enter Start Date" />
 
+    <EditText
+        android:id="@+id/editTextTarget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter you target number" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupHabitPreference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"> <!-- or horizontal if you prefer -->
+
+        <RadioButton
+            android:id="@+id/radioButtonAllDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All Day"
+            android:padding="2dp"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonMorning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Morning"
+            android:padding="2dp"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonEvening"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Evening"
+            android:padding="2dp"/>
+    </RadioGroup>
+
     <Button
         android:id="@+id/buttonSaveHabit"
         android:layout_width="198dp"

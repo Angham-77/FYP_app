@@ -1,5 +1,6 @@
 package com.example.fyp_habitiny
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,19 +16,25 @@ import com.example.fyp_habitiny.Model.Habit
 class HabitAdapter(context: Context, resource: Int, private val habitList: List<Habit>) :
     ArrayAdapter<Habit>(context, resource, habitList) {
 
+    @SuppressLint("MissingInflatedId")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val itemView = inflater.inflate(R.layout.activity_single_habit, parent, false) // Ensure this matches your layout file name
 
         val habitNameTextView: TextView = itemView.findViewById(R.id.habitNameTextView)
         val habitStartDateTextView: TextView = itemView.findViewById(R.id.HabitStartDateTextView)
+        val habitTargetTextView: TextView= itemView.findViewById(R.id.HabitTargetNumber)
+        val habitTimePrefTextView: TextView = itemView.findViewById(R.id.HabitTimePref)
         val habitStatusView: CheckBox = itemView.findViewById(R.id.HabitDonecheckBox)
         val removeButton: Button = itemView.findViewById(R.id.RemoveHabitBtn)
+
 
         val habit = habitList[position]
 
         habitNameTextView.text = habit.habitName
         habitStartDateTextView.text = "Start Date: ${habit.habitStartDate}"
+        habitTargetTextView.text = "Target: ${habit.habittarget}"
+        habitTimePrefTextView.text = "Time: ${habit.habittimePreference}"
         habitStatusView.isChecked = (habit.habitStatus == 1)
 
         removeButton.setOnClickListener {
@@ -43,7 +50,12 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: List<
                 Log.d("HabitAdapter", "Failed to delete habit: ${habit.habitId}") // Log on failure
             }
         }
-
+        habitStatusView.setOnCheckedChangeListener { _, isChecked ->
+            val newStatus = if (isChecked) 1 else 0
+            val dbHelper = DataBaseHelper(context)
+            dbHelper.updateHabitStatus(habit.habitId, newStatus)
+            this.notifyDataSetChanged()
+        }
         return itemView
     }
 
