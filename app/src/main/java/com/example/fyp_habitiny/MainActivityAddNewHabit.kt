@@ -4,7 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fyp_habitiny.Model.DataBaseHelper
@@ -19,16 +22,39 @@ class MainActivityAddNewHabit : AppCompatActivity() {
     fun saveNewHabitButton(view: View) {
         val habitName = findViewById<EditText>(R.id.editTextHabitName).text.toString()
         val habitStartDate = findViewById<EditText>(R.id.editTextHabitStartDate).text.toString()
+        val habitTarget = findViewById<EditText>(R.id.editTextTarget).text.toString()
+        var habitPref = ""
         val message = findViewById<TextView>(R.id.textViewMessageHabit)
+
+
+
+
+        //////
+        val HabitTarget = habitTarget.toInt()
+        /*check Time Preference*/
+        val rg = findViewById<RadioGroup>(R.id.radioGroupHabitPreference)
+        val rb = findViewById<RadioButton>(rg.checkedRadioButtonId)
+        if(rb.text.toString() == "All Day")
+            habitPref = "All Day"
+        else if (rb.text.toString() == "Morning") { // Corrected line: Added missing closing parenthesis
+            habitPref = "Morning"
+        } else {
+            habitPref = "Evening"
+        }
+
+        ////////
 
         val validator = UserInputValidator()
         val validationResult = validator.validateHabitInput(habitName, habitStartDate)
+      //  val habitStatus = 0
 
         if (validationResult != "Valid") {
             message.text = validationResult
         } else {
             // Proceed with saving the habit as before
-            val newHabit = Habit(-1, 0, habitName, habitStartDate, 0)
+            /*val habitId: Int, var HabitUserId: Int, var habitName: String, var habitStartDate: String,
+              val habitStatus: Int, val habittarget: Int, val habittimePreference: Int*/
+            val newHabit = Habit(-1, 0, habitName, habitStartDate, 0, HabitTarget, habitPref)
             val mydatabase = DataBaseHelper(this)
             val result = mydatabase.addHabit(newHabit)
 

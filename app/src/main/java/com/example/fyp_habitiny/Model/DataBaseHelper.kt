@@ -47,6 +47,8 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
     private val Habit_Column_Name = "HabitName"
     private val Habit_Column_StartDate = "StartDate"
     private val Habit_Column_HabitStatus = "HabitStatus"
+    private val Habit_Column_Target = "Target"
+    private val Habit_Column_TimePreference = "TimePreference"
 
 
     /*Recomanded habits table*/
@@ -117,7 +119,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
         try {
             var sqlCreateStatement: String = "CREATE TABLE " + HabitTableName + "(" + Habit_Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +  Habit_Column_UserId + "  INTEGER, " +
-                    Habit_Column_Name + " TEXT NOT NULL, " + Habit_Column_StartDate+ " TEXT NOT NULL, "  + Habit_Column_HabitStatus+ " INTEGER)"
+                    Habit_Column_Name + " TEXT NOT NULL, " + Habit_Column_StartDate+ " TEXT NOT NULL, "  + Habit_Column_HabitStatus+ " INTEGER NOT NULL" + Habit_Column_Target+ " INTEGER NOT NULL" + Habit_Column_TimePreference+ " TEXT NOT NULL )"
 
             db?.execSQL(sqlCreateStatement)
         }
@@ -211,6 +213,9 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
         cv.put(Habit_Column_Name, habit.habitName)
         cv.put(Habit_Column_StartDate, habit.habitStartDate)
+        cv.put(Habit_Column_HabitStatus, habit.habitStatus)
+        cv.put(Habit_Column_Target, habit.habittarget)
+        cv.put(Habit_Column_TimePreference, habit.habittimePreference)
 
 
         val success  =  db.insert(HabitTableName, null, cv)
@@ -357,9 +362,12 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
           val id = cursor.getInt(cursor.getColumnIndex(Habit_Column_ID)) // Retrieve the habit ID
           val habitName = cursor.getString(cursor.getColumnIndex(Habit_Column_Name))
           val habitStartDate = cursor.getString(cursor.getColumnIndex(Habit_Column_StartDate))
-          val habitStatus = cursor.getInt(cursor.getColumnIndex(Habit_Column_HabitStatus)) // Assuming you want to retrieve this as well
+          val habitStatus = cursor.getInt(cursor.getColumnIndex(Habit_Column_HabitStatus))
+          val habitTarget = cursor.getInt(cursor.getColumnIndex(Habit_Column_Target))
+          val habitTimePre = cursor.getString(cursor.getColumnIndex(Habit_Column_TimePreference))
 
-          val habit = Habit(id, 0, habitName, habitStartDate, habitStatus) // Use the actual ID
+
+          val habit = Habit(id, 0, habitName, habitStartDate, habitStatus, habitTarget, habitTimePre) // Use the actual ID
           productList.add(habit)
       }
 
@@ -377,5 +385,25 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         db.close()
         return deletedRows > 0
     }
+    fun updateHabitStatus(habitId: Int, status: Int): Int {
+        val db: SQLiteDatabase
+        try {
+            db = this.writableDatabase
+        } catch(e: SQLiteException) {
+            e.printStackTrace()
+            return -2 // Indicate database access error
+        }
+
+        val cv = ContentValues()
+        cv.put(Habit_Column_HabitStatus, status)
+
+        val selection = "$Habit_Column_ID = ?"
+        val selectionArgs = arrayOf(habitId.toString())
+
+        val count = db.update(HabitTableName, cv, selection, selectionArgs)
+        db.close()
+        return count // The number of rows affected
+    }
+
 
 }
