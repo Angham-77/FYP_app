@@ -22,8 +22,18 @@ class MainActivtyMyHabit : AppCompatActivity() {
         val habitAdapter = HabitAdapter(this, R.layout.activity_single_habit, habitList)
         listView.adapter = habitAdapter
 
+       /* override fun onResume() {
+            super.onResume()
+            val updatedHabits = dbHelper.getHabit() // Assuming dbHelper is your DataBaseHelper instance
+            habitList.clear()
+            habitList.addAll(updatedHabits)
+            habitAdapter.notifyDataSetChanged() // Assuming habitAdapter is your adapter instance
+        }*/
+
+
 
     }
+
     fun addHabitButton(view: View) {
         val intent = Intent(this, MainActivityAddNewHabit::class.java)
         startActivity(intent)

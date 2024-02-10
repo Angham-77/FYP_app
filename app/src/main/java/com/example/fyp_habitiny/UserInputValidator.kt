@@ -49,7 +49,7 @@ class UserInputValidator {
         }
         if (habitStartDate.isEmpty()) {
             return "Start date is required!"
-        } else {
+        } /*else {
             //Date validation to ensure a conssitent format
             val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.UK)
             dateFormat.isLenient = false
@@ -57,8 +57,8 @@ class UserInputValidator {
                 dateFormat.parse(habitStartDate)
             } catch (e: Exception) {
                 return "Invalid start date format. Expected format: dd-MM-yyyy"
-            }
-        }
+            }*/
+
         return "Valid"
     }
 }

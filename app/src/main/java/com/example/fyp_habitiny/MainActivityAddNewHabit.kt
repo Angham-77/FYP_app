@@ -1,5 +1,6 @@
 package com.example.fyp_habitiny
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -12,11 +13,29 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fyp_habitiny.Model.DataBaseHelper
 import com.example.fyp_habitiny.Model.Habit
+import java.util.Calendar
 
 class MainActivityAddNewHabit : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_habit)
+
+        val editTextStartDate = findViewById<EditText>(R.id.editTextHabitStartDate)
+        editTextStartDate.setOnClickListener {
+            showDatePickerDialog()
+        }
+    }
+
+    private fun showDatePickerDialog() {
+
+            val datePickerDialog = DatePickerDialog(this, { view, year, month, dayOfMonth ->
+                // Note: Month is zero-based, add 1 for display
+                val selectedDate = "${dayOfMonth}/${month + 1}/${year}"
+                findViewById<EditText>(R.id.editTextHabitStartDate).setText(selectedDate)
+            }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+
+            datePickerDialog.show()
+
     }
 
     fun saveNewHabitButton(view: View) {
@@ -54,7 +73,7 @@ class MainActivityAddNewHabit : AppCompatActivity() {
             // Proceed with saving the habit as before
             /*val habitId: Int, var HabitUserId: Int, var habitName: String, var habitStartDate: String,
               val habitStatus: Int, val habittarget: Int, val habittimePreference: Int*/
-            val newHabit = Habit(-1, 0, habitName, habitStartDate, 0, HabitTarget, habitPref)
+            val newHabit = Habit(-1, 0, habitName, habitStartDate, 0, HabitTarget, habitPref, 0)
             val mydatabase = DataBaseHelper(this)
             val result = mydatabase.addHabit(newHabit)
 
