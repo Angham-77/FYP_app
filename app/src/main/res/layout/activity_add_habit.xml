@@ -14,10 +14,18 @@
         android:hint="Enter Habit Name" />
 
     <EditText
-        android:id="@+id/editTextHabitStartDate"
+        android:id="@+id/editTextHabitStartDate2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Start Date" />
+
+
+    <EditText
+        android:id="@+id/editTextHabitStartDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Pick Start Date"
+        android:focusable="false" />
 
     <EditText
         android:id="@+id/editTextTarget"

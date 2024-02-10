@@ -49,6 +49,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
     private val Habit_Column_HabitStatus = "HabitStatus"
     private val Habit_Column_Target = "Target"
     private val Habit_Column_TimePreference = "TimePreference"
+    private val Habit_Column_CurrentTargetCount = "CurrentTargetCount"
 
 
     /*Recomanded habits table*/
@@ -119,7 +120,8 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
         try {
             var sqlCreateStatement: String = "CREATE TABLE " + HabitTableName + "(" + Habit_Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +  Habit_Column_UserId + "  INTEGER, " +
-                    Habit_Column_Name + " TEXT NOT NULL, " + Habit_Column_StartDate+ " TEXT NOT NULL, "  + Habit_Column_HabitStatus+ " INTEGER NOT NULL" + Habit_Column_Target+ " INTEGER NOT NULL" + Habit_Column_TimePreference+ " TEXT NOT NULL )"
+                    Habit_Column_Name + " TEXT NOT NULL, " + Habit_Column_StartDate+ " TEXT NOT NULL, "  + Habit_Column_HabitStatus+ " INTEGER NOT NULL" +
+                    Habit_Column_Target+ " INTEGER NOT NULL" + Habit_Column_TimePreference+ " TEXT NOT NULL" + Habit_Column_CurrentTargetCount + "INTEGER )"
 
             db?.execSQL(sqlCreateStatement)
         }
@@ -216,6 +218,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         cv.put(Habit_Column_HabitStatus, habit.habitStatus)
         cv.put(Habit_Column_Target, habit.habittarget)
         cv.put(Habit_Column_TimePreference, habit.habittimePreference)
+
 
 
         val success  =  db.insert(HabitTableName, null, cv)
@@ -365,9 +368,10 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
           val habitStatus = cursor.getInt(cursor.getColumnIndex(Habit_Column_HabitStatus))
           val habitTarget = cursor.getInt(cursor.getColumnIndex(Habit_Column_Target))
           val habitTimePre = cursor.getString(cursor.getColumnIndex(Habit_Column_TimePreference))
+          val habitCurrentCount = cursor.getInt(cursor.getColumnIndex(Habit_Column_CurrentTargetCount))
 
 
-          val habit = Habit(id, 0, habitName, habitStartDate, habitStatus, habitTarget, habitTimePre) // Use the actual ID
+          val habit = Habit(id, 0, habitName, habitStartDate, habitStatus, habitTarget, habitTimePre, habitCurrentCount) // Use the actual ID
           productList.add(habit)
       }
 
@@ -404,6 +408,19 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         db.close()
         return count // The number of rows affected
     }
+    fun updateHabitProgress(habitId: Int, newProgress: Int) {
+        val db = this.writableDatabase
+        val contentValues = ContentValues().apply {
+            put(Habit_Column_CurrentTargetCount, newProgress)
+        }
+        val selection = "$Habit_Column_ID = ?"
+        val selectionArgs = arrayOf(habitId.toString())
+        db.update(HabitTableName, contentValues, selection, selectionArgs)
+        db.close()
+    }
+
+
+
 
 
 }

@@ -1,6 +1,8 @@
 <!-- res/layout/list_item_product.xml -->
 <LinearLayout
+    android:id="@+id/habitItemContainer"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -34,6 +36,13 @@
             android:text="Target: 0"/>
 
         <TextView
+            android:id="@+id/HabitCurrentCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Current Count: 0"/>
+
+        <TextView
             android:id="@+id/HabitTimePref"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,11 +50,12 @@
             android:text="Time: text"/>
 
 
-        <CheckBox
+       <!-- <CheckBox
             android:id="@+id/HabitDonecheckBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Done" />
+            android:text="Done" />-->
+
 
         <Button
             android:id="@+id/RemoveHabitBtn"
@@ -56,6 +66,13 @@
             android:text="Remove" />
 
     </LinearLayout>
+    <!-- ImageButton placed here to align it to the right of the LinearLayout -->
+    <ImageButton
+        android:id="@+id/imageButtonTargetIncrease"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:srcCompat="@drawable/icons8_plus_30" /> <!-- Use @null to remove any background to fit your design needs -->
 
 </LinearLayout>
 
