@@ -15,4 +15,12 @@ class MainActivtyReadyBtn : AppCompatActivity() {
         val intent = Intent(this, MainActivtyMyHabit::class.java)
         startActivity(intent)
     }
+    fun addHabitButton2(view: View) {
+        val intent = Intent(this, MainActivityAddNewHabit::class.java)
+        startActivity(intent)
+    }
+    fun viewRecoHabits(view: View) {
+        val intent = Intent(this, MainActivityPreCreatedHabits::class.java)
+        startActivity(intent)
+    }
 }

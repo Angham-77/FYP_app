@@ -20,6 +20,12 @@ class MainActivityAddNewHabit : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_habit)
 
+        //adding th
+        val habitName = intent.getStringExtra("recoHabitName")
+        val editTextHabitName: EditText = findViewById(R.id.editTextHabitName)
+        editTextHabitName.setText(habitName)
+        //
+
         val editTextStartDate = findViewById<EditText>(R.id.editTextHabitStartDate)
         editTextStartDate.setOnClickListener {
             showDatePickerDialog()

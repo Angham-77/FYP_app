@@ -228,6 +228,25 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         else return success.toInt() //1
 
     }
+    fun addRecoHabit(habit: Habit): Int {
+        val db: SQLiteDatabase
+        try {
+            db = this.writableDatabase
+        }
+        catch(e: SQLiteException) {
+            return -2
+        }
+
+        val cv: ContentValues = ContentValues()
+
+        cv.put(Habit_Column_Name, habit.habitName)
+
+        val success  =  db.insert(HabitTableName, null, cv)
+
+        db.close()
+        if (success.toInt() == -1) return success.toInt() //Error, adding new habit
+        else return success.toInt()
+    }
   /* fun addHabit(habit: Habit): Long {
        val db: SQLiteDatabase
        try {
@@ -254,6 +273,26 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
        return rowId // Directly return the row ID of the newly inserted habit or -1 if error occurred
    }*/
+  fun addRecoHabit(recoHabit: RecoHabit): Int {
+      val db: SQLiteDatabase
+      try {
+          db = this.writableDatabase
+      }
+      catch(e: SQLiteException) {
+          return -2
+      }
+
+      val cv: ContentValues = ContentValues()
+
+      cv.put(RecoHabit_Column_RecoHabitName,recoHabit.recoHabitName)
+
+      val success  =  db.insert(RecoHabitTableName, null, cv)
+
+      db.close()
+      if (success.toInt() == -1) return success.toInt() //Error, adding new habit
+      else return success.toInt() //1
+
+  }
 
 
     private fun checkUserName(user: User): Int {
@@ -380,7 +419,35 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
       return productList
   }
+    @SuppressLint("Range")
+    fun getPreCraetedHabits(): List<RecoHabit> {
+        val productList = mutableListOf<RecoHabit>()
+        val db: SQLiteDatabase
 
+        try {
+            db = this.readableDatabase
+        } catch (e: SQLiteException) {
+            // Handle the exception as needed
+            return emptyList()
+        }
+
+        val sqlStatement = "SELECT * FROM $RecoHabitTableName"
+        val cursor: Cursor = db.rawQuery(sqlStatement, null)
+
+        while (cursor.moveToNext()) {
+            val id = cursor.getInt(cursor.getColumnIndex(RecoHabit_Column_ID)) // Retrieve the habit ID
+            val habitName = cursor.getString(cursor.getColumnIndex(RecoHabit_Column_RecoHabitName))
+
+
+            val Recohabit = RecoHabit(id, habitName)
+            productList.add(Recohabit)
+        }
+
+        cursor.close()
+        db.close()
+
+        return productList
+    }
     fun deleteHabit(habitId: Int): Boolean {
         val db = this.writableDatabase
         val selection = "$Habit_Column_ID = ?" // Use = for an exact match
