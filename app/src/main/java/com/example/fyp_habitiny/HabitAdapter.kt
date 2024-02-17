@@ -2,6 +2,8 @@ package com.example.fyp_habitiny
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.LayerDrawable
+import android.graphics.drawable.ShapeDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -74,6 +76,7 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: List<
                 if (habit.habitcurrentCount == habit.habittarget) {
                     // Target met, change background color
                     containerLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.TargetMet)) // Example color
+
                     //
                     // Target met, show alert dialog
                     val dialogBuilder = AlertDialog.Builder(context)
