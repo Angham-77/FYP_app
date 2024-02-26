@@ -7,7 +7,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.fyp_habitiny.Model.User
+import java.util.ArrayList
 
 /* Database Config*/
 private val DataBaseName = "FYPDB.db"
@@ -24,7 +24,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
     private val User_Column_PhoneNo = "UserPhoneNo"
     private val User_Column_UserName = "UserUserName"
     private val User_Column_Password = "UserPassword"
-    private val User_Column_IsActive = "UserIsActive"
+   // private val User_Column_IsActive = "UserIsActive"
 
 
 
@@ -37,6 +37,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
     private val Admin_Column_Email = "AdminEmail"
     private val Admin_Column_UserName = "AdminUserName"
     private val Admin_Column_Password = "AdminPassword"
+    private val Admin_Column_PhoneNo = "AdminPhoneNo"
 
 
     /* Habit Table */
@@ -77,6 +78,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
     private val Feedback_Column_ID = "FeedbackId"
     private val Feedback_Column_UserId = "UserId"
     private val Feedback_Column_FeedbackContent = "FeedbackContent"
+    private val Feedback_Column_Rating= "FeedbackRating"
 
 
     /*************************/
@@ -88,7 +90,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         try {
             var sqlCreateStatement: String = "CREATE TABLE " + UserTableName + "(" + User_Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +  User_Column_FullName + " TEXT NOT NULL, " +
                     User_Column_Email + " TEXT NOT NULL, " + User_Column_PhoneNo + " TEXT NOT NULL, "  + User_Column_UserName + " TEXT NOT NULL, " +
-                    User_Column_Password + " TEXT NOT NULL, " + User_Column_IsActive + " INTEGER NOT NULL )"
+                    User_Column_Password + " TEXT NOT NULL)"
 
             db?.execSQL(sqlCreateStatement)
         }
@@ -97,7 +99,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         // Create Admin table
         try {
             var sqlCreateStatement: String = "CREATE TABLE " + AdminTableName + "(" + Admin_Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +  Admin_Column_FullName + " TEXT NOT NULL, " +
-                    Admin_Column_Email + " TEXT NOT NULL, " + Admin_Column_UserName + " TEXT NOT NULL, "  + Admin_Column_Password + " TEXT NOT NULL)"
+                    Admin_Column_Email + " TEXT NOT NULL, " + Admin_Column_UserName + " TEXT NOT NULL, "  + Admin_Column_Password + " TEXT NOT NULL" + Admin_Column_PhoneNo + "TEXT NOT NULL)"
 
             db?.execSQL(sqlCreateStatement)
         }
@@ -105,15 +107,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
 
         //..........................................................
-        //Create habit table
 
-       /* try {
-            var sqlCreateStatement: String = "CREATE TABLE " + HabitTableName + "(" + Habit_Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +  Habit_Column_UserId + "  INTEGER NOT NULL, " +
-                    Habit_Column_Name + " TEXT NOT NULL, " + Habit_Column_StartDate+ " TEXT NOT NULL, "  + Habit_Column_HabitStatus+ " INTEGER NOT NULL)"
-
-            db?.execSQL(sqlCreateStatement)
-        }
-        catch (e: SQLiteException) {}*/
 
         //................................
         //CREATE HABIT TABLE
@@ -147,8 +141,8 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         //...............................
         // Create Feedback table
         try {
-            var sqlCreateStatement: String = "CREATE TABLE " + FeedbackTableName + "(" + Feedback_Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +  Feedback_Column_UserId + " INTEGER NOT NULL, " +
-                    Feedback_Column_FeedbackContent + " TEXT NOT NULL)"
+            var sqlCreateStatement: String = "CREATE TABLE " + FeedbackTableName + "(" + Feedback_Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +  Feedback_Column_UserId + " INTEGER, " +
+                    Feedback_Column_FeedbackContent + " TEXT NOT NULL, "+ Feedback_Column_Rating +" INTEGER NOT NULL)"
 
             db?.execSQL(sqlCreateStatement)
         }
@@ -194,13 +188,61 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         cv.put(User_Column_PhoneNo, user.userPhoneNo)
         cv.put(User_Column_UserName, user.userUserName.lowercase())
         cv.put(User_Column_Password, user.userPassword)
-        cv.put(User_Column_IsActive, user.userIsActive)
+      //  cv.put(User_Column_IsActive, user.userIsActive)
 
         val success  =  db.insert(UserTableName, null, cv)
 
         db.close()
         if (success.toInt() == -1) return success.toInt() //Error, adding new user
         else return success.toInt() //1
+    }
+    fun addAdmimnUser(admin: Admin) : Int {
+
+        val db: SQLiteDatabase
+        val isAdminUserNameAlreadyExists = checkAdminUserName(admin) // check if the username is already exist in the database
+        if(isAdminUserNameAlreadyExists < 0)
+            return isAdminUserNameAlreadyExists
+
+        try {
+            db = this.writableDatabase
+        }
+        catch(e: SQLiteException) {
+            return -2
+        }
+
+        val cv: ContentValues = ContentValues()
+
+        cv.put(Admin_Column_FullName, admin.adminFullName)
+        cv.put(Admin_Column_Email, admin.adminEmail)
+        cv.put(Admin_Column_PhoneNo, admin.adminPhoneNo)
+        cv.put(Admin_Column_UserName, admin.adminUserName.lowercase())
+        cv.put(Admin_Column_Password, admin.adminPassword)
+
+        val success  =  db.insert(AdminTableName, null, cv)
+
+        db.close()
+        if (success.toInt() == -1) return success.toInt() //Error, adding new user
+        else return success.toInt() //1
+    }
+    fun addFeedback(feedback: Feedback): Int {
+        val db: SQLiteDatabase
+        try {
+            db = this.writableDatabase
+        } catch (e: SQLiteException) {
+            return -2
+        }
+
+        val cv: ContentValues = ContentValues()
+
+        // Use Feedback_Column_FeedbackContent instead of FeedbackTableName
+        cv.put(Feedback_Column_FeedbackContent, feedback.feedbackText)
+        cv.put(Feedback_Column_Rating, feedback.feedbackRating)
+
+        val success = db.insert(FeedbackTableName, null, cv)
+
+        db.close()
+        if (success.toInt() == -1) return success.toInt() // Error, adding new feedback
+        else return success.toInt() // 1
     }
     fun addHabit(habit: Habit): Int {
         val db: SQLiteDatabase
@@ -247,32 +289,6 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         if (success.toInt() == -1) return success.toInt() //Error, adding new habit
         else return success.toInt()
     }
-  /* fun addHabit(habit: Habit): Long {
-       val db: SQLiteDatabase
-       try {
-           db = this.writableDatabase
-       } catch(e: SQLiteException) {
-           e.printStackTrace()
-           return -2L // Indicate database access error
-       }
-
-       val cv = ContentValues()
-       cv.put(Habit_Column_Name, habit.habitName)
-       cv.put(Habit_Column_StartDate, habit.habitStartDate)
-
-       val rowId: Long
-       try {
-           rowId = db.insert(HabitTableName, null, cv)
-       } catch (e: SQLiteException) {
-           e.printStackTrace()
-           db.close()
-           return -3L // Indicate error during insert
-       } finally {
-           db.close()
-       }
-
-       return rowId // Directly return the row ID of the newly inserted habit or -1 if error occurred
-   }*/
   fun addRecoHabit(recoHabit: RecoHabit): Int {
       val db: SQLiteDatabase
       try {
@@ -324,6 +340,35 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         return 0 //User not found
 
     }
+    private fun checkAdminUserName(admin: Admin): Int {
+
+        val db: SQLiteDatabase
+        try {
+            db = this.readableDatabase
+        }
+        catch(e: SQLiteException) {
+            return -2
+        }
+
+        val AdminuserName = admin.adminUserName.lowercase()
+
+        val sqlStatement = "SELECT * FROM $AdminTableName WHERE $Admin_Column_UserName = ?"
+        val param = arrayOf(AdminuserName)
+        val cursor: Cursor =  db.rawQuery(sqlStatement,param)
+
+        if(cursor.moveToFirst()){
+            // The Adminuser is found
+            val n = cursor.getInt(0)
+            cursor.close()
+            db.close()
+            return -3 // error the user name is already exist
+        }
+
+        cursor.close()
+        db.close()
+        return 0 //User not found
+
+    }
 
     fun getUser(user: User) : Int {
 
@@ -355,36 +400,36 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         return -1 //User not found
 
     }
+    fun getAdminUser(admin: Admin) : Int {
 
-  /*  @SuppressLint("Range")
-    fun getHabit(): List<Habit> {
-        val productList = mutableListOf<Habit>()
         val db: SQLiteDatabase
-
         try {
             db = this.readableDatabase
-        } catch (e: SQLiteException) {
-            // Handle the exception as needed
-            return emptyList()
+        }
+        catch(e: SQLiteException) {
+            return -2
         }
 
-        val sqlStatement = "SELECT * FROM $HabitTableName"
-        val cursor: Cursor = db.rawQuery(sqlStatement, null)
+        val AdminuserName = admin.adminUserName.lowercase()
+        val AdminuserPassword = admin.adminPassword
+        //val sqlStatement = "SELECT * FROM $TableName WHERE $Column_UserName = $userName AND $Column_Password = $userPassword"
 
-        while (cursor.moveToNext()) {
-            val HabitName = cursor.getString(cursor.getColumnIndex(Habit_Column_Name))
-            val HabitStartDate = cursor.getString(cursor.getColumnIndex(Habit_Column_StartDate))
-
-
-            val product = Habit(-1,0, HabitName, HabitStartDate, 0)
-            productList.add(product)
+        val sqlStatement = "SELECT * FROM $AdminTableName WHERE $Admin_Column_UserName = ? AND $Admin_Column_Password = ?"
+        val param = arrayOf(AdminuserName,AdminuserPassword)
+        val cursor: Cursor =  db.rawQuery(sqlStatement,param)
+        if(cursor.moveToFirst()){
+            // The admin user is found
+            val n = cursor.getInt(0)
+            cursor.close()
+            db.close()
+            return n
         }
 
         cursor.close()
         db.close()
+        return -1 //User not found
 
-        return productList
-    }*/
+    }
   @SuppressLint("Range")
   fun getHabit(): List<Habit> {
       val productList = mutableListOf<Habit>()
@@ -448,6 +493,31 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
         return productList
     }
+
+   @SuppressLint("Range")
+   fun getMototext(): List<Moto> {
+       val productList = mutableListOf<Moto>()
+
+       try {
+           this.readableDatabase.use { db ->
+               val cursor = db.rawQuery("SELECT * FROM $MotoTableName", null)
+               cursor.use {
+                   while (it.moveToNext()) {
+                       val id = it.getInt(it.getColumnIndex(Moto_Column_ID))
+                       val motoText = it.getString(it.getColumnIndex(Moto_Column_MotoText))
+                       productList.add(Moto(id, motoText))
+                   }
+               }
+           }
+       } catch (e: SQLiteException) {
+           // Log the exception or handle it as needed
+           return emptyList()
+       }
+
+       return productList
+   }
+
+
     fun deleteHabit(habitId: Int): Boolean {
         val db = this.writableDatabase
         val selection = "$Habit_Column_ID = ?" // Use = for an exact match

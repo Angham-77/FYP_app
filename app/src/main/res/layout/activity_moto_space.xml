@@ -3,43 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
 
     <TextView
         android:id="@+id/MotoTextView"
-        android:layout_width="302dp"
-        android:layout_height="329dp"
-        android:layout_marginTop="140dp"
+        android:layout_width="270dp"
+        android:layout_height="246dp"
+        android:layout_marginTop="180dp"
+        android:gravity="center"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.587"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+
+    <ImageButton
         android:id="@+id/buttonNext"
-        android:layout_width="179dp"
-        android:layout_height="57dp"
-        android:onClick="buttonNextPresed"
-        android:text="Next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:padding="16dp"
+        android:src="@drawable/right"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.982"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MotoTextView"
-        app:layout_constraintVertical_bias="0.819" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/MotoTextView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.455" />
 
-    <Button
+    <ImageButton
         android:id="@+id/buttonPrev"
-        android:layout_width="179dp"
-        android:layout_height="57dp"
-        android:onClick="buttonPrevPresed"
-        android:text="Prev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="?android:selectableItemBackground"
+        android:padding="16dp"
+        android:src="@drawable/left"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonNext"
-        app:layout_constraintHorizontal_bias="0.326"
+        app:layout_constraintEnd_toStartOf="@+id/MotoTextView"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MotoTextView"
-        app:layout_constraintVertical_bias="0.819" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.455" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

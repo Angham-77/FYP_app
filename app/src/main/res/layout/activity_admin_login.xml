@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context="MainActivityAdminLogin"
     android:background="@color/background">
 
     <EditText
-        android:id="@+id/editTextUserName"
+        android:id="@+id/editTextAdminUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -16,62 +16,60 @@
         android:inputType="text"
         android:hint="UserName"
         android:textColorHint ="@color/hintText"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPasswordAdmin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.119"
-        app:layout_constraintStart_toEndOf="@+id/textViewUserName"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWelcome"
-        app:layout_constraintVertical_bias="0.817" />
+        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintStart_toEndOf="@+id/textViewUserNameAdmin"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLoginAsAdmin"
+        app:layout_constraintVertical_bias="0.847" />
 
     <TextView
-        android:id="@+id/textViewWelcome"
+        android:id="@+id/textViewLoginAsAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:autoText="false"
-        android:text="Welcome to your new journey!"
+        android:text="Login as admin"
         android:textAlignment="center"
-        android:textColor="@color/TextColor"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.265" />
+        app:layout_constraintVertical_bias="0.313" />
 
     <Button
-        android:id="@+id/buttonSignin"
+        android:id="@+id/buttonSigninAdmin"
         android:layout_width="201dp"
         android:layout_height="45dp"
         android:backgroundTint="@color/button_color"
-        android:onClick="loginButton"
+        android:onClick="adminLoginButton"
         android:text="Sign in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMessageMainActivity"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMessageMainActivityAdmin"
         app:layout_constraintVertical_bias="0.053" />
 
     <Button
-        android:id="@+id/buttonSignup"
+        android:id="@+id/buttonSignupAdmin"
         android:layout_width="201dp"
         android:layout_height="45dp"
         android:layout_marginBottom="48dp"
         android:backgroundTint="@color/button_color"
-        android:onClick="registerButton"
+        android:onClick="goToAdminRegister"
         android:text="Sign up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSignin"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSigninAdmin"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewAdmin"
         android:layout_width="196dp"
         android:layout_height="106dp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewWelcome"
+        android:layout_marginTop="92dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewLoginAsAdmin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,62 +78,50 @@
         app:srcCompat="@drawable/appnamet" />
 
     <ImageView
-        android:id="@+id/textViewUserName"
+        android:id="@+id/textViewUserNameAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="52dp"
         android:src="@drawable/baseline_person_3_24"
-        android:textColor="@color/TextColor"
-        app:layout_constraintBottom_toTopOf="@+id/textViewPassword"
+        app:layout_constraintBottom_toTopOf="@+id/textViewPasswordAdmin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.897" />
+        app:layout_constraintVertical_bias="0.912" />
 
     <ImageView
-        android:id="@+id/textViewPassword"
+        android:id="@+id/textViewPasswordAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginBottom="52dp"
         android:src="@drawable/baseline_lock_24"
-        android:textColor="@color/TextColor"
-        app:layout_constraintBottom_toTopOf="@+id/textViewMessageMainActivity"
+        app:layout_constraintBottom_toTopOf="@+id/textViewMessageMainActivityAdmin"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/editTextPasswordAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="40dp"
         android:ems="10"
-        android:hint="Password"
         android:inputType="textPassword"
-        android:textColorHint="@color/hintText"
-        app:layout_constraintBottom_toTopOf="@+id/textViewMessageMainActivity"
+        android:hint="Password"
+        android:textColorHint ="@color/hintText"
+        app:layout_constraintBottom_toTopOf="@+id/textViewMessageMainActivityAdmin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
-        app:layout_constraintStart_toEndOf="@+id/textViewPassword" />
+        app:layout_constraintHorizontal_bias="0.106"
+        app:layout_constraintStart_toEndOf="@+id/textViewPasswordAdmin" />
 
     <TextView
-        android:id="@+id/textViewMessageMainActivity"
+        android:id="@+id/textViewMessageMainActivityAdmin"
         android:layout_width="313dp"
         android:layout_height="48dp"
         android:layout_marginBottom="252dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign Up/Sign In as admin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSignup"
-        android:textStyle="bold"
-        android:onClick="goToAdminLogin"
-        android:textColor="@color/TextColor"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
