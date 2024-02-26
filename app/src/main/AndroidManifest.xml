@@ -10,8 +10,28 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FYP_Habitiny"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivityBaseDrawerNav"
+            android:exported="true"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".MainActivityFeedback"
+            android:exported="true"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".MainActivityNewUserAdmin"
+            android:exported="true"
+            android:parentActivityName=".MainActivityAdminLogin"/>
+        <activity
+            android:name=".MainActivityAdminLogin"
+            android:exported="true"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".MainActivityBNav"
+            android:exported="true"
+            android:parentActivityName=".MainActivtyReadyBtn"/>
         <activity
             android:name=".MainActivtyMotoSpace"
             android:exported="true"
@@ -24,14 +44,6 @@
             android:name=".MainActivityDetailHabit"
             android:exported="true"
             android:parentActivityName=".MainActivtyMyHabit"/>
-        <activity
-            android:name=".MainAcitivy_bottom_nav_view"
-            android:exported="true"
-            android:parentActivityName=".MainActivity"/>
-        <activity
-            android:name=".MainActivityBottomNav"
-            android:exported="true"
-            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MainActivityAddNewHabit"
             android:exported="true"

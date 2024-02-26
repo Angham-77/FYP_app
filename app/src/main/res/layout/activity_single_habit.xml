@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background = "@color/singlHabit">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -58,13 +59,13 @@
             android:text="Done" />-->
 
 
-        <Button
+        <ImageButton
             android:id="@+id/RemoveHabitBtn"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            android:backgroundTint="#2A4262"
             android:onClick="addToOrderClick"
-            android:text="Remove" />
+            android:src="@drawable/baseline_delete_24"
+            android:background="@android:color/transparent"/>
 
     </LinearLayout>
     <!-- ImageButton placed here to align it to the right of the LinearLayout -->

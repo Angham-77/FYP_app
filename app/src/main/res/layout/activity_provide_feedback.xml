@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/background">
+
+    <RatingBar
+        android:id="@+id/ratingBarFeedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/editTextFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:hint="Enter your feedback"
+        android:textColorHint="@color/hintText"
+        android:inputType="textMultiLine"
+        android:gravity="top"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/ratingBarFeedback"/>
+    <TextView
+        android:id="@+id/textViewMessageFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:textColor="@color/TextColor"
+        android:textSize="18sp"
+        android:layout_below="@+id/editTextFeedback"/>
+
+    <Button
+        android:id="@+id/buttonSubmitFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewMessageFeedback"
+        android:layout_marginTop="220dp"
+        android:text="Submit"
+        android:backgroundTint="@color/button_color"
+        android:onClick="saveNewFeedbackButton"/>
+
+</RelativeLayout>

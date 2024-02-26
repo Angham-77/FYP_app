@@ -35,7 +35,7 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: List<
         val habitTimePrefTextView: TextView = itemView.findViewById(R.id.HabitTimePref)
         val habitCurrentTargetCount: TextView = itemView.findViewById(R.id.HabitCurrentCount)
         //val habitStatusView: CheckBox = itemView.findViewById(R.id.HabitDonecheckBox)
-        val removeButton: Button = itemView.findViewById(R.id.RemoveHabitBtn)
+        val removeButton: ImageButton = itemView.findViewById(R.id.RemoveHabitBtn)
         val increaseButton: ImageButton = itemView.findViewById(R.id.imageButtonTargetIncrease)
         val containerLayout = itemView.findViewById<LinearLayout>(R.id.habitItemContainer)
 
@@ -52,6 +52,7 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: List<
         if (habit.habitcurrentCount == habit.habittarget) {
             // Target met, change background color
             containerLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.TargetMet)) // Example color
+            //textView.setTextColor(ContextCompat.getColor(context, R.color.YOUR_DEFAULT_TEXT_COLOR));
         }
 
         //habitStatusView.isChecked = (habit.habitStatus == 1)

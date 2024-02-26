@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/LLHM"
     android:layout_width="match_parent"
@@ -11,7 +10,7 @@
 
 
     <TextView
-        android:id="@+id/textViewNewUserTitle"
+        android:id="@+id/textViewNewUserTitleAdmin"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:text="\nCreate New User"
@@ -19,25 +18,24 @@
         android:textSize="20sp" />
 
     <LinearLayout
-        android:id="@+id/LLH1"
+        android:id="@+id/LLH1Admin"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/editTextFullName"
+            android:id="@+id/editTextFullNameAdmin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
             android:textSize="18sp"
-            android:hint="Enter Full Name"
-            android:textColorHint ="@color/hintText"/>
+            android:hint="Enter Admin Full Name"/>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/LLH2"
+        android:id="@+id/LLH2Admin"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal">
@@ -45,58 +43,55 @@
 
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/editTextTextEmailAddressAdmin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
             android:textSize="18sp"
-            android:hint="Enter Email"
-            android:textColorHint ="@color/hintText"/>
+            android:hint="Enter Admin Email"/>
     </LinearLayout>
 
 
     <LinearLayout
-        android:id="@+id/LLH4"
+        android:id="@+id/LLH4Admin"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal">
 
 
         <EditText
-            android:id="@+id/editTextPhoneNo"
+            android:id="@+id/editTextPhoneNoAdmin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
             android:textSize="18sp"
-            android:hint="Enter Phone No"
-            android:textColorHint ="@color/hintText"/>
+            android:hint="Enter Admin Phone No"/>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/LLH6"
+        android:id="@+id/LLH6Admin"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal">
 
 
         <EditText
-            android:id="@+id/editTextNewUserName"
+            android:id="@+id/editTextNewUserNameAdmin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
             android:textSize="18sp"
-            android:hint="Enter Username"
-            android:textColorHint ="@color/hintText"/>
+            android:hint="Enter Admin Username"/>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/LLH7"
+        android:id="@+id/LLH7Admin"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal">
@@ -104,32 +99,31 @@
 
 
         <EditText
-            android:id="@+id/editTextNewUserPassword"
+            android:id="@+id/editTextNewUserPasswordAdmin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPassword"
-            android:hint="Enter Password"
-            android:textColorHint ="@color/hintText"/>
+            android:hint="Enter Admin Password"/>
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textViewMessage"
+        android:id="@+id/textViewMessageAdmin"
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:textColor="@color/design_default_color_error"
         android:textSize="18sp" />
 
 
-        <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="198dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:backgroundTint="#2A4262"
-            android:onClick="saveNewUserButton"
-            android:text="Save" />
+    <Button
+        android:id="@+id/buttonSaveAdmin"
+        android:layout_width="198dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#2A4262"
+        android:onClick="saveNewAdminUserButton"
+        android:text="Save" />
 
 
 </LinearLayout>
