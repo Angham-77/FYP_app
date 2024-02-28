@@ -1,11 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.FYP_Habitiny" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.FYP_Habitiny" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
     <style name="Theme.FYP_Habitiny" parent="Base.Theme.FYP_Habitiny" />
+    <style name="Base.Theme.FYP_Habitiny.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar.Bridge">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -16,5 +20,10 @@
         <item name="android:textColorPrimary">@color/TextColor</item>
         <item name="android:textColorSecondary">@color/hintText</item>
     </style>
+
+    <style name="Base.Theme.FYP_Habitiny.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Base.Theme.FYP_Habitiny.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 
 </resources>

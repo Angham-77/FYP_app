@@ -1,5 +1,6 @@
 package com.example.fyp_habitiny
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -41,6 +42,8 @@ class MainActivityNewUserAdmin : AppCompatActivity() {
                 else -> {
                     message.text = "Your details have been added to the database successfully"
                     findViewById<Button>(R.id.buttonSaveAdmin).isEnabled = false
+                    val intent = Intent(this, MainActivityAdminLogin::class.java)
+                    startActivity(intent)
                 }
             }
         } else {

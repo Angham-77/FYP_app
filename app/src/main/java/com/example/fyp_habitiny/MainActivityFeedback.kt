@@ -1,5 +1,6 @@
 package com.example.fyp_habitiny
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -33,7 +34,7 @@ class MainActivityFeedback : AppCompatActivity() {
             message.text = "Feedback Content is required!"
         else { // Save data
 
-            val newFeedback = Feedback(-1, 0, FeedbackText, Rating)
+            val newFeedback = Feedback(-1, FeedbackText, Rating)
             //save data
             val mydatabase = DataBaseHelper(this)
             val result = mydatabase.addFeedback(newFeedback)
@@ -44,8 +45,10 @@ class MainActivityFeedback : AppCompatActivity() {
                 -2 -> message.text = "Error can not open/create database"
                 -3 -> message.text = "User name is already exist"
                 else ->  {
-                    message.text = "Thank you! Your Feedback has been add to the database successfully "
+                    message.text = "Thank you! Your Feedback has been submitted successfully "
                     findViewById<Button>(R.id.buttonSubmitFeedback).isEnabled = false
+                    val intent = Intent(this, MainActivtyReadyBtn::class.java)
+                    startActivity(intent)
                 }
             }
         }

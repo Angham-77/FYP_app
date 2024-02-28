@@ -42,7 +42,7 @@ class MainActivityAdminLogin : AppCompatActivity() {
                     message.text = "You logged in successfully"
 
                     // Launch the new activity
-                    val intent = Intent(this, MainActivtyReadyBtn::class.java)
+                    val intent = Intent(this, MainActivityAdminOptions::class.java)
                     startActivity(intent)
                 }
                 else -> message.text = "Incorrect username or password"
