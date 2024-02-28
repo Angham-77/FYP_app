@@ -15,7 +15,15 @@
         <activity
             android:name=".MainActivityBaseDrawerNav"
             android:exported="true"
-            android:parentActivityName=".MainActivity"/>
+            android:theme="@style/Theme.FYP_Habitiny"/>
+        <activity
+            android:name=".MainActivityAdminFeedback"
+            android:exported="true"
+            android:parentActivityName=".MainActivityAdminOptions"/>
+        <activity
+            android:name=".MainActivityAdminOptions"
+            android:exported="true"
+            android:parentActivityName=".MainActivityAdminLogin"/>
         <activity
             android:name=".MainActivityFeedback"
             android:exported="true"
@@ -28,10 +36,6 @@
             android:name=".MainActivityAdminLogin"
             android:exported="true"
             android:parentActivityName=".MainActivity"/>
-        <activity
-            android:name=".MainActivityBNav"
-            android:exported="true"
-            android:parentActivityName=".MainActivtyReadyBtn"/>
         <activity
             android:name=".MainActivtyMotoSpace"
             android:exported="true"

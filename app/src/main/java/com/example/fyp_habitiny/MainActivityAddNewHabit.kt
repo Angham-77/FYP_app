@@ -87,9 +87,12 @@ class MainActivityAddNewHabit : AppCompatActivity() {
                 -1 -> message.text = "Error on creating new habit"
                 -2 -> message.text = "Error can not open/create database"
                 -3 -> message.text = "User name is already exist"
+
                 else -> {
                     message.text = "Your habit has been add to the database successfully "
                     findViewById<Button>(R.id.buttonSaveHabit).isEnabled = false
+                    val intent = Intent(this, MainActivtyMyHabit::class.java)
+                    startActivity(intent)
                 }
             }
         }

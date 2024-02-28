@@ -76,7 +76,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
     private val FeedbackTableName = "TFeedback"
 
     private val Feedback_Column_ID = "FeedbackId"
-    private val Feedback_Column_UserId = "UserId"
+   // private val Feedback_Column_UserId = "UserId"
     private val Feedback_Column_FeedbackContent = "FeedbackContent"
     private val Feedback_Column_Rating= "FeedbackRating"
 
@@ -141,7 +141,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         //...............................
         // Create Feedback table
         try {
-            var sqlCreateStatement: String = "CREATE TABLE " + FeedbackTableName + "(" + Feedback_Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +  Feedback_Column_UserId + " INTEGER, " +
+            var sqlCreateStatement: String = "CREATE TABLE " + FeedbackTableName + "(" + Feedback_Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     Feedback_Column_FeedbackContent + " TEXT NOT NULL, "+ Feedback_Column_Rating +" INTEGER NOT NULL)"
 
             db?.execSQL(sqlCreateStatement)
@@ -516,6 +516,30 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
        return productList
    }
+    @SuppressLint("Range")
+    fun getFeedback(): List<Feedback> {
+        val productList = mutableListOf<Feedback>()
+
+        try {
+            this.readableDatabase.use { db ->
+                val cursor = db.rawQuery("SELECT * FROM $FeedbackTableName", null)
+                cursor.use {
+                    while (it.moveToNext()) {
+                        val id = it.getInt(it.getColumnIndex(Feedback_Column_ID))
+                        val feedbackText = it.getString(it.getColumnIndex(Feedback_Column_FeedbackContent))
+                        val rating = it.getDouble((it.getColumnIndex(Feedback_Column_Rating)))
+                        productList.add(Feedback(id, feedbackText, rating))
+                    }
+                }
+            }
+        } catch (e: SQLiteException) {
+            // Log the exception or handle it as needed
+            return emptyList()
+        }
+
+        return productList
+    }
+
 
 
     fun deleteHabit(habitId: Int): Boolean {
