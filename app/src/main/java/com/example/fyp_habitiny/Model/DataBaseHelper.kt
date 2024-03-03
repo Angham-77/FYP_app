@@ -7,6 +7,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import java.util.ArrayList
 
 /* Database Config*/
@@ -270,47 +271,6 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         else return success.toInt() //1
 
     }
-    fun addRecoHabit(habit: Habit): Int {
-        val db: SQLiteDatabase
-        try {
-            db = this.writableDatabase
-        }
-        catch(e: SQLiteException) {
-            return -2
-        }
-
-        val cv: ContentValues = ContentValues()
-
-        cv.put(Habit_Column_Name, habit.habitName)
-
-        val success  =  db.insert(HabitTableName, null, cv)
-
-        db.close()
-        if (success.toInt() == -1) return success.toInt() //Error, adding new habit
-        else return success.toInt()
-    }
-  fun addRecoHabit(recoHabit: RecoHabit): Int {
-      val db: SQLiteDatabase
-      try {
-          db = this.writableDatabase
-      }
-      catch(e: SQLiteException) {
-          return -2
-      }
-
-      val cv: ContentValues = ContentValues()
-
-      cv.put(RecoHabit_Column_RecoHabitName,recoHabit.recoHabitName)
-
-      val success  =  db.insert(RecoHabitTableName, null, cv)
-
-      db.close()
-      if (success.toInt() == -1) return success.toInt() //Error, adding new habit
-      else return success.toInt() //1
-
-  }
-
-
     private fun checkUserName(user: User): Int {
 
         val db: SQLiteDatabase
@@ -386,6 +346,47 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
         val sqlStatement = "SELECT * FROM $UserTableName WHERE $User_Column_UserName = ? AND $User_Column_Password = ?"
         val param = arrayOf(userName,userPassword)
+        val cursor: Cursor =  db.rawQuery(sqlStatement,param)
+        if(cursor.moveToFirst()){
+            // The user is found
+            val n = cursor.getInt(0)
+            cursor.close()
+            db.close()
+            return n
+        }
+
+        cursor.close()
+        db.close()
+        return -1 //User not found
+
+    }
+    fun GetUserDetails(user: User) : Int {
+
+        val db: SQLiteDatabase
+        val isUserNameAlreadyExists = checkUserName(user) // check if the username exists in the database
+        if(isUserNameAlreadyExists < 0)
+            return isUserNameAlreadyExists
+
+
+        try {
+            db = this.readableDatabase
+        }
+        catch(e: SQLiteException) {
+            return -2
+        }
+        val userFullName = user.userFullName
+        val userEmail = user.userEmail
+        val userPhoneNo = user.userPhoneNo
+        val userName = user.userUserName.lowercase()
+        val userPassword = user.userPassword
+
+
+
+        //val sqlStatement = "SELECT * FROM $TableName WHERE $Column_UserName = $userName AND $Column_Password = $userPassword"
+
+        val sqlStatement = "SELECT * FROM $UserTableName WHERE $User_Column_UserName = ? AND $User_Column_Password = ?" +
+                " AND $User_Column_FullName = ? AND $User_Column_Email = ? AND $User_Column_PhoneNo = ?"
+        val param = arrayOf(userName,userPassword, userEmail, userPhoneNo, userFullName)
         val cursor: Cursor =  db.rawQuery(sqlStatement,param)
         if(cursor.moveToFirst()){
             // The user is found
@@ -516,6 +517,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
        return productList
    }
+
     @SuppressLint("Range")
     fun getFeedback(): List<Feedback> {
         val productList = mutableListOf<Feedback>()
@@ -540,8 +542,6 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         return productList
     }
 
-
-
     fun deleteHabit(habitId: Int): Boolean {
         val db = this.writableDatabase
         val selection = "$Habit_Column_ID = ?" // Use = for an exact match
@@ -550,6 +550,25 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         db.close()
         return deletedRows > 0
     }
+    fun deleteUser(userName: String): Boolean {
+        val db = this.writableDatabase
+        val selection = "$User_Column_UserName = ?"
+        val selectionArgs = arrayOf(userName)
+        Log.d("DeleteUserQuery", "DELETE FROM $UserTableName WHERE $selection")
+        val deletedRows = db.delete(UserTableName, selection, selectionArgs)
+        Log.d("DeletedRows", deletedRows.toString())
+        db.close()
+        return deletedRows > 0
+    }
+
+    /* fun deleteUser(userName: String): Boolean {
+        val db = this.writableDatabase
+        val selection = "$User_Column_UserName = ?"
+        val selectionArgs = arrayOf(userName.toString())
+        val deletedRows = db.delete(UserTableName, selection, selectionArgs)
+        db.close()
+        return deletedRows > 0
+    }*/
     fun updateHabitStatus(habitId: Int, status: Int): Int {
         val db: SQLiteDatabase
         try {
@@ -579,9 +598,56 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         db.update(HabitTableName, contentValues, selection, selectionArgs)
         db.close()
     }
+    //update user details
+    fun updateUserDetails(user: User): Int {
+        return try {
+            val db = this.writableDatabase
 
+            val values = ContentValues().apply {
+                put(User_Column_FullName, user.userFullName)
+                put(User_Column_Email, user.userEmail)
+                put(User_Column_PhoneNo, user.userPhoneNo)
+                put(User_Column_UserName, user.userUserName)
+            }
 
+            val whereClause = "$User_Column_UserName = ?"  // Update based on username
+            val whereArgs = arrayOf(user.userUserName)
 
+            val updatedRows = db.update(UserTableName, values, whereClause, whereArgs)
 
+            db.close()
+            updatedRows // Success, return the number of updated rows
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            -1 // Error updating user details
+        }
+    }
+//get user details by username
+    @SuppressLint("Range")
+    fun getUserDetailsByUsername(username: String): User? {
+        val db = this.readableDatabase
+
+        val sqlStatement = "SELECT * FROM $UserTableName WHERE $User_Column_UserName = ?"
+        val param = arrayOf(username)
+        val cursor: Cursor = db.rawQuery(sqlStatement, param)
+
+        return if (cursor.moveToFirst()) {
+            val userId = cursor.getInt(cursor.getColumnIndex(User_Column_ID))
+            val fullName = cursor.getString(cursor.getColumnIndex(User_Column_FullName))
+            val userEmail = cursor.getString(cursor.getColumnIndex(User_Column_Email))
+            val userPhoneNo = cursor.getString(cursor.getColumnIndex(User_Column_PhoneNo))
+            val userPassword = cursor.getString(cursor.getColumnIndex(User_Column_Password))
+
+            cursor.close()
+            db.close()
+
+            User(userId, fullName, userEmail, userPhoneNo, username, userPassword)
+        } else {
+            cursor.close()
+            db.close()
+            null // User not found
+        }
+    }
 
 }

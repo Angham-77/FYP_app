@@ -55,7 +55,14 @@ class MainActivityAddNewHabit : AppCompatActivity() {
 
 
         //////
-        val HabitTarget = habitTarget.toInt()
+      //  val HabitTarget = habitTarget.toInt()
+        val HabitTarget: Int = if (habitTarget.isNotEmpty()) {
+            habitTarget.toInt()
+        } else {
+            // Handle the case when habitTarget is empty, e.g., provide a default value or show an error message.
+            // In this example, I'm providing a default value of 0, but you should adjust according to your logic.
+            0
+        }
         /*check Time Preference*/
         val rg = findViewById<RadioGroup>(R.id.radioGroupHabitPreference)
         val rb = findViewById<RadioButton>(rg.checkedRadioButtonId)

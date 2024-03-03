@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             println("Hashed password: $hashedEnteredPassword")
 
             // Verify the password
-            val result = myDataBase.getUser(User(-1, "", "", "", userName, hashedEnteredPassword, 0))
+            val result = myDataBase.getUser(User(-1, "", "", "", userName, hashedEnteredPassword))
             println("DataBase =  $result")
 
             when (result) {

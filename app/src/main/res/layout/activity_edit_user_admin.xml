@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LLHM"
+    android:id="@+id/LLHMEditUser"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivityNewUser"
+    tools:context=".MainActivityAdminEdtUser"
     android:background="@color/background"
     android:layout_gravity="center_vertical">
 
 
     <TextView
-        android:id="@+id/textViewNewUserTitle"
+        android:id="@+id/textViewNewUserTitleEditUser"
         android:layout_width="match_parent"
         android:layout_height="77dp"
-        android:text="\nCreate New User"
+        android:text="\nEdit User Deatils"
         android:textAlignment="center"
         android:textSize="20sp" />
 
     <LinearLayout
-        android:id="@+id/LLH1"
+        android:id="@+id/LLH1EditUser"
         android:layout_width="395dp"
         android:layout_height="60dp"
         android:orientation="horizontal"
         android:layout_gravity="center">
 
         <EditText
-            android:id="@+id/editTextFullName"
+            android:id="@+id/editTextFullNameEditUser"
             android:layout_width="376dp"
             android:layout_height="45dp"
             android:layout_weight="1"
@@ -39,7 +39,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/LLH2"
+        android:id="@+id/LLH2EditUser"
         android:layout_width="395dp"
         android:layout_height="60dp"
         android:orientation="horizontal"
@@ -48,7 +48,7 @@
 
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/editTextTextEmailAddressEditUser"
             android:layout_width="376dp"
             android:layout_height="45dp"
             android:layout_weight="1"
@@ -62,7 +62,7 @@
 
 
     <LinearLayout
-        android:id="@+id/LLH4"
+        android:id="@+id/LLH4EditUser"
         android:layout_width="395dp"
         android:layout_height="60dp"
         android:orientation="horizontal"
@@ -70,7 +70,7 @@
 
 
         <EditText
-            android:id="@+id/editTextPhoneNo"
+            android:id="@+id/editTextPhoneNoEditUser"
             android:layout_width="376dp"
             android:layout_height="45dp"
             android:layout_weight="1"
@@ -83,7 +83,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/LLH6"
+        android:id="@+id/LLH6EditUser"
         android:layout_width="395dp"
         android:layout_height="60dp"
         android:orientation="horizontal"
@@ -91,7 +91,7 @@
 
 
         <EditText
-            android:id="@+id/editTextNewUserName"
+            android:id="@+id/editTextNewUserNameEditUser"
             android:layout_width="376dp"
             android:layout_height="45dp"
             android:layout_weight="1"
@@ -103,43 +103,24 @@
             android:textColorHint ="@color/hintText"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/LLH7"
-        android:layout_width="395dp"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
-
-
-
-        <EditText
-            android:id="@+id/editTextNewUserPassword"
-            android:layout_width="376dp"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:background="@drawable/edit_text_border"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:hint="Enter Password"
-            android:textColorHint ="@color/hintText"/>
-    </LinearLayout>
-
     <TextView
-        android:id="@+id/textViewMessage"
+        android:id="@+id/textViewMessageEditUser"
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:textColor="@color/design_default_color_error"
         android:textSize="18sp" />
 
 
-        <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="198dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:backgroundTint="#2A4262"
-            android:onClick="saveNewUserButton"
-            android:text="Save" />
+    <Button
+        android:id="@+id/buttonUpdateEditUser"
+        android:layout_width="198dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#2A4262"
+        android:onClick="updateUserDetailsButton"
+        android:text="Update" />
+
+
 
 
 </LinearLayout>
