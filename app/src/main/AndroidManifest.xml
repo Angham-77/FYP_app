@@ -17,9 +17,21 @@
             android:exported="true"
             android:theme="@style/Theme.FYP_Habitiny"/>
         <activity
+            android:name=".MainActivityAddNewUserByAdmin"
+            android:exported="true"
+            android:parentActivityName=".MainActivityAdminOptions"/>
+        <activity
             android:name=".MainActivityAdminFeedback"
             android:exported="true"
             android:parentActivityName=".MainActivityAdminOptions"/>
+        <activity
+            android:name=".MainActivityAdminEditUserPre"
+            android:exported="true"
+            android:parentActivityName=".MainActivityAdminOptions"/>
+        <activity
+            android:name=".MainActivityAdminEdtUser"
+            android:exported="true"
+            android:parentActivityName=".MainActivityAdminEditUserPre"/>
         <activity
             android:name=".MainActivityAdminOptions"
             android:exported="true"

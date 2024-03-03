@@ -16,4 +16,12 @@ class MainActivityAdminOptions : AppCompatActivity() {
         val intent = Intent(this, MainActivityAdminFeedback::class.java)
         startActivity(intent)
     }
+    fun goToPreEditUser(view: View){
+        val intent = Intent(this, MainActivityAdminEditUserPre::class.java)
+        startActivity(intent)
+    }
+    fun addAnewUser(view: View) {
+        val intent = Intent(this, MainActivityAddNewUserByAdmin::class.java)
+        startActivity(intent)
+    }
 }
