@@ -17,6 +17,14 @@
             android:exported="true"
             android:theme="@style/Theme.FYP_Habitiny"/>
         <activity
+            android:name=".MainActivityDoneHabit"
+            android:exported="true"
+            android:parentActivityName=".MainActivtyMyHabit"/>
+        <activity
+            android:name=".MainActivitySearchHabitEmpty"
+            android:exported="true"
+            android:parentActivityName=".MainActivtyMyHabit"/>
+        <activity
             android:name=".MainActivityAddNewUserByAdmin"
             android:exported="true"
             android:parentActivityName=".MainActivityAdminOptions"/>

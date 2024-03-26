@@ -1,6 +1,6 @@
 <!-- res/layout/list_item_product.xml -->
 <LinearLayout
-    android:id="@+id/habitItemContainer"
+    android:id="@+id/habitItemContainerArchivedHabit"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/habitNameTextView"
+            android:id="@+id/habitNameTextViewArchivedHabit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
@@ -24,43 +24,39 @@
             android:text="Habit Name"/>
 
         <TextView
-            android:id="@+id/HabitStartDateTextView"
+            android:id="@+id/HabitStartDateTextViewArchivedHabit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:text="Start Date: 00/00/0000"/>
 
         <TextView
-            android:id="@+id/HabitTargetNumber"
+            android:id="@+id/HabitTargetNumberArchivedHabit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:text="Target: 0"/>
 
         <TextView
-            android:id="@+id/HabitCurrentCount"
+            android:id="@+id/HabitCurrentCountArchivedHabit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:text="Current Count: 0"/>
 
         <TextView
-            android:id="@+id/HabitTimePref"
+            android:id="@+id/HabitTimePrefArchivedHabit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:text="Time: text"/>
 
 
-       <!-- <CheckBox
-            android:id="@+id/HabitDonecheckBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Done" />-->
+
 
 
         <ImageButton
-            android:id="@+id/RemoveHabitBtn"
+            android:id="@+id/RemoveHabitBtnArchivedHabit"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:onClick="addToOrderClick"
@@ -68,34 +64,13 @@
             android:background="@android:color/transparent"/>
 
         <Button
-            android:id="@+id/buttonDone"
+            android:id="@+id/buttonReactivate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Done" />
+            android:text="Reactivate" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
-
-        <ImageButton
-            android:id="@+id/imageButtonTargetIncrease"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            app:srcCompat="@drawable/icons8_plus_30" />
-
-        <ImageButton
-            android:id="@+id/imageButtonTargetDecrease"
-            android:layout_width="30dp"
-            android:layout_height="35dp"
-            android:background="@null"
-            app:srcCompat="@drawable/minus"
-            app:tint="@color/nav_grey"/>
-    </LinearLayout>
 
 
 </LinearLayout>

@@ -31,4 +31,8 @@ class MainActivtyReadyBtn : AppCompatActivity() {
         val intent = Intent(this, MainActivityFeedback::class.java)
         startActivity(intent)
     }
+    fun GoToArchive(view: View) {
+        val intent = Intent(this, MainActivityDoneHabit::class.java)
+        startActivity(intent)
+    }
 }
