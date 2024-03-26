@@ -54,6 +54,21 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
     private val Habit_Column_CurrentTargetCount = "CurrentTargetCount"
 
 
+
+    /* Archive Habit Table */
+    private val ArchiveHabitTableName = "TArchiveHabit"
+
+    private val Archive_Habit_Column_ID = "ArchiveHabitId"
+    private val Archive_Habit_Column_UserId = "ArchiveUserId"
+    private val Archive_Habit_Column_HabitId = "HabitId"
+    private val Archive_Habit_Column_Name = "ArchiveHabitName"
+    private val Archive_Habit_Column_StartDate = "ArchiveStartDate"
+  //  private val Archive_Habit_Column_EndtDate = "ArchiveEndDate"
+    private val Archive_Habit_Column_Target = "ArchiveTarget"
+    private val Archive_Habit_Column_TimePreference = "ArchiveTimePreference"
+    private val Archive_Habit_Column_CurrentTargetCount = "ArchiveCurrentTargetCount"
+
+
     /*Recomanded habits table*/
 
     private val RecoHabitTableName = "TRecoHabit"
@@ -117,6 +132,18 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
             var sqlCreateStatement: String = "CREATE TABLE " + HabitTableName + "(" + Habit_Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +  Habit_Column_UserId + "  INTEGER, " +
                     Habit_Column_Name + " TEXT NOT NULL, " + Habit_Column_StartDate+ " TEXT NOT NULL, "  + Habit_Column_HabitStatus+ " INTEGER NOT NULL" +
                     Habit_Column_Target+ " INTEGER NOT NULL" + Habit_Column_TimePreference+ " TEXT NOT NULL" + Habit_Column_CurrentTargetCount + "INTEGER )"
+
+            db?.execSQL(sqlCreateStatement)
+        }
+        catch (e: SQLiteException) {}
+
+        //................................
+        //CREATE Archive HABIT TABLE
+
+        try {
+            var sqlCreateStatement: String = "CREATE TABLE " + ArchiveHabitTableName + "(" + Archive_Habit_Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +  Archive_Habit_Column_HabitId + "  INTEGER, " +  Archive_Habit_Column_UserId + "  INTEGER, " +
+                    Archive_Habit_Column_Name + " TEXT NOT NULL, " + Archive_Habit_Column_StartDate+ " TEXT NOT NULL, " +  Archive_Habit_Column_Target+ " INTEGER NOT NULL" + Archive_Habit_Column_TimePreference+ " TEXT NOT NULL" +
+                    Archive_Habit_Column_CurrentTargetCount + "INTEGER)"
 
             db?.execSQL(sqlCreateStatement)
         }
@@ -649,5 +676,234 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
             null // User not found
         }
     }
+   /* fun addHabitToArchive(archiveHabit: ArchiveHabit): Int {
+        val db: SQLiteDatabase
+        try {
+            db = this.writableDatabase
+        }
+        catch(e: SQLiteException) {
+            Log.e("DataBaseHelper", "Error opening writable database: ${e.message}")
+            return -2
+        }
+        val cv: ContentValues = ContentValues()
+
+        cv.put(Archive_Habit_Column_Name, archiveHabit.archivedHabitName)
+        cv.put(Archive_Habit_Column_Target, archiveHabit.archivedHabittarget)
+        cv.put(Archive_Habit_Column_StartDate, archiveHabit.archivedHabitStartDate)
+        cv.put(Archive_Habit_Column_EndtDate, archiveHabit.archivedHabitEndDate)
+        cv.put(Archive_Habit_Column_CurrentTargetCount, archiveHabit.archivedHabitcurrentCount)
+        cv.put(Archive_Habit_Column_TimePreference, archiveHabit.archivedHabittimePreference)
+
+        //continue here
+        val success  =  db.insert(ArchiveHabitTableName, null, cv)
+
+        db.close()
+        if (success.toInt() == -1) {
+            Log.e("DataBaseHelper", "addItemToCart: Error adding cart item to database.")
+
+            return success.toInt() //Error, adding new user
+        }
+        else {
+            Log.d("DataBaseHelper", "addItemToCart: Successfully added cart item to database.")
+            return success.toInt() //1
+        }
+    }*/
+   @SuppressLint("Range")
+   fun getAllArchivedHabits(): List<ArchiveHabit> {
+       val archivedHabitList = mutableListOf<ArchiveHabit>()
+       val db: SQLiteDatabase
+
+       try {
+           db = this.readableDatabase
+       } catch (e: SQLiteException) {
+           // Handle the exception as needed
+           Log.e("DataBaseHelper", "Error opening readable database: ${e.message}")
+           return emptyList()
+       }
+
+       val sqlStatement = "SELECT * FROM $ArchiveHabitTableName"
+       val cursor: Cursor = db.rawQuery(sqlStatement, null)
+
+       while (cursor.moveToNext()) {
+
+           //
+
+           val HabitName = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_Name))
+           val StartDate = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_StartDate))
+           val Target = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_Target))
+           val PrefTime = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_TimePreference))
+           val CurrentCount = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_CurrentTargetCount))
+
+           val cart = ArchiveHabit(-1, 0, 0,  HabitName,StartDate, Target, PrefTime, CurrentCount )
+           archivedHabitList.add(cart)
+       }
+
+       cursor.close()
+       db.close()
+       Log.d("DataBaseHelper", "getAllArchivedHabits: Successfully retrieved ${archivedHabitList.size} cart items.")
+
+       return archivedHabitList
+   }
+   @SuppressLint("Range")
+   fun getarchivedHabitByHabitId(habitId: Int): ArchiveHabit? {//needs modifications
+       val db = this.readableDatabase
+       var archviedhHabit: ArchiveHabit? = null
+
+       val cursor = db.query(
+           ArchiveHabitTableName, // Table name
+           arrayOf(Archive_Habit_Column_ID,Archive_Habit_Column_UserId,  Archive_Habit_Column_Name, Archive_Habit_Column_StartDate,
+               Archive_Habit_Column_Target, Archive_Habit_Column_TimePreference, Archive_Habit_Column_CurrentTargetCount), // Columns to return
+           "$Archive_Habit_Column_HabitId = ?", // Selection criteria
+           arrayOf(habitId.toString()), // Selection arguments
+           null, // Group by
+           null, // Having
+           null // Order by
+       )
+
+       if (cursor.moveToFirst()) {
+           val archivedHabitId = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_ID))
+           val userId = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_UserId))
+           val habitName = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_Name))
+           val startDate = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_StartDate))
+           val target = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_Target))
+           val prefTime = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_TimePreference))
+           val currentCount = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_CurrentTargetCount))
+
+           archviedhHabit = ArchiveHabit(archivedHabitId , userId, habitId, habitName , startDate, target, prefTime, currentCount)
+
+       }
+
+       cursor.close()
+       db.close()
+       return archviedhHabit
+   }
+    fun addHabitToArchive(archiveHabit: ArchiveHabit): Int {
+        val db: SQLiteDatabase
+        try {
+            db = this.writableDatabase
+        }
+        catch(e: SQLiteException) {
+            Log.e("DataBaseHelper", "Error opening writable database: ${e.message}")
+            return -2
+        }
+
+        val cv: ContentValues = ContentValues()
+
+        cv.put(Archive_Habit_Column_Name, archiveHabit.archivedHabitName)
+        cv.put(Archive_Habit_Column_StartDate, archiveHabit.archivedHabitStartDate)
+        cv.put(Archive_Habit_Column_Target,archiveHabit.archivedHabittarget)
+        cv.put(Archive_Habit_Column_TimePreference, archiveHabit.archivedHabittimePreference)
+        cv.put(Archive_Habit_Column_CurrentTargetCount, archiveHabit.archivedHabitcurrentCount)
+
+
+
+
+        val success  =  db.insert(ArchiveHabitTableName, null, cv)
+
+        db.close()
+        if (success.toInt() == -1) {
+            Log.e("DataBaseHelper", "addIHabitToArchive: Error adding habit to archive.")
+
+            return success.toInt() //Error, adding new user
+        }
+        else {
+            Log.d("DataBaseHelper", "addIHabitToArchive: Successfully added adding habit to archive.")
+            return success.toInt() //1
+        }
+
+    }
+
+   /* fun moveHabitToArchive(archiveHabit: ArchiveHabit): Int {
+        val db: SQLiteDatabase
+        try {
+            db = this.writableDatabase
+        } catch (e: SQLiteException) {
+            Log.e("DataBaseHelper", "Error opening writable database: ${e.message}")
+            return -2
+        }
+
+        db.beginTransaction()
+        try {
+            // Insert the habit into the archive table
+            val cv: ContentValues = ContentValues()
+            cv.put(Archive_Habit_Column_Name, archiveHabit.archivedHabitName)
+            cv.put(Archive_Habit_Column_Target, archiveHabit.archivedHabittarget)
+            cv.put(Archive_Habit_Column_StartDate, archiveHabit.archivedHabitStartDate)
+            cv.put(Archive_Habit_Column_CurrentTargetCount, archiveHabit.archivedHabitcurrentCount)
+            cv.put(Archive_Habit_Column_TimePreference, archiveHabit.archivedHabittimePreference)
+
+            val archiveSuccess = db.insert(ArchiveHabitTableName, null, cv)
+
+            if (archiveSuccess == -1L) {
+                db.endTransaction()
+                Log.e("DataBaseHelper", "Error adding habit to archive table.")
+                return -1
+            }
+
+            // Delete the habit from the original table
+            val deleteSuccess = db.delete(
+                HabitTableName,
+                "$Habit_Column_ID=?",
+                arrayOf(archiveHabit.archivedHabitId.toString())
+            )
+
+            if (deleteSuccess == 0) {
+                db.endTransaction()
+                Log.e("DataBaseHelper", "Error deleting habit from original table.")
+                return -1
+            }
+
+            db.setTransactionSuccessful()
+        } finally {
+            db.endTransaction()
+            db.close()
+        }
+
+        return 1
+    }*/
+    fun moveHabitToArchive(archiveHabit: ArchiveHabit): Int {
+        val db: SQLiteDatabase
+        try {
+            db = this.writableDatabase
+        } catch (e: SQLiteException) {
+            Log.e("DataBaseHelper", "Error opening writable database: ${e.message}")
+            return -2
+        }
+
+        db.beginTransaction()
+        try {
+            // Insert the habit into the archive table
+            val cv: ContentValues = ContentValues()
+
+            cv.put(Archive_Habit_Column_Name, archiveHabit.archivedHabitName)
+            cv.put(Archive_Habit_Column_Target, archiveHabit.archivedHabittarget)
+            cv.put(Archive_Habit_Column_StartDate, archiveHabit.archivedHabitStartDate)
+            cv.put(Archive_Habit_Column_CurrentTargetCount, archiveHabit.archivedHabitcurrentCount)
+            cv.put(Archive_Habit_Column_TimePreference, archiveHabit.archivedHabittimePreference)
+
+            val archiveSuccess = db.insert(ArchiveHabitTableName, null, cv)
+            if (archiveSuccess == -1L) {
+                Log.e("DataBaseHelper", "Error adding habit to archive table.")
+                return -1 // Transaction will be ended in finally block
+            }
+
+            // Delete the habit from the original table
+            val deleteSuccess = db.delete(HabitTableName, "$Habit_Column_ID=?", arrayOf(archiveHabit.archivedHabitId.toString()))
+            if (deleteSuccess == 0) {
+                Log.e("DataBaseHelper", "Error deleting habit from original table.")
+                return -1 // Transaction will be ended in finally block
+            }
+
+            db.setTransactionSuccessful() // Marks this transaction as successful
+        } finally {
+            db.endTransaction() // Ends the transaction
+            db.close() // Close the database
+        }
+
+        return 1 // Success
+    }
+
+
+
 
 }

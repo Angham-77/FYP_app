@@ -9,22 +9,22 @@
     android:background="@color/background">
 
     <TextView
-        android:id="@+id/MyHabitsTextView"
+        android:id="@+id/DoneHabitsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp"
         android:gravity="center"
-        android:text="@string/my_habits"
+        android:text="Archive"
         android:textColor="@color/TextColor"
         android:textSize="25sp" />
 
     <SearchView
-        android:id="@+id/searchView"
+        android:id="@+id/searchViewDoneHabit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/MyHabitsTextView"
+        android:layout_below="@+id/DoneHabitsTextView"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="16dp"
@@ -34,10 +34,10 @@
         app:iconifiedByDefault="false" />
 
     <ListView
-        android:id="@+id/HabitlistView"
+        android:id="@+id/DoneHabitlistView"
         android:layout_width="361dp"
         android:layout_height="match_parent"
-        android:layout_below="@id/searchView"
+        android:layout_below="@id/searchViewDoneHabit"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -49,22 +49,5 @@
         android:paddingTop="32dp"
         android:paddingRight="16dp"
         android:paddingBottom="16dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addFloatingBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/icons8_plus_30"
-        app:backgroundTint="@color/button_color"
-        android:onClick="addHabitButton"
-        app:tint="@null" />
-
-
 
 </RelativeLayout>
