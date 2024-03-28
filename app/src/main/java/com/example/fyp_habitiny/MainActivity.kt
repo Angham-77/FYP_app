@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
     }
-
     fun loginButton(view: View) {
         val message = findViewById<TextView>(R.id.textViewMessageMainActivity)
         val userName = findViewById<EditText>(R.id.editTextUserName).text.toString()
@@ -43,6 +42,10 @@ class MainActivity : AppCompatActivity() {
                 -1 -> message.text = "User Not Found, Please try again"
                 -2 -> message.text = "Error Cannot Open/Create DataBase"
                 in 1..Int.MAX_VALUE -> {
+                    //new
+                    // Save the user ID in shared preferences as the current user ID
+                    myDataBase.saveCurrentUserId(result, this)
+                    //
                     message.text = "You logged in successfully"
 
                     // Launch the new activity
@@ -53,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
     fun registerButton(view: View) {
         // val hash = Bcrypt.hash(binding.)
         val intent = Intent(this, MainActivityNewUser::class.java)

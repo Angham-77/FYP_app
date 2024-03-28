@@ -57,7 +57,6 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: List<
             //textView.setTextColor(ContextCompat.getColor(context, R.color.YOUR_DEFAULT_TEXT_COLOR));
         }
 
-        //habitStatusView.isChecked = (habit.habitStatus == 1)
 
         /////////////////
         increaseButton.setOnClickListener {
@@ -143,7 +142,6 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: List<
             }
         }
 
-        //NEW
 
         //NEW
 
@@ -167,18 +165,8 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: List<
          notifyDataSetChanged()
     }
 
-    /*  fun addToArchivedHabit(habit: Habit) {
-        val existingCartItem = dbHelper.getarchivedHabitByHabitId(habit.habitId)
-
-            addHabitToArchiveListener?.invoke(habit)
-            val toast = Toast.makeText(context, "Habit added to archive successfully!", Toast.LENGTH_LONG)
-            toast.show()
-            // notifyDataSetChanged()
-
-
-    }*/
     fun setOnAddHabitToArchiveListener(listener: (Habit) -> Unit) {
         addHabitToArchiveListener = listener
-    }
 
+    }
 }

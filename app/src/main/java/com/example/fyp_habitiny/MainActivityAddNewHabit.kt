@@ -47,56 +47,39 @@ class MainActivityAddNewHabit : AppCompatActivity() {
     fun saveNewHabitButton(view: View) {
         val habitName = findViewById<EditText>(R.id.editTextHabitName).text.toString()
         val habitStartDate = findViewById<EditText>(R.id.editTextHabitStartDate).text.toString()
-        val habitTarget = findViewById<EditText>(R.id.editTextTarget).text.toString()
+        val habitTargetText = findViewById<EditText>(R.id.editTextTarget).text.toString()
         var habitPref = ""
         val message = findViewById<TextView>(R.id.textViewMessageHabit)
 
+        // Fetch the current user ID from shared preferences
+        val myDataBase = DataBaseHelper(this)
+        val currentUserId = myDataBase.getCurrentUserId(this)
 
+        val habitTarget: Int = habitTargetText.toIntOrNull() ?: 0 // Use safe call with elvis operator for default value
 
-
-        //////
-      //  val HabitTarget = habitTarget.toInt()
-        val HabitTarget: Int = if (habitTarget.isNotEmpty()) {
-            habitTarget.toInt()
-        } else {
-            // Handle the case when habitTarget is empty, e.g., provide a default value or show an error message.
-            // In this example, I'm providing a default value of 0, but you should adjust according to your logic.
-            0
-        }
-        /*check Time Preference*/
         val rg = findViewById<RadioGroup>(R.id.radioGroupHabitPreference)
         val rb = findViewById<RadioButton>(rg.checkedRadioButtonId)
-        if(rb.text.toString() == "All Day")
-            habitPref = "All Day"
-        else if (rb.text.toString() == "Morning") { // Corrected line: Added missing closing parenthesis
-            habitPref = "Morning"
-        } else {
-            habitPref = "Evening"
+        habitPref = when (rb.text.toString()) {
+            "All Day" -> "All Day"
+            "Morning" -> "Morning"
+            else -> "Evening"
         }
-
-        ////////
 
         val validator = UserInputValidator()
         val validationResult = validator.validateHabitInput(habitName, habitStartDate)
-      //  val habitStatus = 0
 
         if (validationResult != "Valid") {
             message.text = validationResult
         } else {
-            // Proceed with saving the habit as before
-            /*val habitId: Int, var HabitUserId: Int, var habitName: String, var habitStartDate: String,
-              val habitStatus: Int, val habittarget: Int, val habittimePreference: Int*/
-            val newHabit = Habit(-1, 0, habitName, habitStartDate, 0, HabitTarget, habitPref, 0)
-            val mydatabase = DataBaseHelper(this)
-            val result = mydatabase.addHabit(newHabit)
+            // Create the new habit with the current user's ID
+            val newHabit = Habit(-1, currentUserId, habitName, habitStartDate, 0, habitTarget, habitPref, 0)
+            val result = myDataBase.addHabit(newHabit)
 
             when (result) {
                 -1 -> message.text = "Error on creating new habit"
                 -2 -> message.text = "Error can not open/create database"
-                -3 -> message.text = "User name is already exist"
-
                 else -> {
-                    message.text = "Your habit has been add to the database successfully "
+                    message.text = "Your habit has been added to the database successfully."
                     findViewById<Button>(R.id.buttonSaveHabit).isEnabled = false
                     val intent = Intent(this, MainActivtyMyHabit::class.java)
                     startActivity(intent)
@@ -104,6 +87,7 @@ class MainActivityAddNewHabit : AppCompatActivity() {
             }
         }
     }
+
     fun viewHabitButton(view: View) {
         val intent = Intent(this, MainActivtyMyHabit::class.java)
         startActivity(intent)
