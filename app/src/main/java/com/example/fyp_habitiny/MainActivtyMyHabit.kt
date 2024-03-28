@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ListView
+import android.widget.PopupMenu
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fyp_habitiny.Model.ArchiveHabit
@@ -33,6 +35,12 @@ class MainActivtyMyHabit : AppCompatActivity() {
 
         val listView: ListView = findViewById(R.id.HabitlistView)
         val searchView = findViewById<SearchView>(R.id.searchView)
+        //
+        val filterButton: ImageButton = findViewById(R.id.btnFilter)
+        filterButton.setOnClickListener { view ->
+            showFilterPopupMenu(view)
+        }
+
 
         // Initialize the adapter with the habit list for the current user
         adapter = HabitAdapter(this, R.layout.activity_single_habit, habitList, dbHelper)
@@ -63,6 +71,29 @@ class MainActivtyMyHabit : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String?): Boolean = false
             override fun onQueryTextChange(newText: String?): Boolean = true
         })
+    }
+    fun showFilterPopupMenu(view: View) {
+        val popupMenu = PopupMenu(this, view)
+        popupMenu.inflate(R.menu.filter_option_menu) // Make sure to define this menu in your resources
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.option1 -> {
+
+                        val intent =Intent(this, MainActivtyMyHabit::class.java)
+                        startActivity(intent)
+
+                    true
+                }
+                R.id.option2 -> {
+                    val intent =Intent(this, MainActivityDoneHabit::class.java)
+                    startActivity(intent)
+                    true
+                }
+                // Handle other options...
+                else -> false
+            }
+        }
+        popupMenu.show()
     }
 
     fun addHabitButton(view: View) {
