@@ -628,6 +628,14 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         db.close()
         return deletedRows > 0
     }
+    fun deletearchivedHabit(archivedHabitId: Int): Boolean {
+        val db = this.writableDatabase
+        val selection = "$Archive_Habit_Column_ID = ?" // Use = for an exact match
+        val selectionArgs = arrayOf(archivedHabitId.toString())
+        val deletedRows = db.delete(ArchiveHabitTableName, selection, selectionArgs)
+        db.close()
+        return deletedRows > 0
+    }
     fun deleteUser(userName: String): Boolean {
         val db = this.writableDatabase
         val selection = "$User_Column_UserName = ?"

@@ -1,6 +1,7 @@
 package com.example.fyp_habitiny
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,8 +33,10 @@ class ArchivedHabitAdapter(context: Context, resource: Int, private val archived
         val doneHabitTimePrefTextView: TextView = view.findViewById(R.id.HabitTimePrefArchivedHabit)
         val doneHabitCurrentTargetCount: TextView = view.findViewById(R.id.HabitCurrentCountArchivedHabit)
         val btnReactivate: Button = view.findViewById(R.id.buttonReactivate)
+        val btnDeleteArchive: ImageButton  = view.findViewById(R.id.RemoveHabitBtnArchivedHabit)
 
-        val archivedHabit = getItem(position)
+        //val archivedHabit = getItem(position)
+        val archivedHabit = archivedHabits[position]
 
         doneHabitNameTextView.text = archivedHabit?.archivedHabitName
         doneHabitStartDateTextView.text = "Start Date: ${archivedHabit?.archivedHabitStartDate}"
@@ -48,6 +51,36 @@ class ArchivedHabitAdapter(context: Context, resource: Int, private val archived
                 onReactivateHabitListener?.onReactivateHabit(it.archivedHabitName, it.archivedHabittarget)
             }
         }
+
+        btnDeleteArchive.setOnClickListener {
+            val dbHelper = DataBaseHelper(context)
+            Log.d("HabitAdapter", "Attempting to delete habit: ${archivedHabit.archivedHabitId}") // Log before deletion
+
+            if (dbHelper.deletearchivedHabit(archivedHabit.archivedHabitId)) {
+                Log.d("HabitAdapter", "Habit deleted successfully: ${archivedHabit.archivedHabitId}") // Log on successful deletion
+                // Remove the item from the list and notify the adapter to update the view
+                (archivedHabits as MutableList).removeAt(position)
+                notifyDataSetChanged()
+            } else {
+                Log.d("HabitAdapter", "Failed to delete habit: ${archivedHabit.archivedHabitId}") // Log on failure
+            }
+        }
+      /*  btnDeleteArchive.setOnClickListener {
+            archivedHabit?.let { Archivedhabit ->
+                val dbHelper = DataBaseHelper(context)
+                Log.d("ArchivedHabitAdapter", "Attempting to delete archived habit: ${Archivedhabit.archivedHabitId}") // Adjusted log tag to match adapter name
+
+                if (dbHelper.deleteHabit(Archivedhabit.archivedHabitId)) {
+                    Log.d("ArchivedHabitAdapter", "Archived habit deleted successfully: ${Archivedhabit.archivedHabitId}")
+
+                    (archivedHabits as? MutableList<ArchiveHabit>)?.removeAt(position)
+                    notifyDataSetChanged()
+                } else {
+                    Log.d("ArchivedHabitAdapter", "Failed to delete archived habit: ${Archivedhabit.archivedHabitId}")
+                }
+            }
+        }*/
+
 
         return view
     }
