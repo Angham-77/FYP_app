@@ -40,7 +40,7 @@ class MainActivityNewUser : AppCompatActivity() {
                 -2 -> message.text = "Error can not open/create database"
                 -3 -> message.text = "User name is already exist"
                 else -> {
-                    message.text = "Your details have been added to the database successfully"
+                    message.text = "Your details have been registered successfully"
                     findViewById<Button>(R.id.buttonSave).isEnabled = false
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)

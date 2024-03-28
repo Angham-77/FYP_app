@@ -11,7 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.fyp_habitiny.Model.ArchiveHabit
 import  com.example.fyp_habitiny.Model.DataBaseHelper
-class ArchivedHabitAdapter(context: Context, resource: Int, private val archivedHabits: MutableList<ArchiveHabit>, private val dbHelper: DataBaseHelper ) :
+class ArchivedHabitAdapter(context: Context, resource: Int, private val archivedHabits: List<ArchiveHabit>, private val dbHelper: DataBaseHelper ) :
     ArrayAdapter<ArchiveHabit>(context, resource, archivedHabits) {
 
 
@@ -27,12 +27,14 @@ class ArchivedHabitAdapter(context: Context, resource: Int, private val archived
         val btnReactivate: Button = view.findViewById(R.id.buttonReactivate)
         val removeButtonArchived: ImageButton = view.findViewById(R.id.RemoveHabitBtnArchivedHabit)
         val containerLayoutArchived = view.findViewById<LinearLayout>(R.id.habitItemContainerArchivedHabit)
+
+
         val archivedHabit = getItem(position)
 
         DoneHabitNameTextView.text = archivedHabit?.archivedHabitName
-        DoneHabitStartDateTextView.text = archivedHabit?.archivedHabitStartDate
+        DoneHabitStartDateTextView.text = "Start Date: ${archivedHabit?.archivedHabitStartDate}"
         DoneHabitTargetTextView.text = " Target: ${archivedHabit?.archivedHabittarget}"
-        DoneHabitTimePrefTextView.text = archivedHabit?.archivedHabittimePreference
+        DoneHabitTimePrefTextView.text = "Time: ${archivedHabit?.archivedHabittimePreference}"
         DoneHabitCurrentTargetCount.text = " Count: ${archivedHabit?.archivedHabitcurrentCount}"
 
         return view
