@@ -10,33 +10,49 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.fyp_habitiny.Model.ArchiveHabit
-import  com.example.fyp_habitiny.Model.DataBaseHelper
-class ArchivedHabitAdapter(context: Context, resource: Int, private val archivedHabits: List<ArchiveHabit>, private val dbHelper: DataBaseHelper ) :
+import com.example.fyp_habitiny.Model.DataBaseHelper
+
+class ArchivedHabitAdapter(context: Context, resource: Int, private val archivedHabits: List<ArchiveHabit>, private val dbHelper: DataBaseHelper) :
     ArrayAdapter<ArchiveHabit>(context, resource, archivedHabits) {
 
+    private var onReactivateHabitListener: OnReactivateHabitListener? = null
+
+    //1 (of 4 steps) Define an interface for thr Reactive button
+    interface OnReactivateHabitListener {
+        fun onReactivateHabit(habitName: String, habitTarget: Int)
+    }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.activity_sinlge_done_habit, parent, false)
 
-        val DoneHabitNameTextView: TextView = view.findViewById(R.id.habitNameTextViewArchivedHabit)
-        val DoneHabitStartDateTextView: TextView = view.findViewById(R.id.HabitStartDateTextViewArchivedHabit)
-        val DoneHabitTargetTextView: TextView = view.findViewById(R.id.HabitTargetNumberArchivedHabit)
-        val DoneHabitTimePrefTextView: TextView = view.findViewById(R.id.HabitTimePrefArchivedHabit)
-        val DoneHabitCurrentTargetCount: TextView = view.findViewById(R.id.HabitCurrentCountArchivedHabit)
+        val doneHabitNameTextView: TextView = view.findViewById(R.id.habitNameTextViewArchivedHabit)
+        val doneHabitStartDateTextView: TextView = view.findViewById(R.id.HabitStartDateTextViewArchivedHabit)
+        val doneHabitTargetTextView: TextView = view.findViewById(R.id.HabitTargetNumberArchivedHabit)
+        val doneHabitTimePrefTextView: TextView = view.findViewById(R.id.HabitTimePrefArchivedHabit)
+        val doneHabitCurrentTargetCount: TextView = view.findViewById(R.id.HabitCurrentCountArchivedHabit)
         val btnReactivate: Button = view.findViewById(R.id.buttonReactivate)
-        val removeButtonArchived: ImageButton = view.findViewById(R.id.RemoveHabitBtnArchivedHabit)
-        val containerLayoutArchived = view.findViewById<LinearLayout>(R.id.habitItemContainerArchivedHabit)
-
 
         val archivedHabit = getItem(position)
 
-        DoneHabitNameTextView.text = archivedHabit?.archivedHabitName
-        DoneHabitStartDateTextView.text = "Start Date: ${archivedHabit?.archivedHabitStartDate}"
-        DoneHabitTargetTextView.text = " Target: ${archivedHabit?.archivedHabittarget}"
-        DoneHabitTimePrefTextView.text = "Time: ${archivedHabit?.archivedHabittimePreference}"
-        DoneHabitCurrentTargetCount.text = " Count: ${archivedHabit?.archivedHabitcurrentCount}"
+        doneHabitNameTextView.text = archivedHabit?.archivedHabitName
+        doneHabitStartDateTextView.text = "Start Date: ${archivedHabit?.archivedHabitStartDate}"
+        doneHabitTargetTextView.text = "Target: ${archivedHabit?.archivedHabittarget}"
+        doneHabitTimePrefTextView.text = "Time: ${archivedHabit?.archivedHabittimePreference}"
+        doneHabitCurrentTargetCount.text = "Count: ${archivedHabit?.archivedHabitcurrentCount}"
+
+
+        //3 Set up a click listener in the adapter
+        btnReactivate.setOnClickListener {
+            archivedHabit?.let {
+                onReactivateHabitListener?.onReactivateHabit(it.archivedHabitName, it.archivedHabittarget)
+            }
+        }
 
         return view
+    }
+
+    fun setOnReactivateHabitListener(listener: OnReactivateHabitListener) {
+        this.onReactivateHabitListener = listener
     }
 }

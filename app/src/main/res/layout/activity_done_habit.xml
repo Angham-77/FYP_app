@@ -32,6 +32,17 @@
         android:layout_marginEnd="16dp"
         android:queryHint="Search Habits"
         app:iconifiedByDefault="false" />
+    <ImageButton
+        android:id="@+id/btnFilterArchive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DoneHabitsTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/filter"
+        app:tint="@color/TextColor" />
 
     <ListView
         android:id="@+id/DoneHabitlistView"
