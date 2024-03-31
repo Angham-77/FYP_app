@@ -20,18 +20,19 @@
         android:textColor="@color/TextColor"
         android:textSize="25sp" />
 
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/MyHabitsTextView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="15dp"
-        android:queryHint="Search Habits"
-        app:iconifiedByDefault="false"
-        android:layout_toStartOf="@+id/btnFilter"/>
-
+   <androidx.appcompat.widget.SearchView
+    android:id="@+id/searchView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/MyHabitsTextView"
+    android:layout_alignParentStart="true"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="15dp"
+    android:queryHint="Search Habits"
+    android:textColor="@color/TextColor"
+    app:iconifiedByDefault="false"
+    android:layout_toStartOf="@+id/btnFilter"
+    />
     <ImageButton
         android:id="@+id/btnFilter"
         android:layout_width="wrap_content"
@@ -52,7 +53,8 @@
         android:layout_marginTop="16dp"
         android:divider="@android:color/white"
         android:dividerHeight="10dp"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:visibility="visible"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addFloatingBtn"

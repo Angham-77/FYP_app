@@ -837,6 +837,8 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         }
         return 1 // Success
     }
+
+
     fun saveCurrentUserId(userId: Int, context: Context) {
         val sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -847,6 +849,68 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         val sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         return sharedPreferences.getInt("currentUserId", -1) // Returns -1 if no user ID is found
     }
+    fun searchHabits(query: String): List<Habit> {
+        val matchedHabits = mutableListOf<Habit>() // Temporarily mutable for building the list
+        val db = this.readableDatabase
+        val selectQuery = "SELECT * FROM $HabitTableName WHERE $Habit_Column_Name LIKE ?"
+        db.rawQuery(selectQuery, arrayOf("%$query%")).use { cursor ->
+            if (cursor.moveToFirst()) {
+                do {
+                    val habit = Habit(cursor)
+                    matchedHabits.add(habit)
+                    // Log the details of each habit as you add them to the list
+                    Log.d("DataBaseHelper", "Found Habit: ${habit.toString()}")
+                } while (cursor.moveToNext())
+            } else {
+                Log.d("DataBaseHelper", "No habits matched the query.")
+            }
+        }
+        // Log the size of the list after searching
+        Log.d("DataBaseHelper", "Number of habits matched: ${matchedHabits.size}")
+
+        // If you want to log the entire list
+        matchedHabits.forEach { habit ->
+            Log.d("DataBaseHelper", "Habit: ${habit.habitName}, ID: ${habit.habitId}")
+        }
+
+        // Convert the MutableList to an immutable List before returning
+        return matchedHabits.toList()
+    }
+
+    /*   fun searchHabits(query: String): List<Habit> {
+           val matchedHabits = mutableListOf<Habit>() // Temporarily mutable for building the list
+           val db = this.readableDatabase
+           val selectQuery = "SELECT * FROM $HabitTableName WHERE $Habit_Column_Name LIKE ?"
+           db.rawQuery(selectQuery, arrayOf("%$query%")).use { cursor ->
+               if (cursor.moveToFirst()) {
+                   do {
+                       // Assuming you have a constructor for Habit that takes a Cursor
+                       matchedHabits.add(Habit(cursor))
+                       Log.d("DataBaseHelper", "Found Habit: Adding to list")
+                   } while (cursor.moveToNext())
+               } else {
+                   Log.d("DataBaseHelper", "No habits matched the query.")
+               }
+           }
+           // Convert the MutableList to an immutable List before returning
+           return matchedHabits.toList()
+       }*/
 
 
+    /*fun searchHabits(query: String): List<Habit> {
+        val matchedHabits = mutableListOf<Habit>()
+        val db = this.readableDatabase
+        val selectQuery = "SELECT * FROM $HabitTableName WHERE $Habit_Column_Name LIKE ?"
+        db.rawQuery(selectQuery, arrayOf("%$query%")).use { cursor ->
+            if (cursor.moveToFirst()) {
+                do {
+                    matchedHabits.add(Habit(cursor))
+                    Log.d("DataBaseHelper", "Found Habit: Adding to list")
+                } while (cursor.moveToNext())
+            } else {
+                Log.d("DataBaseHelper", "No habits matched the query.")
+            }
+        }
+        return matchedHabits
+    }*/
 }

@@ -2,15 +2,14 @@ package com.example.fyp_habitiny
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.drawable.LayerDrawable
-import android.graphics.drawable.ShapeDrawable
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -20,15 +19,15 @@ import androidx.core.content.ContextCompat
 import com.example.fyp_habitiny.Model.DataBaseHelper
 import com.example.fyp_habitiny.Model.Habit
 
-class HabitAdapter(context: Context, resource: Int, private val habitList: List<Habit>, private val dbHelper: DataBaseHelper) :
+class HabitAdapter(context: Context, resource: Int, private val habitList: MutableList<Habit>, private val dbHelper: DataBaseHelper) :
     ArrayAdapter<Habit>(context, resource, habitList) {
 
-
+    val mutableList: MutableList<Habit> = habitList.toMutableList()
     var addHabitToArchiveListener: ((Habit) -> Unit)? = null
     @SuppressLint("MissingInflatedId")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val itemView = inflater.inflate(R.layout.activity_single_habit, parent, false) // Ensure this matches your layout file name
+        val itemView = inflater.inflate(R.layout.activity_single_habit, parent, false)
 
         val habitNameTextView: TextView = itemView.findViewById(R.id.habitNameTextView)
         val habitStartDateTextView: TextView = itemView.findViewById(R.id.HabitStartDateTextView)
@@ -43,6 +42,9 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: List<
 
 
         val habit = habitList[position]
+        // val habit = mutableList[position]
+
+
 
         habitNameTextView.text = habit.habitName
         habitStartDateTextView.text = "Start Date: ${habit.habitStartDate}"
@@ -102,7 +104,6 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: List<
 
                 increaseButton.isEnabled = false
             }
-            //    this.notifyDataSetChanged()
         }
 
         decreaseButton.setOnClickListener {
@@ -127,7 +128,7 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: List<
         }
 
 
-
+        //delete habit
         removeButton.setOnClickListener {
             val dbHelper = DataBaseHelper(context)
             Log.d("HabitAdapter", "Attempting to delete habit: ${habit.habitId}") // Log before deletion
@@ -144,7 +145,7 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: List<
 
 
         //NEW
-
+        //add habit to archive table
         val addToArchivedHabit: Button = itemView.findViewById(R.id.buttonDone)
         addToArchivedHabit.tag = getItem(position)  // Set the product as the tag of the button
 
@@ -156,13 +157,48 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: List<
 
         return itemView
     }
+    private var habitList2: List<Habit> = listOf()
+
+   /* fun updateData(newHabitList: List<Habit>) {
+        Log.d("HabitAdapter", "Updating data with new list size: ${newHabitList.size}")
+        habitList2 = newHabitList.toList() // Create a new list based on newHabitList
+        Log.d("HabitAdapter", "New data set size after update: ${habitList.size}")
+        notifyDataSetChanged()
+    }*/
+  /* fun updateData(newHabitList: List<Habit>) {
+       Log.d("HabitAdapter", "Updating data with new list size: ${newHabitList.size}")
+
+       // Check if you are on the main thread
+       if (Looper.myLooper() == Looper.getMainLooper()) {
+           // You are on the main thread, safe to update UI elements
+           mutableList.clear()
+           mutableList.addAll(newHabitList)
+           notifyDataSetChanged()
+       } else {
+           // Not on the main thread, post to the main thread
+           Handler(Looper.getMainLooper()).post {
+               mutableList.clear()
+               mutableList.addAll(newHabitList)
+               notifyDataSetChanged()
+           }
+       }
+   }*/
+
+     fun updateData(newHabitList: List<Habit>) {
+          Log.d("HabitAdapter", "Updating data with new list size: ${newHabitList.size}")
+          habitList.clear()
+         habitList.addAll(newHabitList)
+          Log.d("HabitAdapter", "New data set size after update: ${mutableList.size}")
+          notifyDataSetChanged()
+      }
+
     fun addToArchivedHabit(habit: Habit) {
-        val existingCartItem = dbHelper.getarchivedHabitByHabitId(habit.habitId)
+        val existingHabit = dbHelper.getarchivedHabitByHabitId(habit.habitId)
 
         addHabitToArchiveListener?.invoke(habit)
         val toast = Toast.makeText(context, "Habit added to archive successfully!", Toast.LENGTH_LONG)
         toast.show()
-         notifyDataSetChanged()
+        notifyDataSetChanged()
     }
 
     fun setOnAddHabitToArchiveListener(listener: (Habit) -> Unit) {
