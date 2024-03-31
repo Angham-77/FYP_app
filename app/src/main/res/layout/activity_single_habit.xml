@@ -52,13 +52,6 @@
             android:text="Time: text"/>
 
 
-       <!-- <CheckBox
-            android:id="@+id/HabitDonecheckBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Done" />-->
-
-
         <ImageButton
             android:id="@+id/RemoveHabitBtn"
             android:layout_width="wrap_content"
