@@ -1,0 +1,42 @@
+<!-- activity_add_habit.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/background">
+
+    <!-- Habit Name Input -->
+    <EditText
+        android:id="@+id/editTextRecoHabitName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Habit Name"
+        android:textColorHint="@color/hintText"/>
+
+
+    <Button
+        android:id="@+id/buttonSaveRecoHabit"
+        android:layout_width="198dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/button_color"
+        android:text="Save Habit"
+        android:onClick="saveNewRecoHabitButton"/>
+
+    <Button
+        android:id="@+id/buttonViewRecoHabit"
+        android:layout_width="198dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/button_color"
+        android:text="View Habit"
+        android:onClick="viewHabitButton"/>
+    <TextView
+        android:id="@+id/textViewMessageRecoHabit"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:textColor="@color/TextColor"
+        android:textSize="18sp" />
+
+</LinearLayout>

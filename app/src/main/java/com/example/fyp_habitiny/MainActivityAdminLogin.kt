@@ -39,7 +39,11 @@ class MainActivityAdminLogin : AppCompatActivity() {
                 -1 -> message.text = "User Not Found, Please try again"
                 -2 -> message.text = "Error Cannot Open/Create DataBase"
                 in 1..Int.MAX_VALUE -> {
+                    //get admin id
+                    myDataBase.saveCurrentAdminUserId(result, this)
+                    //
                     message.text = "You logged in successfully"
+
 
                     // Launch the new activity
                     val intent = Intent(this, MainActivityAdminOptions::class.java)

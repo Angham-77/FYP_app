@@ -75,6 +75,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
     private val RecoHabit_Column_ID = "RecoHabitId"
     private val RecoHabit_Column_RecoHabitName = "RecoHabitName"
+    private val RecoHabit_Column_AdminId = "RecoAdminId"
 
 
     /*Moto table*/
@@ -153,7 +154,9 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         //.................................
         //Create RecoHabit Table
         try {
-            var sqlCreateStatement: String = "CREATE TABLE " + RecoHabitTableName + "(" + RecoHabit_Column_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +  RecoHabit_Column_RecoHabitName + "  TEXT NOT NULL)"
+            var sqlCreateStatement: String = "CREATE TABLE " + RecoHabitTableName + "(" + RecoHabit_Column_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    RecoHabit_Column_RecoHabitName + "  TEXT NOT NULL"  + RecoHabit_Column_AdminId + "INTEGER, " + "FOREIGN KEY (" + RecoHabit_Column_AdminId + ") REFERENCES " +
+                    AdminTableName + "(" + Admin_Column_ID + "))"
 
             db?.execSQL(sqlCreateStatement)
         }
@@ -300,6 +303,32 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         else return success.toInt() //1
 
     }
+    fun addRecoHabit(recoHabit: RecoHabit): Int {
+        val db: SQLiteDatabase
+        val isRecoHabtAlreadyExists = checkRecoHabit(recoHabit)
+        if(isRecoHabtAlreadyExists < 0)
+            return isRecoHabtAlreadyExists
+
+        try {
+            db = this.writableDatabase
+        }
+
+        catch(e: SQLiteException) {
+            return -2
+        }
+
+        val cv: ContentValues = ContentValues()
+
+        cv.put(RecoHabit_Column_RecoHabitName, recoHabit.recoHabitName)
+        cv.put(RecoHabit_Column_AdminId, recoHabit.recoHabitAdminId)
+
+        val success  =  db.insert(RecoHabitTableName, null, cv)
+
+        db.close()
+        if (success.toInt() == -1) return success.toInt() //Error, adding new habit
+        else return success.toInt() //1
+
+    }
     private fun checkUserName(user: User): Int {
 
         val db: SQLiteDatabase
@@ -358,7 +387,32 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         return 0 //User not found
 
     }
+    private fun checkRecoHabit(recoHabit: RecoHabit): Int {
 
+        val db: SQLiteDatabase
+        try {
+            db = this.readableDatabase
+        }
+        catch(e: SQLiteException) {
+            return -2
+        }
+
+        val newRecoHabit = recoHabit.recoHabitName.lowercase()
+
+        val sqlStatement = "SELECT * FROM $RecoHabitTableName WHERE LOWER($RecoHabit_Column_RecoHabitName) = ?"
+        val param = arrayOf(newRecoHabit)
+        val cursor: Cursor = db.rawQuery(sqlStatement, param)
+
+        if(cursor.moveToFirst()) {
+            cursor.close()
+            db.close()
+            return -3 // Habit name already exists
+        }
+
+        cursor.close()
+        db.close()
+        return 0 // Habit name does not exist, okay to proceed
+    }
     fun getUser(user: User) : Int {
 
         val db: SQLiteDatabase
@@ -461,6 +515,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
     }
     @SuppressLint("Range")
+    //get habit by user id
     fun getHabit(userId: Int): List<Habit> {
         val habitList = mutableListOf<Habit>()
         val db: SQLiteDatabase
@@ -561,9 +616,10 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         while (cursor.moveToNext()) {
             val id = cursor.getInt(cursor.getColumnIndex(RecoHabit_Column_ID)) // Retrieve the habit ID
             val habitName = cursor.getString(cursor.getColumnIndex(RecoHabit_Column_RecoHabitName))
+            val adminIdReco = cursor.getInt(cursor.getColumnIndex(RecoHabit_Column_AdminId))
 
 
-            val Recohabit = RecoHabit(id, habitName)
+            val Recohabit = RecoHabit(id, habitName, adminIdReco)
             productList.add(Recohabit)
         }
 
@@ -625,6 +681,14 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         val selection = "$Habit_Column_ID = ?" // Use = for an exact match
         val selectionArgs = arrayOf(habitId.toString())
         val deletedRows = db.delete(HabitTableName, selection, selectionArgs)
+        db.close()
+        return deletedRows > 0
+    }
+    fun deleteRecoHabit(recoHabitId: Int): Boolean {
+        val db = this.writableDatabase
+        val selection = "$RecoHabit_Column_ID = ?" // Use = for an exact match
+        val selectionArgs = arrayOf(recoHabitId.toString())
+        val deletedRows = db.delete(RecoHabitTableName, selection, selectionArgs)
         db.close()
         return deletedRows > 0
     }
@@ -849,8 +913,18 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         val sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         return sharedPreferences.getInt("currentUserId", -1) // Returns -1 if no user ID is found
     }
+    fun saveCurrentAdminUserId(adminUserId: Int, context: Context) {
+        val sharedPreferences = context.getSharedPreferences("AdminUserPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("currentAdminUserId", adminUserId)
+        editor.apply()
+    }
+    fun getCurrentAdminUserId(context: Context): Int {
+        val sharedPreferences = context.getSharedPreferences("AdminUserPrefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getInt("currentAdminUserId", -1) // Returns -1 if no user ID is found
+    }
     fun searchHabits(query: String): List<Habit> {
-        val matchedHabits = mutableListOf<Habit>() // Temporarily mutable for building the list
+        val matchedHabits = mutableListOf<Habit>()
         val db = this.readableDatabase
         val selectQuery = "SELECT * FROM $HabitTableName WHERE $Habit_Column_Name LIKE ?"
         db.rawQuery(selectQuery, arrayOf("%$query%")).use { cursor ->
@@ -876,41 +950,32 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         // Convert the MutableList to an immutable List before returning
         return matchedHabits.toList()
     }
-
-    /*   fun searchHabits(query: String): List<Habit> {
-           val matchedHabits = mutableListOf<Habit>() // Temporarily mutable for building the list
-           val db = this.readableDatabase
-           val selectQuery = "SELECT * FROM $HabitTableName WHERE $Habit_Column_Name LIKE ?"
-           db.rawQuery(selectQuery, arrayOf("%$query%")).use { cursor ->
-               if (cursor.moveToFirst()) {
-                   do {
-                       // Assuming you have a constructor for Habit that takes a Cursor
-                       matchedHabits.add(Habit(cursor))
-                       Log.d("DataBaseHelper", "Found Habit: Adding to list")
-                   } while (cursor.moveToNext())
-               } else {
-                   Log.d("DataBaseHelper", "No habits matched the query.")
-               }
-           }
-           // Convert the MutableList to an immutable List before returning
-           return matchedHabits.toList()
-       }*/
-
-
-    /*fun searchHabits(query: String): List<Habit> {
-        val matchedHabits = mutableListOf<Habit>()
+    fun searchArchivedHabits(query: String): List<ArchiveHabit> {
+        val matchedHabits = mutableListOf<ArchiveHabit>()
         val db = this.readableDatabase
-        val selectQuery = "SELECT * FROM $HabitTableName WHERE $Habit_Column_Name LIKE ?"
+        val selectQuery = "SELECT * FROM $ArchiveHabitTableName WHERE $Archive_Habit_Column_Name LIKE ?"
         db.rawQuery(selectQuery, arrayOf("%$query%")).use { cursor ->
             if (cursor.moveToFirst()) {
                 do {
-                    matchedHabits.add(Habit(cursor))
-                    Log.d("DataBaseHelper", "Found Habit: Adding to list")
+                    val archivedHabit = ArchiveHabit(cursor)
+                    matchedHabits.add(archivedHabit)
+                    // Log the details of each habit as you add them to the list
+                    Log.d("DataBaseHelper", "Found Habit: ${archivedHabit.toString()}")
                 } while (cursor.moveToNext())
             } else {
                 Log.d("DataBaseHelper", "No habits matched the query.")
             }
         }
-        return matchedHabits
-    }*/
+        // Log the size of the list after searching
+        Log.d("DataBaseHelper", "Number of habits matched: ${matchedHabits.size}")
+
+        // If you want to log the entire list
+        matchedHabits.forEach { habit ->
+            Log.d("DataBaseHelper", "Habit: ${habit.archivedHabitName}, ID: ${habit.archivedHabitId}")
+        }
+
+        // Convert the MutableList to an immutable List before returning
+        return matchedHabits.toList()
+    }
+
 }

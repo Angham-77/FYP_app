@@ -24,4 +24,8 @@ class MainActivityAdminOptions : AppCompatActivity() {
         val intent = Intent(this, MainActivityAddNewUserByAdmin::class.java)
         startActivity(intent)
     }
+    fun addAnewRecoHabit(view: View) {
+        val intent = Intent(this, MainActivityAdminAddRecoHabit::class.java)
+        startActivity(intent)
+    }
 }
