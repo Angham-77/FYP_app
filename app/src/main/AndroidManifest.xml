@@ -17,6 +17,14 @@
             android:exported="true"
             android:theme="@style/Theme.FYP_Habitiny"/>
         <activity
+            android:name=".MainActivityAdminRecoHabitEdit"
+            android:exported="true"
+            android:parentActivityName=".MainActivityAdminOptions"/>
+        <activity
+            android:name=".MainActivityAdminAddRecoHabit"
+            android:exported="true"
+            android:parentActivityName=".MainActivityAdminOptions"/>
+        <activity
             android:name=".MainActivityDoneHabit"
             android:exported="true"
             android:parentActivityName=".MainActivtyMyHabit"/>

@@ -12,8 +12,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.fyp_habitiny.Model.ArchiveHabit
 import com.example.fyp_habitiny.Model.DataBaseHelper
+import com.example.fyp_habitiny.Model.Habit
 
-class ArchivedHabitAdapter(context: Context, resource: Int, private val archivedHabits: List<ArchiveHabit>, private val dbHelper: DataBaseHelper) :
+class ArchivedHabitAdapter(context: Context, resource: Int, private val archivedHabits: MutableList<ArchiveHabit>, private val dbHelper: DataBaseHelper) :
     ArrayAdapter<ArchiveHabit>(context, resource, archivedHabits) {
 
     private var onReactivateHabitListener: OnReactivateHabitListener? = null
@@ -88,4 +89,12 @@ class ArchivedHabitAdapter(context: Context, resource: Int, private val archived
     fun setOnReactivateHabitListener(listener: OnReactivateHabitListener) {
         this.onReactivateHabitListener = listener
     }
+    fun updateData(newHabitList: List<ArchiveHabit>) {
+        Log.d("HabitAdapter", "Updating data with new list size: ${newHabitList.size}")
+        archivedHabits.clear()
+        archivedHabits.addAll(newHabitList)
+        Log.d("HabitAdapter", "New data set size after update: ${archivedHabits.size}")
+        notifyDataSetChanged()
+    }
+
 }

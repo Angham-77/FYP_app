@@ -159,31 +159,6 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: Mutab
     }
     private var habitList2: List<Habit> = listOf()
 
-   /* fun updateData(newHabitList: List<Habit>) {
-        Log.d("HabitAdapter", "Updating data with new list size: ${newHabitList.size}")
-        habitList2 = newHabitList.toList() // Create a new list based on newHabitList
-        Log.d("HabitAdapter", "New data set size after update: ${habitList.size}")
-        notifyDataSetChanged()
-    }*/
-  /* fun updateData(newHabitList: List<Habit>) {
-       Log.d("HabitAdapter", "Updating data with new list size: ${newHabitList.size}")
-
-       // Check if you are on the main thread
-       if (Looper.myLooper() == Looper.getMainLooper()) {
-           // You are on the main thread, safe to update UI elements
-           mutableList.clear()
-           mutableList.addAll(newHabitList)
-           notifyDataSetChanged()
-       } else {
-           // Not on the main thread, post to the main thread
-           Handler(Looper.getMainLooper()).post {
-               mutableList.clear()
-               mutableList.addAll(newHabitList)
-               notifyDataSetChanged()
-           }
-       }
-   }*/
-
      fun updateData(newHabitList: List<Habit>) {
           Log.d("HabitAdapter", "Updating data with new list size: ${newHabitList.size}")
           habitList.clear()

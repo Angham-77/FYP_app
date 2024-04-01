@@ -107,7 +107,7 @@ class MainActivtyMyHabit : AppCompatActivity() {
         val listViewScrollPosition = savedInstanceState.getInt("listViewScrollPosition", 0)
         val listView: ListView = findViewById(R.id.HabitlistView)
         listView.setSelection(listViewScrollPosition)
-        // Additional state restoration...
+
     }
 
     fun setupSearchView() {
@@ -134,20 +134,6 @@ class MainActivtyMyHabit : AppCompatActivity() {
         adapter.updateData(filteredHabits)
     }
 
-
-
-   /*  fun updateListView(query: String) {
-        val dbHelper = DataBaseHelper(this)
-        val filteredHabits = dbHelper.searchHabits(query)
-        // Update the adapter data
-         adapter.updateData(filteredHabits)
-         adapter.notifyDataSetChanged()
-         val listView: ListView = findViewById(R.id.HabitlistView)
-         listView.invalidateViews()
-         listView.requestLayout()
-         listView.setSelectionAfterHeaderView()
-
-    }*/
     fun showFilterPopupMenu(view: View) {
         val popupMenu = PopupMenu(this, view)
         popupMenu.inflate(R.menu.filter_option_menu) // Make sure to define this menu in your resources
