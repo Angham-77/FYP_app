@@ -48,6 +48,7 @@ class ArchivedHabitAdapter(context: Context, resource: Int, private val archived
 
         //3 Set up a click listener in the adapter
         btnReactivate.setOnClickListener {
+            Log.d("ArchivedHabitAdapter", "Reactivate button clicked")
             archivedHabit?.let {
                 onReactivateHabitListener?.onReactivateHabit(it.archivedHabitName, it.archivedHabittarget)
             }
@@ -66,22 +67,6 @@ class ArchivedHabitAdapter(context: Context, resource: Int, private val archived
                 Log.d("HabitAdapter", "Failed to delete habit: ${archivedHabit.archivedHabitId}") // Log on failure
             }
         }
-      /*  btnDeleteArchive.setOnClickListener {
-            archivedHabit?.let { Archivedhabit ->
-                val dbHelper = DataBaseHelper(context)
-                Log.d("ArchivedHabitAdapter", "Attempting to delete archived habit: ${Archivedhabit.archivedHabitId}") // Adjusted log tag to match adapter name
-
-                if (dbHelper.deleteHabit(Archivedhabit.archivedHabitId)) {
-                    Log.d("ArchivedHabitAdapter", "Archived habit deleted successfully: ${Archivedhabit.archivedHabitId}")
-
-                    (archivedHabits as? MutableList<ArchiveHabit>)?.removeAt(position)
-                    notifyDataSetChanged()
-                } else {
-                    Log.d("ArchivedHabitAdapter", "Failed to delete archived habit: ${Archivedhabit.archivedHabitId}")
-                }
-            }
-        }*/
-
 
         return view
     }

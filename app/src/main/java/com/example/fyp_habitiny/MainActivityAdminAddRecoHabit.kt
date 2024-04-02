@@ -38,36 +38,16 @@ class MainActivityAdminAddRecoHabit: AppCompatActivity() {
             else -> {
                 message.text = "Your habit has been added to the database successfully."
                 findViewById<Button>(R.id.buttonSaveRecoHabit).isEnabled = false
-                val intent = Intent(this, MainActivityAdminRecoHabitEdit::class.java)
-                startActivity(intent)
+              //  val intent = Intent(this, MainActivityAdminRecoHabitEdit::class.java)
+              //  startActivity(intent)
             }
         }
     }
-   /* fun saveNewRecoHabitButton(view: View) {
-        val habitName = findViewById<EditText>(R.id.editTextRecoHabitName).text.toString()
-        val message = findViewById<TextView>(R.id.textViewMessageRecoHabit)
 
-        // Fetch the current user ID from shared preferences
-        val myDataBase = DataBaseHelper(this)
-        val currentUserId = myDataBase.getCurrentAdminUserId(this)
+    fun viewHabitButton(view: View) {
+        val intent = Intent(this, MainActivityAdminRecoHabitEdit::class.java)
+        startActivity(intent)
+    }
 
 
-
-
-
-        // Create the new habit with the current user's ID
-        val newHabit = RecoHabit(-1, habitName, currentUserId)
-        val result = myDataBase.addRecoHabit(newHabit)
-
-        when (result) {
-            -1 -> message.text = "Error on creating new habit"
-            -2 -> message.text = "Error can not open/create database"
-            else -> {
-                message.text = "Your habit has been added to the database successfully."
-                findViewById<Button>(R.id.buttonSaveRecoHabit).isEnabled = false
-                val intent = Intent(this, MainActivityPreCreatedHabits::class.java)
-                startActivity(intent)
-            }
-        }
-    }*/
 }

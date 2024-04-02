@@ -49,8 +49,9 @@ class MainActivityDoneHabit: AppCompatActivity(), ArchivedHabitAdapter.OnReactiv
         // Fetch and update the habit list after adding a habit to archive
         //Search functionality 2
 
-        archivedHabitAdapter = ArchivedHabitAdapter(this, R.layout.activity_single_habit,
-            archivedHabitList.toMutableList() , dbHelper)
+
+        //DO NOT DELETE
+      //  archivedHabitAdapter = ArchivedHabitAdapter(this, R.layout.activity_sinlge_done_habit, archivedHabitList.toMutableList(), dbHelper)
        // val listView: ListView = findViewById(R.id.DoneHabitlistView)
         archivedHabitListView.adapter = archivedHabitAdapter
 
@@ -112,7 +113,7 @@ class MainActivityDoneHabit: AppCompatActivity(), ArchivedHabitAdapter.OnReactiv
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         // Save ListView state
-        val listView: ListView = findViewById(R.id.HabitlistView)
+        val listView: ListView = findViewById(R.id.DoneHabitlistView)
         outState.putInt("listViewScrollPosition", listView.firstVisiblePosition)
         // Additional state saving...
     }
