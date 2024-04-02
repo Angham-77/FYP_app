@@ -977,5 +977,58 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         // Convert the MutableList to an immutable List before returning
         return matchedHabits.toList()
     }
+    fun searchRecoHabits(query: String): List<RecoHabit> {
+        val matchedHabits = mutableListOf<RecoHabit>()
+        val db = this.readableDatabase
+        val selectQuery = "SELECT * FROM $RecoHabitTableName WHERE $RecoHabit_Column_RecoHabitName LIKE ?"
+        db.rawQuery(selectQuery, arrayOf("%$query%")).use { cursor ->
+            if (cursor.moveToFirst()) {
+                do {
+                    val recoHabit = RecoHabit(cursor)
+                    matchedHabits.add(recoHabit)
+                    // Log the details of each habit as you add them to the list
+                    Log.d("DataBaseHelper", "Found Reco Habit: ${recoHabit.toString()}")
+                } while (cursor.moveToNext())
+            } else {
+                Log.d("DataBaseHelper", "No Reco habits matched the query.")
+            }
+        }
+        // Log the size of the list after searching
+        Log.d("DataBaseHelper", "Number of Reco habits matched: ${matchedHabits.size}")
+
+        // If you want to log the entire list
+        matchedHabits.forEach { habit ->
+            Log.d("DataBaseHelper", "Recommanded Habit: ${habit.recoHabitName}, ID: ${habit.recohabitId}")
+        }
+        // Convert the MutableList to an immutable List before returning
+        return matchedHabits.toList()
+    }
+
+    fun searchRecoHabitsAdmin(query: String): List<RecoHabit> {
+        val matchedHabits = mutableListOf<RecoHabit>()
+        val db = this.readableDatabase
+        val selectQuery = "SELECT * FROM $RecoHabitTableName WHERE $RecoHabit_Column_RecoHabitName LIKE ?"
+        db.rawQuery(selectQuery, arrayOf("%$query%")).use { cursor ->
+            if (cursor.moveToFirst()) {
+                do {
+                    val recoHabit = RecoHabit(cursor)
+                    matchedHabits.add(recoHabit)
+                    // Log the details of each habit as you add them to the list
+                    Log.d("DataBaseHelper", "Found Reco Habit: ${recoHabit.toString()}")
+                } while (cursor.moveToNext())
+            } else {
+                Log.d("DataBaseHelper", "No Reco habits matched the query.")
+            }
+        }
+        // Log the size of the list after searching
+        Log.d("DataBaseHelper", "Number of Reco habits matched: ${matchedHabits.size}")
+
+        // If you want to log the entire list
+        matchedHabits.forEach { habit ->
+            Log.d("DataBaseHelper", "Recommanded Habit: ${habit.recoHabitName}, ID: ${habit.recohabitId}")
+        }
+        // Convert the MutableList to an immutable List before returning
+        return matchedHabits.toList()
+    }
 
 }

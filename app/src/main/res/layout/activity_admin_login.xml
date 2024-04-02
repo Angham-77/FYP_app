@@ -13,28 +13,61 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:ems="10"
-        android:inputType="text"
         android:hint="UserName"
-        android:textColorHint ="@color/hintText"
+        android:inputType="text"
+        android:textColorHint="@color/hintText"
         app:layout_constraintBottom_toTopOf="@+id/editTextPasswordAdmin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintHorizontal_bias="0.119"
         app:layout_constraintStart_toEndOf="@+id/textViewUserNameAdmin"
         app:layout_constraintTop_toBottomOf="@+id/textViewLoginAsAdmin"
-        app:layout_constraintVertical_bias="0.847" />
+        app:layout_constraintVertical_bias="0.85" />
 
-    <Button
-        android:id="@+id/buttonSigninAdmin"
-        android:layout_width="201dp"
-        android:layout_height="45dp"
-        android:backgroundTint="@color/button_color"
-        android:onClick="adminLoginButton"
-        android:text="Sign in"
+    <EditText
+        android:id="@+id/editTextPasswordAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/hintText"
+        app:layout_constraintBottom_toTopOf="@+id/textViewMessageMainActivityAdmin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintStart_toEndOf="@+id/textViewPasswordAdmin" />
+
+    <ImageView
+        android:id="@+id/textViewPasswordAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="44dp"
+        android:src="@drawable/baseline_lock_24"
+        app:layout_constraintBottom_toTopOf="@+id/textViewMessageMainActivityAdmin"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewMessageMainActivityAdmin"
+        android:layout_width="313dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/textViewUserNameAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:src="@drawable/baseline_person_3_24"
+        app:layout_constraintBottom_toTopOf="@+id/textViewPasswordAdmin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMessageMainActivityAdmin"
-        app:layout_constraintVertical_bias="0.053" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.902" />
 
     <Button
         android:id="@+id/buttonSignupAdmin"
@@ -46,10 +79,24 @@
         android:text="Sign up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSigninAdmin"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonSigninAdmin"
+        android:layout_width="201dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@color/button_color"
+        android:onClick="adminLoginButton"
+        android:text="Sign in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMessageMainActivityAdmin"
+        app:layout_constraintVertical_bias="0.064" />
 
     <ImageView
         android:id="@+id/imageViewAdmin"
@@ -58,7 +105,7 @@
         android:layout_marginTop="92dp"
         app:layout_constraintBottom_toTopOf="@+id/textViewLoginAsAdmin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
@@ -73,56 +120,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.227" />
-
-    <ImageView
-        android:id="@+id/textViewUserNameAdmin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:src="@drawable/baseline_person_3_24"
-        app:layout_constraintBottom_toTopOf="@+id/textViewPasswordAdmin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.912" />
-
-    <ImageView
-        android:id="@+id/textViewPasswordAdmin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginBottom="52dp"
-        android:src="@drawable/baseline_lock_24"
-        app:layout_constraintBottom_toTopOf="@+id/textViewMessageMainActivityAdmin"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextPasswordAdmin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="40dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="Password"
-        android:textColorHint ="@color/hintText"
-        app:layout_constraintBottom_toTopOf="@+id/textViewMessageMainActivityAdmin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.106"
-        app:layout_constraintStart_toEndOf="@+id/textViewPasswordAdmin" />
-
-    <TextView
-        android:id="@+id/textViewMessageMainActivityAdmin"
-        android:layout_width="313dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="252dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintVertical_bias="0.3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

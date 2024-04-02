@@ -28,4 +28,9 @@ class MainActivityAdminOptions : AppCompatActivity() {
         val intent = Intent(this, MainActivityAdminAddRecoHabit::class.java)
         startActivity(intent)
     }
+    fun viewHabitButtonOptions(view: View) {
+        val intent = Intent(this, MainActivityAdminRecoHabitEdit::class.java)
+        startActivity(intent)
+    }
+
 }

@@ -12,7 +12,7 @@ import android.widget.TextView
 import com.example.fyp_habitiny.Model.DataBaseHelper
 import com.example.fyp_habitiny.Model.RecoHabit
 
-class RecoHabitAdapterAdmin (context: Context, resource: Int, private val habitList: List<RecoHabit>) :
+class RecoHabitAdapterAdmin (context: Context, resource: Int, private val habitList: MutableList<RecoHabit>) :
     ArrayAdapter<RecoHabit>(context, resource, habitList) {
 
 
@@ -46,9 +46,14 @@ class RecoHabitAdapterAdmin (context: Context, resource: Int, private val habitL
                 Log.d("RecoHabitAdapterAdmin", "Failed to delete habit: ${recohabit.recohabitId}") // Log on failure
             }
         }
-        //
-
         return itemView
+    }
+    fun updateData(newHabitList: List<RecoHabit>) {
+        Log.d("RecoHabitAdapter", "Updating data with new list size: ${newHabitList.size}")
+        habitList.clear()
+        habitList.addAll(newHabitList)
+        Log.d("RecoHabitAdapter", "New data set size after update: ${habitList.size}")
+        notifyDataSetChanged()
     }
 
 

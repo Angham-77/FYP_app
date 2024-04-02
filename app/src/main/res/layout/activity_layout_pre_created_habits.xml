@@ -10,25 +10,32 @@
         android:id="@+id/PreCraetedHabitTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="Need inspiration today?"
         android:textColor="@color/TextColor"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/listViewPreCraetedHabit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.929" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewRecoHabit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:queryHint="Search Habits"
+        android:textColor="@color/TextColor"
+        app:iconifiedByDefault="false"
+        app:layout_constraintTop_toBottomOf="@id/PreCraetedHabitTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp" />
 
     <ListView
         android:id="@+id/listViewPreCraetedHabit"
-        android:layout_width="349dp"
-        android:layout_height="598dp"
-        android:layout_below="@+id/PreCraetedHabitTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/searchViewRecoHabit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -60,7 +60,7 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: Mutab
         }
 
 
-        /////////////////
+        //increase button
         increaseButton.setOnClickListener {
             if (habit.habitcurrentCount < habit.habittarget) {
                 habit.habitcurrentCount ++
@@ -106,6 +106,7 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: Mutab
             }
         }
 
+        //DEcreas button functionality
         decreaseButton.setOnClickListener {
             if (habit.habitcurrentCount > 0) {
                 habit.habitcurrentCount--
