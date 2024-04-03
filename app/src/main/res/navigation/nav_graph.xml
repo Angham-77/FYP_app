@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainActivityAddNewHabit">
+    <activity
+        android:id="@+id/mainActivityAddNewHabit"
+        android:name="com.example.fyp_habitiny.MainActivityAddNewHabit"
+        android:label="MainActivityAddNewHabit" />
+    <activity
+        android:id="@+id/mainActivtyReadyBtn"
+        android:name="com.example.fyp_habitiny.MainActivtyReadyBtn"
+        android:label="MainActivtyReadyBtn" />
+    <activity
+        android:id="@+id/mainActivtyMotoSpace"
+        android:name="com.example.fyp_habitiny.MainActivtyMotoSpace"
+        android:label="MainActivtyMotoSpace" />
+</navigation>

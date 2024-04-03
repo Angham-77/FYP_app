@@ -2,15 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/background">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    tools:context=".MainActivityFeedback">
 
     <RatingBar
         android:id="@+id/ratingBarFeedback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginTop="16dp" />
 
     <EditText
         android:id="@+id/editTextFeedback"
@@ -20,7 +22,7 @@
         android:textColorHint="@color/hintText"
         android:inputType="textMultiLine"
         android:gravity="top"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:layout_below="@+id/ratingBarFeedback"/>
     <TextView
         android:id="@+id/textViewMessageFeedback"
@@ -28,6 +30,7 @@
         android:layout_height="47dp"
         android:textColor="@color/TextColor"
         android:textSize="18sp"
+        android:layout_marginTop="16dp"
         android:layout_below="@+id/editTextFeedback"/>
 
     <Button
@@ -35,9 +38,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewMessageFeedback"
-        android:layout_marginTop="220dp"
         android:text="Submit"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/button_color"
         android:onClick="saveNewFeedbackButton"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_viewFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu" />
+
 
 </RelativeLayout>

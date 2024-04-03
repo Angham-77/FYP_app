@@ -1,96 +1,116 @@
 <!-- activity_add_habit.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@color/background">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background"
+    tools:context=".MainActivityAddNewHabit">
 
-    <!-- Habit Name Input -->
-    <EditText
-        android:id="@+id/editTextHabitName"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Habit Name"
-        android:textColorHint="@color/hintText"/>
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_above="@id/nav_viewAddHabit">
+            <!-- Habit Name Input -->
+            <EditText
+                android:id="@+id/editTextHabitName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Habit Name"
+                android:textColorHint="@color/hintText"/>
 
-    <EditText
-        android:id="@+id/editTextHabitStartDate2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Start Date"
-        android:textColorHint="@color/hintText"/>
+            <EditText
+                android:id="@+id/editTextHabitStartDate2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Start Date"
+                android:textColorHint="@color/hintText"/>
 
 
-    <EditText
-        android:id="@+id/editTextHabitStartDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Pick Start Date"
-        android:focusable="false"
-        android:textColorHint="@color/hintText"/>
+            <EditText
+                android:id="@+id/editTextHabitStartDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Pick Start Date"
+                android:focusable="false"
+                android:textColorHint="@color/hintText"/>
 
-    <EditText
-        android:id="@+id/editTextTarget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter you target number"
-        android:textColorHint="@color/hintText"/>
+            <EditText
+                android:id="@+id/editTextTarget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter you target number"
+                android:textColorHint="@color/hintText"/>
 
-    <RadioGroup
-        android:id="@+id/radioGroupHabitPreference"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"> <!-- or horizontal if you prefer -->
+            <RadioGroup
+                android:id="@+id/radioGroupHabitPreference"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"> <!-- or horizontal if you prefer -->
 
-        <RadioButton
-            android:id="@+id/radioButtonAllDay"
-            android:layout_width="wrap_content"
+                <RadioButton
+                    android:id="@+id/radioButtonAllDay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All Day"
+                    android:padding="2dp"
+                    android:textColor="@color/TextColor"/>
+
+                <RadioButton
+                    android:id="@+id/radioButtonMorning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Morning"
+                    android:padding="2dp"
+                    android:textColor="@color/TextColor"/>
+
+                <RadioButton
+                    android:id="@+id/radioButtonEvening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Evening"
+                    android:padding="2dp"
+                    android:textColor="@color/TextColor"/>
+            </RadioGroup>
+
+        <Button
+            android:id="@+id/buttonSaveHabit"
+            android:layout_width="198dp"
             android:layout_height="wrap_content"
-            android:text="All Day"
-            android:padding="2dp"
-            android:textColor="@color/TextColor"/>
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/button_color"
+            android:text="Save Habit"
+            android:onClick="saveNewHabitButton"/>
 
-        <RadioButton
-            android:id="@+id/radioButtonMorning"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/buttonViewHabit"
+            android:layout_width="198dp"
             android:layout_height="wrap_content"
-            android:text="Morning"
-            android:padding="2dp"
-            android:textColor="@color/TextColor"/>
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/button_color"
+            android:text="View Habit"
+            android:onClick="viewHabitButton"/>
+            <TextView
+                android:id="@+id/textViewMessageHabit"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:textColor="@color/TextColor"
+                android:textSize="18sp" />
 
-        <RadioButton
-            android:id="@+id/radioButtonEvening"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Evening"
-            android:padding="2dp"
-            android:textColor="@color/TextColor"/>
-    </RadioGroup>
 
-    <Button
-        android:id="@+id/buttonSaveHabit"
-        android:layout_width="198dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="@color/button_color"
-        android:text="Save Habit"
-        android:onClick="saveNewHabitButton"/>
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonViewHabit"
-        android:layout_width="198dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="@color/button_color"
-        android:text="View Habit"
-        android:onClick="viewHabitButton"/>
-    <TextView
-        android:id="@+id/textViewMessageHabit"
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_viewAddHabit"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
-        android:textColor="@color/TextColor"
-        android:textSize="18sp" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu" />
 
-</LinearLayout>
+
+
+</RelativeLayout>
