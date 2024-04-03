@@ -3,6 +3,7 @@ package com.example.fyp_habitiny
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -10,14 +11,46 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.fyp_habitiny.Model.DataBaseHelper
 import com.example.fyp_habitiny.Model.Habit
+import com.example.fyp_habitiny.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import java.util.Calendar
 
 class MainActivityAddNewHabit : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_habit)
+
+        //nav
+        val navView: BottomNavigationView = findViewById(R.id.nav_viewAddHabit)
+        navView.setOnItemSelectedListener(object : NavigationBarView.OnItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.navigation_home -> {
+                        val intent = Intent(this@MainActivityAddNewHabit, MainActivtyReadyBtn::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.navigation_dashboard -> {
+                        val intent = Intent(this@MainActivityAddNewHabit, MainActivtyMyHabit::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.navigation_notifications -> {
+                        val intent = Intent(this@MainActivityAddNewHabit, MainActivtyMotoSpace::class.java)
+                        startActivity(intent)
+                    }
+                    // You can add more cases here if needed
+                }
+                return true // True if the event was handled, false otherwise.
+            }
+        })
+
+        //
 
         val editTextHabitName: EditText = findViewById(R.id.editTextHabitName)
         val editTextStartDate = findViewById<EditText>(R.id.editTextHabitStartDate)

@@ -4,21 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
-
+    android:background="@drawable/nasa"
+    tools:context=".MainActivtyMotoSpace">
 
     <TextView
         android:id="@+id/MotoTextView"
-        android:layout_width="270dp"
-        android:layout_height="246dp"
-        android:layout_marginTop="180dp"
+        android:layout_width="410dp"
+        android:layout_height="297dp"
+        android:background="@drawable/moto_rec"
         android:gravity="center"
         android:textSize="24sp"
+        android:textColor="@color/background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.449" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 
     <ImageButton
         android:id="@+id/buttonNext"
@@ -27,26 +37,21 @@
         android:background="?android:selectableItemBackground"
         android:padding="16dp"
         android:src="@drawable/right"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/MotoTextView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.455" />
+        app:layout_constraintBottom_toTopOf="@id/nav_view2"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp" />
 
     <ImageButton
         android:id="@+id/buttonPrev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:background="?android:selectableItemBackground"
         android:padding="16dp"
         android:src="@drawable/left"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/MotoTextView"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.455" />
+        app:layout_constraintBottom_toTopOf="@id/nav_view2"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

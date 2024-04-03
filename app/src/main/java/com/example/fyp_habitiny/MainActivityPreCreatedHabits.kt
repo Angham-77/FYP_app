@@ -4,11 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.example.fyp_habitiny.Model.DataBaseHelper
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 
 class MainActivityPreCreatedHabits : AppCompatActivity(), RecoHabitAdapter.RecoHabitClickListener {
 
@@ -29,6 +32,30 @@ class MainActivityPreCreatedHabits : AppCompatActivity(), RecoHabitAdapter.RecoH
         listView.adapter = recoHabitAdapter
         this.adapter = recoHabitAdapter
         setupSearchView()
+
+        //nav
+        val navView: BottomNavigationView = findViewById(R.id.nav_viewRecoHabit)
+        navView.setOnItemSelectedListener(object : NavigationBarView.OnItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.navigation_home -> {
+                        val intent = Intent(this@MainActivityPreCreatedHabits, MainActivtyReadyBtn::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.navigation_dashboard -> {
+                        val intent = Intent(this@MainActivityPreCreatedHabits, MainActivtyMyHabit::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.navigation_notifications -> {
+                        val intent = Intent(this@MainActivityPreCreatedHabits, MainActivtyMotoSpace::class.java)
+                        startActivity(intent)
+                    }
+                }
+                return true // True if the event was handled, false otherwise.
+            }
+        })
+
+        //
     }
 
     // Moved inside the class

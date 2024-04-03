@@ -2,11 +2,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingTop="16dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="16dp"
-    android:background="@color/background">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background"
+    tools:context=".MainActivityDoneHabit">
 
     <TextView
         android:id="@+id/DoneHabitsTextView"
@@ -27,11 +25,12 @@
         android:layout_below="@+id/DoneHabitsTextView"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="61dp"
         android:queryHint="Search Habits"
         app:iconifiedByDefault="false" />
+
     <ImageButton
         android:id="@+id/btnFilterArchive"
         android:layout_width="wrap_content"
@@ -60,5 +59,13 @@
         android:paddingTop="32dp"
         android:paddingRight="16dp"
         android:paddingBottom="16dp" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_viewDoneHabit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>

@@ -1,8 +1,11 @@
 package com.example.fyp_habitiny
 
+import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ListView
@@ -12,13 +15,42 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.fyp_habitiny.Model.ArchiveHabit
 
 import com.example.fyp_habitiny.Model.DataBaseHelper
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
+import java.util.Calendar
 
 class MainActivtyMyHabit : AppCompatActivity() {
 
     private lateinit var adapter: HabitAdapter
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_habit_list)
+
+
+        //nav
+        val navView: BottomNavigationView = findViewById(R.id.nav_viewMyHabit)
+        navView.setOnItemSelectedListener(object : NavigationBarView.OnItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.navigation_home -> {
+                        val intent = Intent(this@MainActivtyMyHabit, MainActivtyReadyBtn::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.navigation_dashboard -> {
+                        val intent = Intent(this@MainActivtyMyHabit, MainActivtyMyHabit::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.navigation_notifications -> {
+                        val intent = Intent(this@MainActivtyMyHabit, MainActivtyMotoSpace::class.java)
+                        startActivity(intent)
+                    }
+                }
+                return true // True if the event was handled, false otherwise.
+            }
+        })
+
+        //
 
         val dbHelper = DataBaseHelper(this)
 
@@ -90,8 +122,35 @@ class MainActivtyMyHabit : AppCompatActivity() {
             listView.invalidateViews()
             listView.requestLayout()
         }
+        //calender
+        val calendarButton: ImageButton = findViewById(R.id.calendarView)
+
+        calendarButton.setOnClickListener {
+            showDatePicker()
+        }
 
 
+    }
+    private fun showDatePicker() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+                // Do something with the selected date, such as updating UI or saving it
+                // For now, let's just log the selected date
+                Log.d("MainActivity", "Selected date: $selectedDayOfMonth/${selectedMonth + 1}/$selectedYear")
+            },
+            year,
+            month,
+            dayOfMonth
+        )
+
+        // Show the DatePickerDialog
+        datePickerDialog.show()
     }
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

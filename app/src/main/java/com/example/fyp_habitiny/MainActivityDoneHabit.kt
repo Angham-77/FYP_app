@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ListView
@@ -12,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.example.fyp_habitiny.Model.DataBaseHelper
 import com.example.fyp_habitiny.Model.ArchiveHabit
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 
 class MainActivityDoneHabit: AppCompatActivity(), ArchivedHabitAdapter.OnReactivateHabitListener {
 
@@ -22,6 +25,32 @@ class MainActivityDoneHabit: AppCompatActivity(), ArchivedHabitAdapter.OnReactiv
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_done_habit)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
+
+        //nav
+        val navView: BottomNavigationView = findViewById(R.id.nav_viewDoneHabit)
+        navView.setOnItemSelectedListener(object : NavigationBarView.OnItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.navigation_home -> {
+                        val intent = Intent(this@MainActivityDoneHabit, MainActivtyReadyBtn::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.navigation_dashboard -> {
+                        val intent = Intent(this@MainActivityDoneHabit, MainActivtyMyHabit::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.navigation_notifications -> {
+                        val intent = Intent(this@MainActivityDoneHabit, MainActivtyMotoSpace::class.java)
+                        startActivity(intent)
+                    }
+                }
+                return true // True if the event was handled, false otherwise.
+            }
+        })
+
+        //
 
         val dbHelper = DataBaseHelper(this)
 

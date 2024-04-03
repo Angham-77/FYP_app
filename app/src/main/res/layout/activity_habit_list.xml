@@ -1,12 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingTop="16dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="16dp"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".MainActivtyMyHabit">
 
     <TextView
         android:id="@+id/MyHabitsTextView"
@@ -20,24 +18,35 @@
         android:textColor="@color/TextColor"
         android:textSize="25sp" />
 
-   <androidx.appcompat.widget.SearchView
-    android:id="@+id/searchView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/MyHabitsTextView"
-    android:layout_alignParentStart="true"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="15dp"
-    android:queryHint="Search Habits"
-    android:textColor="@color/TextColor"
-    app:iconifiedByDefault="false"
-    android:layout_toStartOf="@+id/btnFilter"
-    />
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MyHabitsTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:queryHint="Search Habits"
+        android:textColor="@color/TextColor"
+        app:iconifiedByDefault="false"
+        android:layout_toStartOf="@+id/btnFilter" />
+
+    <ImageButton
+        android:id="@+id/calendarView"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_below="@id/MyHabitsTextView"
+        android:layout_alignParentStart="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="348dp"
+        android:layout_marginTop="-31dp"
+        android:background="@drawable/baseline_calendar_month_24" />
+
     <ImageButton
         android:id="@+id/btnFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/MyHabitsTextView"
+        android:layout_below="@id/MyHabitsTextView"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="32dp"
@@ -61,12 +70,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="76dp"
         android:src="@drawable/icons8_plus_30"
         app:backgroundTint="@color/button_color"
         android:onClick="addHabitButton"
-        app:tint="@null" />
+        app:tint="@null"
+        android:layout_above="@id/nav_viewMyHabit" /> <!-- Remove this line if it causes layout issues -->
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_viewMyHabit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>
