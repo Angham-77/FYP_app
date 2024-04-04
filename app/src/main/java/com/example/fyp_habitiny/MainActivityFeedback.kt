@@ -32,11 +32,11 @@ class MainActivityFeedback : AppCompatActivity() {
                         startActivity(intent)
                     }
                     R.id.navigation_dashboard -> {
-                        val intent = Intent(this@MainActivityFeedback, MainActivtyMyHabit::class.java)
+                        val intent = Intent(this@MainActivityFeedback, MainActivityAddNewHabit::class.java)
                         startActivity(intent)
                     }
                     R.id.navigation_notifications -> {
-                        val intent = Intent(this@MainActivityFeedback, MainActivtyMotoSpace::class.java)
+                        val intent = Intent(this@MainActivityFeedback, MainActivityMotoUserInput::class.java)
                         startActivity(intent)
                     }
                 }

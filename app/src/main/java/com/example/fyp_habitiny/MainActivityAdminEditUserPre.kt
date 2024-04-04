@@ -1,8 +1,10 @@
 package com.example.fyp_habitiny
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -11,13 +13,40 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.fyp_habitiny.Model.DataBaseHelper
 import com.example.fyp_habitiny.Model.PasswordHasher
 import com.example.fyp_habitiny.Model.User
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import java.io.Serializable
 
 class MainActivityAdminEditUserPre : AppCompatActivity() {
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pre_edit_user)
+
+        //nav
+        val navView: BottomNavigationView = findViewById(R.id.nav_viewEditUserAdminPre)
+        navView.setOnItemSelectedListener(object : NavigationBarView.OnItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.Home -> {
+                        val intent = Intent(this@MainActivityAdminEditUserPre, MainActivityAdminOptions::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.AddUser -> {
+                        val intent = Intent(this@MainActivityAdminEditUserPre, MainActivityAddNewUserByAdmin::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.AddHabit -> {
+                        val intent = Intent(this@MainActivityAdminEditUserPre, MainActivityAdminAddRecoHabit::class.java)
+                        startActivity(intent)
+                    }
+                }
+                return true // True if the event was handled, false otherwise.
+            }
+        })
+
+        //
     }
     //check if a user name exist and retrive the right data to be place in the right edit texts
     fun checkUserAndPopulateDetails(view: View) {

@@ -17,6 +17,10 @@
             android:exported="true"
             android:parentActivityName=".MainActivityAdminOptions"/>
         <activity
+            android:name=".MainActivityMotoUserInput"
+            android:exported="true"
+            android:parentActivityName=".MainActivityAdminOptions"/>
+        <activity
             android:name=".MainActivityAdminAddRecoHabit"
             android:exported="true"
             android:parentActivityName=".MainActivityAdminOptions"/>

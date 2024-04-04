@@ -43,11 +43,11 @@ class MainActivityPreCreatedHabits : AppCompatActivity(), RecoHabitAdapter.RecoH
                         startActivity(intent)
                     }
                     R.id.navigation_dashboard -> {
-                        val intent = Intent(this@MainActivityPreCreatedHabits, MainActivtyMyHabit::class.java)
+                        val intent = Intent(this@MainActivityPreCreatedHabits, MainActivityAddNewHabit::class.java)
                         startActivity(intent)
                     }
                     R.id.navigation_notifications -> {
-                        val intent = Intent(this@MainActivityPreCreatedHabits, MainActivtyMotoSpace::class.java)
+                        val intent = Intent(this@MainActivityPreCreatedHabits, MainActivityMotoUserInput::class.java)
                         startActivity(intent)
                     }
                 }

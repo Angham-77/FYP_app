@@ -2,23 +2,34 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="button_color">#6083a1</color>
+    <!--<color name="button_color">#6083a1</color>-->
+    <color name="button_color">#C5EDD3</color>
+    <color name="button_color_option">#FFD373</color>
     <color name="nav_grey">#B9B9B9</color>
     <color name="light_grey">#D3D3D3</color>
 
     <color name="colorPrimary">#001F3F</color>
     <color name="colorPrimaryDark">#95a7b8</color>
     <color name="colorAccent">#2196F3</color>
-    <color name="TargetMet">#153C63</color>
+  <!--  <color name="TargetMet">#153C63</color>-->
+    <color name="TargetMet">#8BFCB39C</color>
+
     <color name="Round">#89a4b0</color>
-    <color name="singlHabit">#545555</color>
+    <!--<color name="singlHabit">#545555</color>-->
+    <color name="singlHabit">#72CFCFCF</color>
     <color name="IsAdminText">#5c5c5b</color>
-    <color name="background">#001F3F</color>
-    <color name="TextColor">#95a7b8</color>
+    <!--<color name="background">#001F3F</color>-->
+   <!-- <color name="background">#FFFFE5</color>-->
+   <!-- <color name="background">#3c3c3c</color>-->
+    <color name="background">#FFFFFF</color>
+   <!-- <color name="TextColor">#95a7b8</color>-->
+    <color name="TextColor">#2A2C2C</color>
     <color name="AccentColor">#2196F3 </color>
-    <color name="hintText">#455463</color>
+   <!-- <color name="hintText">#455463</color>-->
+    <color name="hintText">#606163</color>
     <color name="imagebackground">#697d91</color>
     <color name="editTextBorder">#0b3057</color>
+
 
 
 

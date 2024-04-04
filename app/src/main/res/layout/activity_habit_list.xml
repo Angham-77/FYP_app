@@ -65,7 +65,7 @@
         android:padding="16dp"
         android:visibility="visible"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+   <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addFloatingBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,13 +76,14 @@
         app:backgroundTint="@color/button_color"
         android:onClick="addHabitButton"
         app:tint="@null"
-        android:layout_above="@id/nav_viewMyHabit" /> <!-- Remove this line if it causes layout issues -->
+        android:layout_above="@id/nav_viewMyHabit" />-->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_viewMyHabit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@color/button_color"
         app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>

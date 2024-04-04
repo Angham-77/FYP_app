@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background"
+    tools:context=".MainActivityAdminFeedback">
 
     <RatingBar
         android:id="@+id/ratingBarRetrived"
@@ -19,7 +20,8 @@
         android:id="@+id/AdminFeedbackTextView"
         android:layout_width="270dp"
         android:layout_height="246dp"
-        android:layout_marginTop="196dp"
+        android:layout_marginTop="152dp"
+        android:background="@drawable/moto_rec"
         android:gravity="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,5 +57,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.455" />
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_viewFeedbackAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/button_color"
+        app:menu="@menu/bottom_nav_menu_admin"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

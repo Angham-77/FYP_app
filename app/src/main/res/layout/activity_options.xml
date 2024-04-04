@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/universe"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
     <TextView
@@ -53,7 +53,7 @@
                     android:layout_height="50dp"
                     android:src="@drawable/add"
                     android:onClick="addHabitButton2"
-                    app:tint="@color/background"/>
+                    app:tint="@color/button_color"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
                     android:layout_height="50dp"
                     android:src="@drawable/folder"
                     android:onClick="readyButton"
-                    app:tint="@color/background" />
+                    app:tint="@color/button_color" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
                     android:layout_height="50dp"
                     android:src="@drawable/ladder"
                     android:onClick="GoToMotoSpace"
-                    app:tint="@color/background"/>
+                    app:tint="@color/button_color"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -160,7 +160,7 @@
                     android:layout_height="50dp"
                     android:src="@drawable/idea"
                     android:onClick="viewRecoHabits"
-                    app:tint="@color/background"/>
+                    app:tint="@color/button_color"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -194,7 +194,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/feedback"
-                    app:tint="@color/background"
+                    app:tint="@color/button_color"
                     android:onClick="GoToFeedback"/>
 
                 <TextView
@@ -230,7 +230,7 @@
                     android:layout_height="50dp"
                     android:onClick="GoToArchive"
                     android:src="@drawable/archive"
-                    app:tint="@color/background"
+                    app:tint="@color/button_color"
                     />
 
                 <TextView

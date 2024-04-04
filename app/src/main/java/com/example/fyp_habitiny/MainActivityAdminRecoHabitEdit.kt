@@ -4,11 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.example.fyp_habitiny.Model.DataBaseHelper
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 
 class MainActivityAdminRecoHabitEdit:  AppCompatActivity() {
 
@@ -32,6 +35,31 @@ class MainActivityAdminRecoHabitEdit:  AppCompatActivity() {
         listView.adapter = recoHabitAdapterAdmin
         this.adapter = recoHabitAdapterAdmin
         setupSearchView()
+
+
+        //nav
+        val navView: BottomNavigationView = findViewById(R.id.nav_viewEditPreHabitAdmin)
+        navView.setOnItemSelectedListener(object : NavigationBarView.OnItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.Home -> {
+                        val intent = Intent(this@MainActivityAdminRecoHabitEdit, MainActivityAdminOptions::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.AddUser -> {
+                        val intent = Intent(this@MainActivityAdminRecoHabitEdit, MainActivityAddNewUserByAdmin::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.AddHabit -> {
+                        val intent = Intent(this@MainActivityAdminRecoHabitEdit, MainActivityAdminAddRecoHabit::class.java)
+                        startActivity(intent)
+                    }
+                }
+                return true // True if the event was handled, false otherwise.
+            }
+        })
+
+        //
 
     }
     fun addRecoHabitButton(view: View) {

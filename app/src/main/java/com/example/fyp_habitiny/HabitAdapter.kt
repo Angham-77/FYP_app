@@ -31,6 +31,7 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: Mutab
 
         val habitNameTextView: TextView = itemView.findViewById(R.id.habitNameTextView)
         val habitStartDateTextView: TextView = itemView.findViewById(R.id.HabitStartDateTextView)
+        val habitEndtDateTextView: TextView = itemView.findViewById(R.id.HabitEndtDateTextView)
         val habitTargetTextView: TextView= itemView.findViewById(R.id.HabitTargetNumber)
         val habitTimePrefTextView: TextView = itemView.findViewById(R.id.HabitTimePref)
         val habitCurrentTargetCount: TextView = itemView.findViewById(R.id.HabitCurrentCount)
@@ -48,6 +49,7 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: Mutab
 
         habitNameTextView.text = habit.habitName
         habitStartDateTextView.text = "Start Date: ${habit.habitStartDate}"
+        habitEndtDateTextView.text = "Start Date: ${habit.habitEndtDate}"
         habitTargetTextView.text = "Target: ${habit.habittarget}"
         habitTimePrefTextView.text = "Time: ${habit.habittimePreference}"
         habitCurrentTargetCount.text = "Current Count: ${habit.habitcurrentCount}"

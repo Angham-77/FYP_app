@@ -1,4 +1,3 @@
-<!-- activity_add_habit.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,33 +12,35 @@
         android:padding="16dp"/>
     <!-- Habit Name Input -->
     <EditText
-        android:id="@+id/editTextRecoHabitName"
+        android:id="@+id/editTextEntreMoto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Habit Name"
+        android:layout_height="250dp"
+        android:hint="Enter text"
         android:textColorHint="@color/hintText"
         android:padding="16dp"/>
 
 
     <Button
-        android:id="@+id/buttonSaveRecoHabit"
+        android:id="@+id/buttonSubmitMoto"
         android:layout_width="198dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/button_color"
-        android:text="Save Habit"
-        android:onClick="saveNewRecoHabitButton"/>
+        android:text="Submit"
+        android:onClick="saveNewMotoButton"/>
 
     <Button
-        android:id="@+id/buttonViewRecoHabit"
+        android:id="@+id/buttonViewMoto"
         android:layout_width="198dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/button_color"
-        android:text="View Habit"
-        android:onClick="viewHabitButton"/>
+        android:text="View"
+        android:onClick="GoToMotoSpaceFromEdit"/>
+
+
     <TextView
-        android:id="@+id/textViewMessageRecoHabit"
+        android:id="@+id/textViewMotoInputMessage"
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:textColor="@color/TextColor"
@@ -52,11 +53,11 @@
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_viewAddPreHabitAdmin"
+        android:id="@+id/nav_viewAddMoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/button_color"
-        app:menu="@menu/bottom_nav_menu_admin"
+        app:menu="@menu/bottom_nav_menu"
         tools:ignore="MissingConstraints" />
 
 </LinearLayout>

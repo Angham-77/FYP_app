@@ -38,11 +38,11 @@ class MainActivityDoneHabit: AppCompatActivity(), ArchivedHabitAdapter.OnReactiv
                         startActivity(intent)
                     }
                     R.id.navigation_dashboard -> {
-                        val intent = Intent(this@MainActivityDoneHabit, MainActivtyMyHabit::class.java)
+                        val intent = Intent(this@MainActivityDoneHabit, MainActivityAddNewHabit::class.java)
                         startActivity(intent)
                     }
                     R.id.navigation_notifications -> {
-                        val intent = Intent(this@MainActivityDoneHabit, MainActivtyMotoSpace::class.java)
+                        val intent = Intent(this@MainActivityDoneHabit, MainActivityMotoUserInput::class.java)
                         startActivity(intent)
                     }
                 }

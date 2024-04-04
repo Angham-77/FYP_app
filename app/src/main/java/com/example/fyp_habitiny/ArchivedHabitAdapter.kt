@@ -30,6 +30,7 @@ class ArchivedHabitAdapter(context: Context, resource: Int, private val archived
 
         val doneHabitNameTextView: TextView = view.findViewById(R.id.habitNameTextViewArchivedHabit)
         val doneHabitStartDateTextView: TextView = view.findViewById(R.id.HabitStartDateTextViewArchivedHabit)
+        val doneHabitEndtDateTextView: TextView = view.findViewById(R.id.HabitEndtDateTextViewArchivedHabit)
         val doneHabitTargetTextView: TextView = view.findViewById(R.id.HabitTargetNumberArchivedHabit)
         val doneHabitTimePrefTextView: TextView = view.findViewById(R.id.HabitTimePrefArchivedHabit)
         val doneHabitCurrentTargetCount: TextView = view.findViewById(R.id.HabitCurrentCountArchivedHabit)
@@ -41,6 +42,7 @@ class ArchivedHabitAdapter(context: Context, resource: Int, private val archived
 
         doneHabitNameTextView.text = archivedHabit?.archivedHabitName
         doneHabitStartDateTextView.text = "Start Date: ${archivedHabit?.archivedHabitStartDate}"
+        doneHabitEndtDateTextView.text = "End Date: ${archivedHabit?.archivedEndDate}"
         doneHabitTargetTextView.text = "Target: ${archivedHabit?.archivedHabittarget}"
         doneHabitTimePrefTextView.text = "Time: ${archivedHabit?.archivedHabittimePreference}"
         doneHabitCurrentTargetCount.text = "Count: ${archivedHabit?.archivedHabitcurrentCount}"

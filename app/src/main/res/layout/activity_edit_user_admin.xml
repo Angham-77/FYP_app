@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/LLHMEditUser"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,7 +31,7 @@
             android:layout_width="376dp"
             android:layout_height="45dp"
             android:layout_weight="1"
-            android:background="@drawable/edit_text_border"
+
             android:ems="10"
             android:hint="Enter Full Name"
             android:inputType="textPersonName"
@@ -52,7 +53,7 @@
             android:layout_width="376dp"
             android:layout_height="45dp"
             android:layout_weight="1"
-            android:background="@drawable/edit_text_border"
+
             android:ems="10"
             android:inputType="textPersonName"
             android:textSize="18sp"
@@ -74,7 +75,7 @@
             android:layout_width="376dp"
             android:layout_height="45dp"
             android:layout_weight="1"
-            android:background="@drawable/edit_text_border"
+
             android:ems="10"
             android:inputType="textPersonName"
             android:textSize="18sp"
@@ -95,7 +96,7 @@
             android:layout_width="376dp"
             android:layout_height="45dp"
             android:layout_weight="1"
-            android:background="@drawable/edit_text_border"
+
             android:ems="10"
             android:inputType="textPersonName"
             android:textSize="18sp"
@@ -107,8 +108,9 @@
         android:id="@+id/textViewMessageEditUser"
         android:layout_width="match_parent"
         android:layout_height="47dp"
-        android:textColor="@color/design_default_color_error"
+        android:textColor="@color/TextColor"
         android:textSize="18sp" />
+
 
 
     <Button
@@ -116,11 +118,22 @@
         android:layout_width="198dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:backgroundTint="#2A4262"
+        android:background="@color/button_color"
         android:onClick="updateUserDetailsButton"
         android:text="Update" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_viewEditUserAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/button_color"
+        app:menu="@menu/bottom_nav_menu_admin"
+        tools:ignore="MissingConstraints" />
 
 
 </LinearLayout>
