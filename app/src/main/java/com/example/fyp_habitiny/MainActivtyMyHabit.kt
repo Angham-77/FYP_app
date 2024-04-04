@@ -38,11 +38,11 @@ class MainActivtyMyHabit : AppCompatActivity() {
                         startActivity(intent)
                     }
                     R.id.navigation_dashboard -> {
-                        val intent = Intent(this@MainActivtyMyHabit, MainActivtyMyHabit::class.java)
+                        val intent = Intent(this@MainActivtyMyHabit, MainActivityAddNewHabit::class.java)
                         startActivity(intent)
                     }
                     R.id.navigation_notifications -> {
-                        val intent = Intent(this@MainActivtyMyHabit, MainActivtyMotoSpace::class.java)
+                        val intent = Intent(this@MainActivtyMyHabit, MainActivityMotoUserInput::class.java)
                         startActivity(intent)
                     }
                 }
@@ -107,6 +107,7 @@ class MainActivtyMyHabit : AppCompatActivity() {
                 archivedHabittarget = addedHabit.habittarget,
                 archivedHabittimePreference = addedHabit.habittimePreference,
                 archivedHabitcurrentCount = addedHabit.habitcurrentCount,
+                archivedEndDate = addedHabit.habitEndtDate,
             )
 
             dbHelper.addHabitToArchive(archivedHabit)
@@ -140,16 +141,12 @@ class MainActivtyMyHabit : AppCompatActivity() {
         val datePickerDialog = DatePickerDialog(
             this,
             { _, selectedYear, selectedMonth, selectedDayOfMonth ->
-                // Do something with the selected date, such as updating UI or saving it
-                // For now, let's just log the selected date
                 Log.d("MainActivity", "Selected date: $selectedDayOfMonth/${selectedMonth + 1}/$selectedYear")
             },
             year,
             month,
             dayOfMonth
         )
-
-        // Show the DatePickerDialog
         datePickerDialog.show()
     }
     override fun onSaveInstanceState(outState: Bundle) {

@@ -11,12 +11,8 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.example.fyp_habitiny.Model.DataBaseHelper
 import com.example.fyp_habitiny.Model.Habit
-import com.example.fyp_habitiny.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import java.util.Calendar
@@ -37,11 +33,11 @@ class MainActivityAddNewHabit : AppCompatActivity() {
                         startActivity(intent)
                     }
                     R.id.navigation_dashboard -> {
-                        val intent = Intent(this@MainActivityAddNewHabit, MainActivtyMyHabit::class.java)
+                        val intent = Intent(this@MainActivityAddNewHabit, MainActivityAddNewHabit::class.java)
                         startActivity(intent)
                     }
                     R.id.navigation_notifications -> {
-                        val intent = Intent(this@MainActivityAddNewHabit, MainActivtyMotoSpace::class.java)
+                        val intent = Intent(this@MainActivityAddNewHabit, MainActivityMotoUserInput::class.java)
                         startActivity(intent)
                     }
                     // You can add more cases here if needed
@@ -54,6 +50,7 @@ class MainActivityAddNewHabit : AppCompatActivity() {
 
         val editTextHabitName: EditText = findViewById(R.id.editTextHabitName)
         val editTextStartDate = findViewById<EditText>(R.id.editTextHabitStartDate)
+        val editTextEndDate = findViewById<EditText>(R.id.editTextHabitEndDate)
 
         //4 Retrieve habit name and target from intent if available (for reactivating a habit)
         intent.getStringExtra("EXTRA_HABIT_NAME")?.let { habitName ->
@@ -67,6 +64,10 @@ class MainActivityAddNewHabit : AppCompatActivity() {
         editTextStartDate.setOnClickListener {
             showDatePickerDialog()
         }
+
+        editTextEndDate.setOnClickListener {
+            showDatePickerDialogEnd()
+        }
     }
 
     private fun showDatePickerDialog() {
@@ -78,10 +79,20 @@ class MainActivityAddNewHabit : AppCompatActivity() {
 
         datePickerDialog.show()
     }
+    private fun showDatePickerDialogEnd() {
+        val datePickerDialog = DatePickerDialog(this, { _, year, month, dayOfMonth ->
+            // Note: Month is zero-based, add 1 for display
+            val selectedDate = "${dayOfMonth}/${month + 1}/${year}"
+            findViewById<EditText>(R.id.editTextHabitEndDate).setText(selectedDate)
+        }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+
+        datePickerDialog.show()
+    }
 
     fun saveNewHabitButton(view: View) {
         val habitName = findViewById<EditText>(R.id.editTextHabitName).text.toString()
         val habitStartDate = findViewById<EditText>(R.id.editTextHabitStartDate).text.toString()
+        val habitEndDate = findViewById<EditText>(R.id.editTextHabitEndDate).text.toString()
         val habitTargetText = findViewById<EditText>(R.id.editTextTarget).text.toString()
         val message = findViewById<TextView>(R.id.textViewMessageHabit)
 
@@ -100,7 +111,7 @@ class MainActivityAddNewHabit : AppCompatActivity() {
         }
 
         // Create the new habit with the current user's ID
-        val newHabit = Habit(-1, currentUserId, habitName, habitStartDate, 0, habitTarget, habitPref, 0)
+        val newHabit = Habit(-1, currentUserId, habitName, habitStartDate, 0, habitTarget, habitPref, 0, habitEndDate )
         val result = myDataBase.addHabit(newHabit)
 
         when (result) {

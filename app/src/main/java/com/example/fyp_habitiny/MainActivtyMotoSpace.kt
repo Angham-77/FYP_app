@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -18,11 +17,13 @@ class MainActivtyMotoSpace : AppCompatActivity() {
 
     private lateinit var motoList: List<Moto>
     private var currentIndex = 0
+    private lateinit var dbHelper2: DataBaseHelper
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_moto_space)
+
 
         val dbHelper = DataBaseHelper(this)
         motoList = dbHelper.getMototext() // Load the moto texts from the database
@@ -57,11 +58,11 @@ class MainActivtyMotoSpace : AppCompatActivity() {
                         startActivity(intent)
                     }
                     R.id.navigation_dashboard -> {
-                        val intent = Intent(this@MainActivtyMotoSpace, MainActivtyMyHabit::class.java)
+                        val intent = Intent(this@MainActivtyMotoSpace, MainActivityAddNewHabit::class.java)
                         startActivity(intent)
                     }
                     R.id.navigation_notifications -> {
-                        val intent = Intent(this@MainActivtyMotoSpace, MainActivtyMotoSpace::class.java)
+                        val intent = Intent(this@MainActivtyMotoSpace, MainActivityMotoUserInput::class.java)
                         startActivity(intent)
                     }
                 }
@@ -70,7 +71,25 @@ class MainActivtyMotoSpace : AppCompatActivity() {
         })
 
         //
+
+        motoList = dbHelper.getMotoByUserId(this) // This fetches both user and system quotes
+
+        // If the list is not empty, display the first quote
+        if (motoList.isNotEmpty()) {
+            updateMotoText()
+        }
+
+
+        ///////////////////////////
     }
+    /*private fun updateMotoText() {
+        // Ensures we cycle through quotes without going out of bounds
+        currentIndex = if (currentIndex >= motoList.size) 0 else currentIndex
+
+        val motoTextDisplay = findViewById<TextView>(R.id.MotoTextView)
+        motoTextDisplay.text = motoList[currentIndex].motoText
+        currentIndex++
+    }*/
 
     private fun updateMotoText() {
         if (motoList.isNotEmpty()) {

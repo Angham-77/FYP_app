@@ -39,4 +39,15 @@
         app:tint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_viewEditPreHabitAdmin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/button_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/bottom_nav_menu_admin" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

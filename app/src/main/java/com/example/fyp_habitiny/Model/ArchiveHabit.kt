@@ -3,7 +3,7 @@ package com.example.fyp_habitiny.Model
 import android.database.Cursor
 
 data class ArchiveHabit( val archivedHabitId: Int, var archivedHabitUserId: Int, var AhabitId: Int, var archivedHabitName: String, var archivedHabitStartDate: String,
-                        val archivedHabittarget: Int, val archivedHabittimePreference: String, var archivedHabitcurrentCount: Int){
+                        val archivedHabittarget: Int, val archivedHabittimePreference: String, var archivedHabitcurrentCount: Int, val archivedEndDate: String){
 
     constructor(cursor: Cursor) : this(
         archivedHabitId = cursor.getInt(cursor.getColumnIndexOrThrow("ArchiveHabitId")),
@@ -13,6 +13,7 @@ data class ArchiveHabit( val archivedHabitId: Int, var archivedHabitUserId: Int,
         archivedHabitStartDate = cursor.getString(cursor.getColumnIndexOrThrow("ArchiveStartDate")),
         archivedHabittarget = cursor.getInt(cursor.getColumnIndexOrThrow("ArchiveTarget")),
         archivedHabittimePreference = cursor.getString(cursor.getColumnIndexOrThrow("ArchiveTimePreference")),
-        archivedHabitcurrentCount = cursor.getInt(cursor.getColumnIndexOrThrow("ArchiveCurrentTargetCount"))
+        archivedHabitcurrentCount = cursor.getInt(cursor.getColumnIndexOrThrow("ArchiveCurrentTargetCount")),
+        archivedEndDate = cursor.getString(cursor.getColumnIndexOrThrow("EndDate"))
     )
 }

@@ -48,6 +48,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
     private val Habit_Column_UserId = "UserId"
     private val Habit_Column_Name = "HabitName"
     private val Habit_Column_StartDate = "StartDate"
+    private val Habit_Column_EndDate = "EndDate"
     private val Habit_Column_HabitStatus = "HabitStatus"
     private val Habit_Column_Target = "Target"
     private val Habit_Column_TimePreference = "TimePreference"
@@ -63,7 +64,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
     private val Archive_Habit_Column_HabitId = "HabitId"
     private val Archive_Habit_Column_Name = "ArchiveHabitName"
     private val Archive_Habit_Column_StartDate = "ArchiveStartDate"
-  //  private val Archive_Habit_Column_EndtDate = "ArchiveEndDate"
+    private val Archive_Habit_Column_EndtDate = "ArchiveEndDate"
     private val Archive_Habit_Column_Target = "ArchiveTarget"
     private val Archive_Habit_Column_TimePreference = "ArchiveTimePreference"
     private val Archive_Habit_Column_CurrentTargetCount = "ArchiveCurrentTargetCount"
@@ -84,6 +85,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
     private val MotoTableName = "TMoto"
 
     private val Moto_Column_ID = "MotoId"
+    private val Moto_Column_UserID = "MotoUserId"
     private val Moto_Column_MotoText = "MotoText"
 
 
@@ -131,7 +133,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
         try {
             var sqlCreateStatement: String = "CREATE TABLE " + HabitTableName + "(" + Habit_Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +  Habit_Column_UserId + "  INTEGER NOT NULL, " +
-                    Habit_Column_Name + " TEXT NOT NULL, " + Habit_Column_StartDate+ " TEXT NOT NULL, "  + Habit_Column_HabitStatus+ " INTEGER NOT NULL" +
+                    Habit_Column_Name + " TEXT NOT NULL, " + Habit_Column_StartDate+ " TEXT NOT NULL, " + Habit_Column_EndDate+ " TEXT NOT NULL, " + Habit_Column_HabitStatus+ " INTEGER NOT NULL" +
                     Habit_Column_Target+ " INTEGER NOT NULL" + Habit_Column_TimePreference+ " TEXT NOT NULL" + Habit_Column_CurrentTargetCount + "INTEGER," +"FOREIGN KEY (" + Habit_Column_UserId + ") REFERENCES TUser(UserId))"
 
             db?.execSQL(sqlCreateStatement)
@@ -143,7 +145,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
         try {
             var sqlCreateStatement: String = "CREATE TABLE " + ArchiveHabitTableName + "(" + Archive_Habit_Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +  Archive_Habit_Column_HabitId + "  INTEGER NOT NULL, " +  Archive_Habit_Column_UserId + "  INTEGER NOT NULL, " +
-                    Archive_Habit_Column_Name + " TEXT NOT NULL, " + Archive_Habit_Column_StartDate+ " TEXT NOT NULL, " +  Archive_Habit_Column_Target+ " INTEGER NOT NULL" + Archive_Habit_Column_TimePreference+ " TEXT NOT NULL" +
+                    Archive_Habit_Column_Name + " TEXT NOT NULL, " + Archive_Habit_Column_StartDate+ " TEXT NOT NULL, " + Archive_Habit_Column_EndtDate+ " TEXT NOT NULL, "+  Archive_Habit_Column_Target+ " INTEGER NOT NULL" + Archive_Habit_Column_TimePreference+ " TEXT NOT NULL" +
                     Archive_Habit_Column_CurrentTargetCount + "INTEGER,  " +  "FOREIGN KEY (" + Archive_Habit_Column_HabitId + ") REFERENCES " + HabitTableName + "(" + Habit_Column_ID + "), " +
             "FOREIGN KEY (" + Archive_Habit_Column_UserId + ") REFERENCES TUser(UserId))"
 
@@ -165,7 +167,9 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
         //Create Moto Table
         try {
-            var sqlCreateStatement: String = "CREATE TABLE " + MotoTableName + "(" + Moto_Column_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +  Moto_Column_MotoText+ "  TEXT NOT NULL)"
+            var sqlCreateStatement: String = "CREATE TABLE " + MotoTableName + "(" + Moto_Column_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    Moto_Column_MotoText+ "  TEXT NOT NULL "+ Moto_Column_UserID + "INTEGER, " + "FOREIGN KEY (" + Moto_Column_UserID + ") REFERENCES " +
+                    UserTableName + "(" + User_Column_ID + "))"
 
             db?.execSQL(sqlCreateStatement)
         }
@@ -276,6 +280,49 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         if (success.toInt() == -1) return success.toInt() // Error, adding new feedback
         else return success.toInt() // 1
     }
+    fun addMoto(moto: Moto): Int {
+        val db: SQLiteDatabase
+        try {
+            db = this.writableDatabase
+        } catch (e: SQLiteException) {
+            return -2
+        }
+
+        val cv: ContentValues = ContentValues()
+
+
+        cv.put(Moto_Column_MotoText, moto.motoText)
+
+
+        val success = db.insert(MotoTableName, null, cv)
+
+        db.close()
+        if (success.toInt() == -1) return success.toInt() // Error, adding new feedback
+        else return success.toInt() // 1
+    }
+    @SuppressLint("Range")
+    fun getRandomMoto(userId: Int?): Moto? {
+        val db: SQLiteDatabase = this.readableDatabase
+        var moto: Moto? = null
+        val query = if (userId != null) {
+            "SELECT * FROM $MotoTableName WHERE $Moto_Column_UserID = ? OR $Moto_Column_UserID IS NULL ORDER BY RANDOM() LIMIT 1"
+        } else {
+            "SELECT * FROM $MotoTableName ORDER BY RANDOM() LIMIT 1"
+        }
+        val cursor: Cursor = db.rawQuery(query, userId?.let { arrayOf(it.toString()) })
+
+        if (cursor.moveToFirst()) {
+            val id = cursor.getInt(cursor.getColumnIndex(Moto_Column_ID))
+            val motoText = cursor.getString(cursor.getColumnIndex(Moto_Column_MotoText))
+            val motoUserId = cursor.getInt(cursor.getColumnIndex(Moto_Column_UserID))
+            moto = Moto(id, motoText, motoUserId)
+        }
+
+        cursor.close()
+        db.close()
+        return moto
+    }
+
     fun addHabit(habit: Habit): Int {
         val db: SQLiteDatabase
         try {
@@ -290,6 +337,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         cv.put(Habit_Column_Name, habit.habitName)
         cv.put(Habit_Column_UserId, habit.HabitUserId)
         cv.put(Habit_Column_StartDate, habit.habitStartDate)
+        cv.put(Habit_Column_EndDate, habit.habitEndtDate)
         cv.put(Habit_Column_HabitStatus, habit.habitStatus)
         cv.put(Habit_Column_Target, habit.habittarget)
         cv.put(Habit_Column_TimePreference, habit.habittimePreference)
@@ -542,12 +590,13 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
             val userId = cursor.getInt(cursor.getColumnIndex(Habit_Column_UserId))
             val habitName = cursor.getString(cursor.getColumnIndex(Habit_Column_Name))
             val habitStartDate = cursor.getString(cursor.getColumnIndex(Habit_Column_StartDate))
+            val habitEndDate = cursor.getString(cursor.getColumnIndex(Habit_Column_EndDate))
             val habitStatus = cursor.getInt(cursor.getColumnIndex(Habit_Column_HabitStatus))
             val habitTarget = cursor.getInt(cursor.getColumnIndex(Habit_Column_Target))
             val habitTimePreference = cursor.getString(cursor.getColumnIndex(Habit_Column_TimePreference))
             val habitCurrentCount = cursor.getInt(cursor.getColumnIndex(Habit_Column_CurrentTargetCount))
 
-            val habit = Habit(id, userId, habitName, habitStartDate, habitStatus, habitTarget, habitTimePreference, habitCurrentCount)
+            val habit = Habit(id, userId, habitName, habitStartDate, habitStatus, habitTarget, habitTimePreference, habitCurrentCount, habitEndDate)
             habitList.add(habit)
         }
 
@@ -583,12 +632,13 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
             val userId = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_UserId))
             val habitName = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_Name))
             val habitStartDate = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_StartDate))
+            val habitEndtDate = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_EndtDate))
             val AhabitID = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_HabitId))
             val habitTarget = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_Target))
             val habitTimePreference = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_TimePreference))
             val habitCurrentCount = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_CurrentTargetCount))
 
-            val archivedHabit = ArchiveHabit(id, userId,AhabitID,  habitName, habitStartDate, habitTarget, habitTimePreference, habitCurrentCount)
+            val archivedHabit = ArchiveHabit(id, userId,AhabitID,  habitName, habitStartDate, habitTarget, habitTimePreference, habitCurrentCount, habitEndtDate)
             habitList.add(archivedHabit)
         }
 
@@ -597,6 +647,77 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
         return habitList
     }
+   /* @SuppressLint("Range")
+    fun getMotoByUserId(userId: Int): List<Moto> {
+        val moto = mutableListOf<Moto>()
+        val db: SQLiteDatabase
+
+        try {
+            db = this.readableDatabase
+        } catch (e: SQLiteException) {
+            Log.e("DataBaseHelper", "Error opening readable database: ${e.message}")
+            return emptyList()
+        }
+
+        val cursor: Cursor = db.query(
+            MotoTableName,
+            null,
+            "$Moto_Column_UserID = ?",
+            arrayOf(userId.toString()),
+            null,
+            null,
+            null
+        )
+
+        while (cursor.moveToNext()) {
+            val id = cursor.getInt(cursor.getColumnIndex(Moto_Column_ID))
+            val motoText = cursor.getString(cursor.getColumnIndex(Moto_Column_MotoText))
+            val motoUserId = cursor.getInt(cursor.getColumnIndex(Moto_Column_UserID))
+
+            val setmotoText = Moto(id, motoText,  motoUserId)
+            moto.add(setmotoText)
+        }
+
+        cursor.close()
+        db.close()
+
+        return moto
+    }*/
+   @SuppressLint("Range")
+   fun getMotoByUserId(context: Context): List<Moto> {
+       val userId = getCurrentUserId(context)
+       val motoList = mutableListOf<Moto>()
+       val db: SQLiteDatabase
+
+       try {
+           db = this.readableDatabase
+       } catch (e: SQLiteException) {
+           Log.e("DataBaseHelper", "Error opening readable database: ${e.message}")
+           return emptyList()
+       }
+
+       val selectionArgs = if (userId == -1) arrayOf() else arrayOf(userId.toString())
+       val query = "SELECT * FROM $MotoTableName WHERE $Moto_Column_UserID IS NULL" +
+               if (userId != -1) " OR $Moto_Column_UserID = ?" else ""
+
+       val cursor: Cursor = db.rawQuery(query, selectionArgs)
+
+       while (cursor.moveToNext()) {
+           val id = cursor.getInt(cursor.getColumnIndex(Moto_Column_ID))
+           val motoText = cursor.getString(cursor.getColumnIndex(Moto_Column_MotoText))
+           val motoUserId = cursor.getInt(cursor.getColumnIndex(Moto_Column_UserID))
+
+           motoList.add(Moto(id, motoText, motoUserId))
+       }
+
+       cursor.close()
+       db.close()
+
+       return motoList
+   }
+
+
+
 
     @SuppressLint("Range")
     fun getPreCraetedHabits(): List<RecoHabit> {
@@ -639,8 +760,9 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
                cursor.use {
                    while (it.moveToNext()) {
                        val id = it.getInt(it.getColumnIndex(Moto_Column_ID))
+                       val userId = it.getInt(it.getColumnIndex(Moto_Column_UserID))
                        val motoText = it.getString(it.getColumnIndex(Moto_Column_MotoText))
-                       productList.add(Moto(id, motoText))
+                       productList.add(Moto(id, motoText,userId ))
                    }
                }
            }
@@ -812,11 +934,12 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
            val HabitName = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_Name))
            val StartDate = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_StartDate))
+           val EndDate = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_EndtDate))
            val Target = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_Target))
            val PrefTime = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_TimePreference))
            val CurrentCount = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_CurrentTargetCount))
 
-           val cart = ArchiveHabit(-1, 0, 0,  HabitName,StartDate, Target, PrefTime, CurrentCount )
+           val cart = ArchiveHabit(-1, 0, 0,  HabitName,StartDate, Target, PrefTime, CurrentCount , EndDate)
            archivedHabitList.add(cart)
        }
 
@@ -834,7 +957,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
        val cursor = db.query(
            ArchiveHabitTableName, // Table name
            arrayOf(Archive_Habit_Column_ID,Archive_Habit_Column_UserId,  Archive_Habit_Column_Name, Archive_Habit_Column_StartDate,
-               Archive_Habit_Column_Target, Archive_Habit_Column_TimePreference, Archive_Habit_Column_CurrentTargetCount), // Columns to return
+               Archive_Habit_Column_Target, Archive_Habit_Column_TimePreference, Archive_Habit_Column_CurrentTargetCount, Archive_Habit_Column_EndtDate), // Columns to return
            "$Archive_Habit_Column_HabitId = ?", // Selection criteria
            arrayOf(habitId.toString()), // Selection arguments
            null, // Group by
@@ -847,11 +970,12 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
            val userId = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_UserId))
            val habitName = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_Name))
            val startDate = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_StartDate))
+           val endDate = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_EndtDate))
            val target = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_Target))
            val prefTime = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_TimePreference))
            val currentCount = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_CurrentTargetCount))
 
-           archviedhHabit = ArchiveHabit(archivedHabitId , userId, habitId, habitName , startDate, target, prefTime, currentCount)
+           archviedhHabit = ArchiveHabit(archivedHabitId , userId, habitId, habitName , startDate, target, prefTime, currentCount, endDate)
 
        }
 
@@ -873,6 +997,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
             cv.put(Archive_Habit_Column_UserId, archiveHabit.archivedHabitUserId)
             cv.put(Archive_Habit_Column_Name, archiveHabit.archivedHabitName)
             cv.put(Archive_Habit_Column_StartDate, archiveHabit.archivedHabitStartDate)
+            cv.put(Archive_Habit_Column_EndtDate, archiveHabit.archivedEndDate)
             cv.put(Archive_Habit_Column_Target, archiveHabit.archivedHabittarget)
             cv.put(Archive_Habit_Column_TimePreference, archiveHabit.archivedHabittimePreference)
             cv.put(Archive_Habit_Column_CurrentTargetCount, archiveHabit.archivedHabitcurrentCount)

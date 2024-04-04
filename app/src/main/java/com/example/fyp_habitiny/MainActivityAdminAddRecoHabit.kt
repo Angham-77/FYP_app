@@ -2,6 +2,7 @@ package com.example.fyp_habitiny
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -12,12 +13,38 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.fyp_habitiny.Model.DataBaseHelper
 import com.example.fyp_habitiny.Model.Habit
 import com.example.fyp_habitiny.Model.RecoHabit
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 
 class MainActivityAdminAddRecoHabit: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_add_reco_habit)
+
+        //nav
+        val navView: BottomNavigationView = findViewById(R.id.nav_viewAddPreHabitAdmin)
+        navView.setOnItemSelectedListener(object : NavigationBarView.OnItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.Home -> {
+                        val intent = Intent(this@MainActivityAdminAddRecoHabit, MainActivityAdminOptions::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.AddUser -> {
+                        val intent = Intent(this@MainActivityAdminAddRecoHabit, MainActivityAddNewUserByAdmin::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.AddHabit -> {
+                        val intent = Intent(this@MainActivityAdminAddRecoHabit, MainActivityAdminAddRecoHabit::class.java)
+                        startActivity(intent)
+                    }
+                }
+                return true // True if the event was handled, false otherwise.
+            }
+        })
+
+        //
     }
     fun saveNewRecoHabitButton(view: View) {
         val habitName = findViewById<EditText>(R.id.editTextRecoHabitName).text.toString()
