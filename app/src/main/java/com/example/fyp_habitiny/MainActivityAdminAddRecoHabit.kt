@@ -18,6 +18,8 @@ import com.google.android.material.navigation.NavigationBarView
 
 class MainActivityAdminAddRecoHabit: AppCompatActivity() {
 
+    private val userInputValidator = UserInputValidator()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_add_reco_habit)
@@ -28,15 +30,26 @@ class MainActivityAdminAddRecoHabit: AppCompatActivity() {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when (item.itemId) {
                     R.id.Home -> {
-                        val intent = Intent(this@MainActivityAdminAddRecoHabit, MainActivityAdminOptions::class.java)
+                        val intent = Intent(
+                            this@MainActivityAdminAddRecoHabit,
+                            MainActivityAdminOptions::class.java
+                        )
                         startActivity(intent)
                     }
+
                     R.id.AddUser -> {
-                        val intent = Intent(this@MainActivityAdminAddRecoHabit, MainActivityAddNewUserByAdmin::class.java)
+                        val intent = Intent(
+                            this@MainActivityAdminAddRecoHabit,
+                            MainActivityAddNewUserByAdmin::class.java
+                        )
                         startActivity(intent)
                     }
+
                     R.id.AddHabit -> {
-                        val intent = Intent(this@MainActivityAdminAddRecoHabit, MainActivityAdminAddRecoHabit::class.java)
+                        val intent = Intent(
+                            this@MainActivityAdminAddRecoHabit,
+                            MainActivityAdminAddRecoHabit::class.java
+                        )
                         startActivity(intent)
                     }
                 }
@@ -46,6 +59,45 @@ class MainActivityAdminAddRecoHabit: AppCompatActivity() {
 
         //
     }
+
+    /*fun saveNewRecoHabitButton(view: View) {
+        val habitName = findViewById<EditText>(R.id.editTextRecoHabitName).text.toString()
+        val message = findViewById<TextView>(R.id.textViewMessageRecoHabit)
+
+        // Fetch the current user ID from shared preferences
+        val myDataBase = DataBaseHelper(this)
+        val currentUserId = myDataBase.getCurrentAdminUserId(this)
+
+        // Call the validation function
+        val validationMessage = userInputValidator.validateRecoHabitInput(habitName)
+
+        if (validationMessage != "Valid") {
+            // If validation fails, show the error message and stop further execution
+            message.text = validationMessage
+            return
+
+            // Create the new habit with the current user's ID
+            val newHabit = RecoHabit(-1, habitName, currentUserId)
+            val result = myDataBase.addRecoHabit(newHabit)
+
+            when (result) {
+                -1 -> message.text = "Error on creating new habit"
+                -2 -> message.text = "Error can not open/create database"
+                -3 -> message.text = "This habit already exists." // Handle habit already exists
+                else -> {
+                    message.text = "Your habit has been added to the database successfully."
+                    findViewById<Button>(R.id.buttonSaveRecoHabit).isEnabled = false
+                    //  val intent = Intent(this, MainActivityAdminRecoHabitEdit::class.java)
+                    //  startActivity(intent)
+                }
+            }
+        }*/
+
+        fun viewHabitButton(view: View) {
+            val intent = Intent(this, MainActivityAdminRecoHabitEdit::class.java)
+            startActivity(intent)
+        }
+
     fun saveNewRecoHabitButton(view: View) {
         val habitName = findViewById<EditText>(R.id.editTextRecoHabitName).text.toString()
         val message = findViewById<TextView>(R.id.textViewMessageRecoHabit)
@@ -54,6 +106,16 @@ class MainActivityAdminAddRecoHabit: AppCompatActivity() {
         val myDataBase = DataBaseHelper(this)
         val currentUserId = myDataBase.getCurrentAdminUserId(this)
 
+        // Call the validation function
+        val validationMessage = userInputValidator.validateRecoHabitInput(habitName)
+
+        if (validationMessage != "Valid") {
+            // If validation fails, show the error message and stop further execution
+            message.text = validationMessage
+            return
+        }
+
+        // Assuming validation passed if this point is reached
         // Create the new habit with the current user's ID
         val newHabit = RecoHabit(-1, habitName, currentUserId)
         val result = myDataBase.addRecoHabit(newHabit)
@@ -65,16 +127,11 @@ class MainActivityAdminAddRecoHabit: AppCompatActivity() {
             else -> {
                 message.text = "Your habit has been added to the database successfully."
                 findViewById<Button>(R.id.buttonSaveRecoHabit).isEnabled = false
-              //  val intent = Intent(this, MainActivityAdminRecoHabitEdit::class.java)
-              //  startActivity(intent)
+                // Optionally, proceed with navigation or other steps now that the habit is saved
+                // val intent = Intent(this, MainActivityAdminRecoHabitEdit::class.java)
+                // startActivity(intent)
             }
         }
     }
-
-    fun viewHabitButton(view: View) {
-        val intent = Intent(this, MainActivityAdminRecoHabitEdit::class.java)
-        startActivity(intent)
-    }
-
 
 }
