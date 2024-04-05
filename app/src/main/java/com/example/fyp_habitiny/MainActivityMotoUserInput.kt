@@ -18,6 +18,8 @@ import com.google.android.material.navigation.NavigationBarView
 
 class MainActivityMotoUserInput: AppCompatActivity() {
 
+    private val userInputValidator = UserInputValidator()
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +65,15 @@ class MainActivityMotoUserInput: AppCompatActivity() {
         else if(MotoText.isEmpty())
 
             message.text = "Feedback Content is required!"
+
+        // Call the validation function
+        val validationMessage = userInputValidator.validateMotoInput(MotoText)
+
+        if (validationMessage != "Valid") {
+            // If validation fails, show the error message and stop further execution
+            message.text = validationMessage
+            return
+        }
         else { // Save data
 
             val newMoto = Moto(-1, MotoText, -1)

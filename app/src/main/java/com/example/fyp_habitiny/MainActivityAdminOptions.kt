@@ -32,5 +32,9 @@ class MainActivityAdminOptions : AppCompatActivity() {
         val intent = Intent(this, MainActivityAdminRecoHabitEdit::class.java)
         startActivity(intent)
     }
+    fun addAnewMoto(view: View) {
+        val intent = Intent(this, MainActivityMotoUserInput::class.java)
+        startActivity(intent)
+    }
 
 }

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/cloud"
     tools:context=".MainActivity">
 
     <TextView
@@ -52,7 +52,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/feedback"
-                    app:tint="@color/button_color"
+                    app:tint="@color/button_color_option"
                     android:onClick="goToAdminFeedback"/>
 
                 <TextView
@@ -89,7 +89,7 @@
                     android:layout_height="50dp"
                     android:src="@drawable/folder"
                     android:onClick="goToPreEditUser"
-                    app:tint="@color/button_color" />
+                    app:tint="@color/button_color_option" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
                     android:layout_height="50dp"
                     android:src="@drawable/add"
                     android:onClick="addAnewUser"
-                    app:tint="@color/button_color"/>
+                    app:tint="@color/button_color_option"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -160,9 +160,9 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/add"
-                    android:onClick="addAnewUser"
-                    app:tint="@color/button_color"/>
+                    android:src="@drawable/pen"
+                    android:onClick="addAnewMoto"
+                    app:tint="@color/button_color_option"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -196,7 +196,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/playlist"
-                        app:tint="@color/button_color"
+                        app:tint="@color/button_color_option"
                         android:onClick="addAnewRecoHabit"/>
 
                     <TextView
@@ -233,7 +233,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/menu"
-                    app:tint="@color/button_color"
+                    app:tint="@color/button_color_option"
                     android:onClick="viewHabitButtonOptions"/>
 
                 <TextView
