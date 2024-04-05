@@ -34,7 +34,7 @@ class UserInputValidator {
         if (userName.isEmpty() || userPassword.isEmpty()) {
             return "Username and Password are required!"
         } else if (userName.length < 4 || userName.length > 20) {
-            return "Username must be between 5 and 20 characters."
+            return "Username must be between 4 and 20 characters."
         }
 
         return "Valid"
@@ -66,6 +66,15 @@ class UserInputValidator {
         }
         else if (feedback.length < 4 || feedback.length > 50) {
             return "Feedback entry must be between 4 and 50 characters."
+        }
+        return "Valid"
+    }
+    fun validateRecoHabitInput(recoHabit: String): String {
+        if (recoHabit.isEmpty()) {
+            return "Habit is required!"
+        }
+        else if (recoHabit.length < 4 || recoHabit.length > 20) {
+            return "Habit entry must be between 4 and 20 characters."
         }
         return "Valid"
     }
@@ -107,7 +116,7 @@ class UserInputValidator {
         if (userName.isEmpty()) {
             return "Username and Password are required!"
         } else if (userName.length < 4 || userName.length > 20) {
-            return "Username must be between 5 and 20 characters."
+            return "Username must be between 4 and 20 characters."
         }
 
         return "Valid"

@@ -15,8 +15,8 @@
         android:id="@+id/DoneHabitsTextView"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:background="@color/button_color"
         android:gravity="center"
+        android:text="Enter a Quote"
         android:textColor="@color/TextColor"
         android:textSize="25sp" />
 

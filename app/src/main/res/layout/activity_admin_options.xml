@@ -167,7 +167,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Add User"
+                    android:text="Add Quote"
                     android:textColor="@color/TextColor"
                     android:textAlignment="center"
                     android:textStyle="bold"/>
