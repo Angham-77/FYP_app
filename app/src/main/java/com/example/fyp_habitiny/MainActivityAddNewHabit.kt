@@ -19,6 +19,7 @@ import java.util.Calendar
 
 class MainActivityAddNewHabit : AppCompatActivity() {
 
+    private val userInputValidator = UserInputValidator()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_habit)
@@ -101,17 +102,28 @@ class MainActivityAddNewHabit : AppCompatActivity() {
         val currentUserId = myDataBase.getCurrentUserId(this)
 
         val habitTarget: Int = habitTargetText.toIntOrNull() ?: 0 // Use safe call with elvis operator for default value
-        val habitPref = findViewById<RadioGroup>(R.id.radioGroupHabitPreference).run {
-            findViewById<RadioButton>(checkedRadioButtonId).text.toString()
+        val radioGroup = findViewById<RadioGroup>(R.id.radioGroupHabitPreference)
+        val habitPref: String = if (radioGroup.checkedRadioButtonId != -1) {
+            findViewById<RadioButton>(radioGroup.checkedRadioButtonId).text.toString()
+        } else {
+            "" // or any default value you find appropriate
         }
 
-        if (habitName.isBlank() || habitStartDate.isBlank()) {
+        if (habitName.isBlank() || habitStartDate.isBlank() || habitPref.isBlank()) {
             message.text = "Please fill all the fields."
+            return
+        }
+        // Call the validation function
+        val validationMessage = userInputValidator.validateHabitInput(habitName, habitStartDate, habitEndDate, habitTarget)
+
+        if (validationMessage != "Valid") {
+            // If validation fails, show the error message and stop further execution
+            message.text = validationMessage
             return
         }
 
         // Create the new habit with the current user's ID
-        val newHabit = Habit(-1, currentUserId, habitName, habitStartDate, 0, habitTarget, habitPref, 0, habitEndDate )
+        val newHabit = Habit(-1, currentUserId, habitName, habitStartDate, 0, habitTarget, habitPref, 0, habitEndDate)
         val result = myDataBase.addHabit(newHabit)
 
         when (result) {

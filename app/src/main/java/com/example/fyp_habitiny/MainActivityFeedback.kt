@@ -16,10 +16,11 @@ import com.google.android.material.navigation.NavigationBarView
 
 class MainActivityFeedback : AppCompatActivity() {
 
+    private val userInputValidator = UserInputValidator()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_provide_feedback)
-
 
 
         //nav
@@ -61,6 +62,15 @@ class MainActivityFeedback : AppCompatActivity() {
         else if(FeedbackText.isEmpty()) // // User name and password are required
         //  Toast.makeText(this,"User name and Password are required!",Toast.LENGTH_LONG).show()
             message.text = "Feedback Content is required!"
+
+        // Call the validation function
+        val validationMessage = userInputValidator.validateFeedbackInput(FeedbackText)
+
+        if (validationMessage != "Valid") {
+            // If validation fails, show the error message and stop further execution
+            message.text = validationMessage
+            return
+        }
         else { // Save data
 
             val newFeedback = Feedback(-1, FeedbackText, Rating)

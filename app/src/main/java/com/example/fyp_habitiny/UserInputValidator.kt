@@ -27,7 +27,7 @@ class UserInputValidator {
         } else {
             val phonePattern = Pattern.compile("\\d{11}")
             if (!phonePattern.matcher(phoneNo).matches()) {
-                return "Invalid phone number format. It should have 10 digits.!"
+                return "Invalid phone number format. It should have 11 digits.!"
             }
         }
 
@@ -40,25 +40,42 @@ class UserInputValidator {
         return "Valid"
     }
 
-    fun validateHabitInput(habitName: String, habitStartDate: String): String {
+    fun validateHabitInput(habitName: String, habitStartDate: String,  habitEndDate: String, habitTarget: Int): String {
         if (habitName.isEmpty()) {
             return "Habit name is required!"
         }
-        else if (habitName.length < 3 || habitName.length > 20){
-            return "Habit must be between 3 and 20 characters."
+        else if (habitName.length < 3 || habitName.length > 50) { // Updated the max length to 50 characters
+            return "Habit name must be between 3 and 50 characters."
         }
         if (habitStartDate.isEmpty()) {
             return "Start date is required!"
-        } /*else {
-            //Date validation to ensure a conssitent format
-            val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.UK)
-            dateFormat.isLenient = false
-            try {
-                dateFormat.parse(habitStartDate)
-            } catch (e: Exception) {
-                return "Invalid start date format. Expected format: dd-MM-yyyy"
-            }*/
+        }
+        if (habitEndDate.isEmpty()) {
+            return "Start date is required!"
+        }
 
+        if (habitTarget !in 1..50) {
+            return "Target must be a positive number and cannot exceed 50."
+        }
+
+        return "Valid"
+    }
+    fun validateFeedbackInput(feedback: String): String {
+        if (feedback.isEmpty()) {
+            return "Feedback is required!"
+        }
+        else if (feedback.length < 4 || feedback.length > 50) {
+            return "Feedback entry must be between 4 and 50 characters."
+        }
+        return "Valid"
+    }
+    fun validateMotoInput(motoText: String): String {
+        if (motoText.isEmpty()) {
+            return "Text entry is required!"
+        }
+        else if (motoText.length < 4 || motoText.length > 100) {
+            return "Text entry must be between 4 and 50 characters."
+        }
         return "Valid"
     }
     fun validateEditUserInput(fullName: String, email: String, phoneNo: String, userName: String): String {
