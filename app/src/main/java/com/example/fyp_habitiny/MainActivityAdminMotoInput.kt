@@ -63,8 +63,8 @@ class MainActivityAdminMotoInput : AppCompatActivity() {
 
     fun saveNewMotoButton(view: View) {
 
-        val MotoText = findViewById<EditText>(R.id.editTextEntreMoto).text.toString()
-        val message = findViewById<TextView>(R.id.textViewMotoInputMessage)
+        val MotoText = findViewById<EditText>(R.id.editTextEntreMotoAdmin).text.toString()
+        val message = findViewById<TextView>(R.id.textViewMotoInputMessageAdmin)
 
 
 
@@ -96,7 +96,7 @@ class MainActivityAdminMotoInput : AppCompatActivity() {
                 -3 -> message.text = "Moto is already exist"
                 else -> {
                     message.text = "Thank you! Your Entry has been submitted successfully "
-                    findViewById<Button>(R.id.buttonSubmitMoto).isEnabled = false
+                    findViewById<Button>(R.id.buttonSubmitMotoAdmin).isEnabled = false
                     //     val intent = Intent(this, MainActivtyReadyBtn::class.java)
                     // startActivity(intent)
                 }

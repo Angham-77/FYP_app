@@ -25,6 +25,12 @@ class MainActivityAddNewHabit : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_habit)
 
+        //adding th
+        val habitName = intent.getStringExtra("recoHabitName")
+        val editTextHabitName2: EditText = findViewById(R.id.editTextHabitName)
+        editTextHabitName2.setText(habitName)
+        //
+
         //test add done
 
 
@@ -69,7 +75,7 @@ class MainActivityAddNewHabit : AppCompatActivity() {
         val editTextEndDate = findViewById<EditText>(R.id.editTextHabitEndDate)
 
         //4 Retrieve habit name and target from intent if available (for reactivating a habit)
-        intent.getStringExtra("EXTRA_HABIT_NAME")?.let { habitName ->
+       intent.getStringExtra("EXTRA_HABIT_NAME")?.let { habitName ->
             editTextHabitName.setText(habitName)
         }
         val habitTarget = intent.getIntExtra("EXTRA_HABIT_TARGET", 0)

@@ -52,7 +52,7 @@ class ArchivedHabitAdapter(context: Context, resource: Int, private val archived
         //3 Set up a click listener in the adapter
         btnReactivate.setOnClickListener {
             Log.d("ArchivedHabitAdapter", "Reactivate button clicked")
-            Toast.makeText(context, "Button Clicked", Toast.LENGTH_SHORT).show()
+          //  Toast.makeText(context, "Button Clicked", Toast.LENGTH_SHORT).show()
             archivedHabit?.let {
                 onReactivateHabitListener?.onReactivateHabit(it.archivedHabitName, it.archivedHabittarget)
             }
