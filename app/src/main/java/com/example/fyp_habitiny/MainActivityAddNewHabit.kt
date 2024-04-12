@@ -3,6 +3,7 @@ package com.example.fyp_habitiny
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -23,6 +24,17 @@ class MainActivityAddNewHabit : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_habit)
+
+        //test add done
+
+
+        Log.d("MainActivityAddNewHabit", "Started Activity")
+
+        val habitName2 = intent.getStringExtra("EXTRA_HABIT_NAME")
+        val habitTarget2 = intent.getIntExtra("EXTRA_HABIT_TARGET", 0)
+
+        Log.d("MainActivityAddNewHabit", "Received - Habit Name: $habitName2, Habit Target: $habitTarget2")
+        //
 
         //nav
         val navView: BottomNavigationView = findViewById(R.id.nav_viewAddHabit)
@@ -63,6 +75,7 @@ class MainActivityAddNewHabit : AppCompatActivity() {
         val habitTarget = intent.getIntExtra("EXTRA_HABIT_TARGET", 0)
         if (habitTarget > 0) {
             findViewById<EditText>(R.id.editTextTarget).setText(habitTarget.toString())
+
         }
 
         editTextStartDate.setOnClickListener {

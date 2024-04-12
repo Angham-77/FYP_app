@@ -20,6 +20,7 @@ class MainActivityDoneHabit: AppCompatActivity(), ArchivedHabitAdapter.OnReactiv
 
     private lateinit var archivedHabitAdapter: ArchivedHabitAdapter
 
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,7 +115,9 @@ class MainActivityDoneHabit: AppCompatActivity(), ArchivedHabitAdapter.OnReactiv
     }
     //2 after adapter implement the listener in the activity that's responsible to archive habit
     override fun onReactivateHabit(habitName: String, habitTarget: Int) {
+        Log.d("MainActivityDoneHabit", "onReactivateHabit called with name: $habitName and target: $habitTarget")
         val intent = Intent(this, MainActivityAddNewHabit::class.java).apply {
+            Log.d("MainActivityDoneHabit", "Passing - Habit Name: $habitName, Habit Target: $habitTarget")
             putExtra("EXTRA_HABIT_NAME", habitName)
             putExtra("EXTRA_HABIT_TARGET", habitTarget)
         }

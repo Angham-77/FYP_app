@@ -55,7 +55,7 @@ class MainActivityPreCreatedHabits : AppCompatActivity(), RecoHabitAdapter.RecoH
                         startActivity(intent)
                     }
                 }
-                return true // True if the event was handled, false otherwise.
+                return true
             }
         })
 

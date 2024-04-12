@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addFloatingBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,6 +48,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:menu="@menu/bottom_nav_menu_admin" />
+        app:menu="@menu/bottom_nav_menu_admin"
+        style="@style/BottomNavigationViewStyle"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

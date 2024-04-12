@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import com.example.fyp_habitiny.Model.ArchiveHabit
 import com.example.fyp_habitiny.Model.DataBaseHelper
 import com.example.fyp_habitiny.Model.Habit
@@ -51,6 +52,7 @@ class ArchivedHabitAdapter(context: Context, resource: Int, private val archived
         //3 Set up a click listener in the adapter
         btnReactivate.setOnClickListener {
             Log.d("ArchivedHabitAdapter", "Reactivate button clicked")
+            Toast.makeText(context, "Button Clicked", Toast.LENGTH_SHORT).show()
             archivedHabit?.let {
                 onReactivateHabitListener?.onReactivateHabit(it.archivedHabitName, it.archivedHabittarget)
             }
