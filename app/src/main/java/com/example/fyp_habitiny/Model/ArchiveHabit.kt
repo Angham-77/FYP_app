@@ -14,6 +14,6 @@ data class ArchiveHabit( val archivedHabitId: Int, var archivedHabitUserId: Int,
         archivedHabittarget = cursor.getInt(cursor.getColumnIndexOrThrow("ArchiveTarget")),
         archivedHabittimePreference = cursor.getString(cursor.getColumnIndexOrThrow("ArchiveTimePreference")),
         archivedHabitcurrentCount = cursor.getInt(cursor.getColumnIndexOrThrow("ArchiveCurrentTargetCount")),
-        archivedEndDate = cursor.getString(cursor.getColumnIndexOrThrow("EndDate"))
+        archivedEndDate = cursor.getString(cursor.getColumnIndexOrThrow("ArchiveEndDate"))
     )
 }

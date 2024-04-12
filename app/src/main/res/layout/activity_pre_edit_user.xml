@@ -76,6 +76,7 @@
         android:layout_height="wrap_content"
         android:background="@color/button_color"
         app:menu="@menu/bottom_nav_menu_admin"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        style="@style/BottomNavigationViewStyle"/>
 
 </LinearLayout>

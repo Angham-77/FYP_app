@@ -33,7 +33,7 @@ class MainActivityAdminOptions : AppCompatActivity() {
         startActivity(intent)
     }
     fun addAnewMoto(view: View) {
-        val intent = Intent(this, MainActivityMotoUserInput::class.java)
+        val intent = Intent(this, MainActivityAdminMotoInput::class.java)
         startActivity(intent)
     }
 
