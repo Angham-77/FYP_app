@@ -1,7 +1,10 @@
 package com.example.fyp_habitiny
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,14 +13,17 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.PopupMenu
-import androidx.appcompat.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import com.example.fyp_habitiny.Model.ArchiveHabit
-
 import com.example.fyp_habitiny.Model.DataBaseHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
+
 
 class MainActivtyMyHabit : AppCompatActivity() {
 
@@ -43,6 +49,10 @@ class MainActivtyMyHabit : AppCompatActivity() {
                     }
                     R.id.navigation_notifications -> {
                         val intent = Intent(this@MainActivtyMyHabit, MainActivityMotoUserInput::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.navigation_streak -> {
+                        val intent = Intent(this@MainActivtyMyHabit, MainActivityStreakCounter::class.java)
                         startActivity(intent)
                     }
                 }
@@ -217,5 +227,33 @@ class MainActivtyMyHabit : AppCompatActivity() {
     fun addHabitButton(view: View) {
         val intent = Intent(this, MainActivityAddNewHabit::class.java)
         startActivity(intent)
+    }
+    //notification
+    @SuppressLint("ScheduleExactAlarm")
+    fun scheduleNotification(habitId: Int, habitName: String, reminderDate: String) {
+        val intent = Intent(this, ReminderBroadcastReceiver::class.java).apply {
+            putExtra("habitId", habitId)
+            putExtra("habitName", habitName)
+        }
+        val pendingIntent = PendingIntent.getBroadcast(this, habitId, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val reminderDateTime = LocalDate.parse(reminderDate).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, reminderDateTime, pendingIntent)
+    }
+    //testest
+     fun triggerTestNotification(view: View?) {
+        val scheduler = NotificationScheduler(applicationContext)
+        // Manually set a habit ID, name, and a reminder date for testing
+        val testHabitId = 999 // Example ID
+        val testHabitName = "Test Habit"
+        val testReminderDate =
+            LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE) // Today's date for the test
+        scheduler.scheduleNotification(
+            applicationContext,
+            testHabitId,
+            testHabitName,
+            testReminderDate
+        )
     }
 }

@@ -1,13 +1,19 @@
 package com.example.fyp_habitiny.Model
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import androidx.core.content.ContextCompat.getSystemService
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.ArrayList
 
 /* Database Config*/
@@ -1155,5 +1161,31 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         // Convert the MutableList to an immutable List before returning
         return matchedHabits.toList()
     }
+    //Notifications
+   /* fun getHabitsNearEndDate(reminderDate: String): Cursor {
+        val db = this.readableDatabase
+        val query = """
+            SELECT $Habit_Column_ID, $Habit_Column_Name FROM $HabitTableName 
+            WHERE $Habit_Column_EndDate = ? AND $Habit_Column_CurrentTargetCount < $Habit_Column_Target
+        """
+        return db.rawQuery(query, arrayOf(reminderDate))
+    }*/
+    fun getHabitsNearEndDate(formattedReminderDate: String): Cursor {
+        val db = this.readableDatabase
+        val query = """
+        SELECT $Habit_Column_ID, $Habit_Column_Name FROM $HabitTableName 
+        WHERE $Habit_Column_EndDate = ? AND $Habit_Column_CurrentTargetCount < $Habit_Column_Target
+    """
+        Log.d("DataBaseHelper", "Query: $query")
+        val cursor = db.rawQuery(query, arrayOf(formattedReminderDate))
+        Log.d("DataBaseHelper", "Cursor count: ${cursor.count}")
+        return cursor
+    }
+    companion object {
+        private const val Habit_Column_Name = "HabitName"
 
+        val habitColumnName: String
+            get() = Habit_Column_Name
+
+    }
 }

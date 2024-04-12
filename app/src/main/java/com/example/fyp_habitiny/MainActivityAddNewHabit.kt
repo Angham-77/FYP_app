@@ -41,7 +41,10 @@ class MainActivityAddNewHabit : AppCompatActivity() {
                         val intent = Intent(this@MainActivityAddNewHabit, MainActivityMotoUserInput::class.java)
                         startActivity(intent)
                     }
-                    // You can add more cases here if needed
+                    R.id.navigation_streak -> {
+                        val intent = Intent(this@MainActivityAddNewHabit, MainActivityStreakCounter::class.java)
+                        startActivity(intent)
+                    }
                 }
                 return true // True if the event was handled, false otherwise.
             }
@@ -136,5 +139,9 @@ class MainActivityAddNewHabit : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+    }
+    fun goTStreak(view: View) {
+        val intent = Intent(this, MainActivityStreakCounter::class.java)
+        startActivity(intent)
     }
 }

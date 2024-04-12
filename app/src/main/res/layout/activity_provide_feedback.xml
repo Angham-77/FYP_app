@@ -50,7 +50,8 @@
         android:layout_marginBottom="0dp"
         android:layout_alignParentBottom="true"
         android:background="@color/button_color"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"
+        style="@style/BottomNavigationViewStyle"/>
 
 
 </RelativeLayout>

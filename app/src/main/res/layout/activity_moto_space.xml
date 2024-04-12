@@ -29,7 +29,8 @@
         android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@color/button_color"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"
+        style="@style/BottomNavigationViewStyle"/>
 
     <ImageButton
         android:id="@+id/buttonNext"

@@ -50,6 +50,10 @@ class MainActivityPreCreatedHabits : AppCompatActivity(), RecoHabitAdapter.RecoH
                         val intent = Intent(this@MainActivityPreCreatedHabits, MainActivityMotoUserInput::class.java)
                         startActivity(intent)
                     }
+                    R.id.navigation_streak -> {
+                        val intent = Intent(this@MainActivityPreCreatedHabits, MainActivityStreakCounter::class.java)
+                        startActivity(intent)
+                    }
                 }
                 return true // True if the event was handled, false otherwise.
             }
