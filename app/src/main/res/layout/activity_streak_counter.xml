@@ -1,0 +1,46 @@
+<!-- This is a simplified version. Customize it according to your design requirements. -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivityStreakCounter">
+
+    <FrameLayout
+        android:layout_width="182dp"
+        android:layout_height="185dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="-50dp"
+        android:background="@drawable/flame"> <!-- Ensure you have circle_background.xml in drawable -->
+
+        <TextView
+            android:id="@+id/dailyCounter"
+            android:layout_width="31dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="0"
+            android:textColor="@color/TextColor"
+            android:textSize="24sp" />
+    </FrameLayout>
+    <TextView
+        android:id="@+id/totalDaysCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/nav_viewStreak"
+        android:layout_centerHorizontal="true"
+        android:text="Total Days: 0"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_viewStreak"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/button_color"
+        app:menu="@menu/bottom_nav_menu"
+        style="@style/BottomNavigationViewStyle"/>
+
+
+</RelativeLayout>

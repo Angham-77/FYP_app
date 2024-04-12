@@ -40,6 +40,10 @@ class MainActivityFeedback : AppCompatActivity() {
                         val intent = Intent(this@MainActivityFeedback, MainActivityMotoUserInput::class.java)
                         startActivity(intent)
                     }
+                    R.id.navigation_streak -> {
+                        val intent = Intent(this@MainActivityFeedback, MainActivityStreakCounter::class.java)
+                        startActivity(intent)
+                    }
                 }
                 return true // True if the event was handled, false otherwise.
             }

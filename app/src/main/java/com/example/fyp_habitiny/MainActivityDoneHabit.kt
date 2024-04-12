@@ -45,6 +45,10 @@ class MainActivityDoneHabit: AppCompatActivity(), ArchivedHabitAdapter.OnReactiv
                         val intent = Intent(this@MainActivityDoneHabit, MainActivityMotoUserInput::class.java)
                         startActivity(intent)
                     }
+                    R.id.navigation_streak -> {
+                        val intent = Intent(this@MainActivityDoneHabit, MainActivityStreakCounter::class.java)
+                        startActivity(intent)
+                    }
                 }
                 return true // True if the event was handled, false otherwise.
             }

@@ -77,6 +77,12 @@
         android:onClick="addHabitButton"
         app:tint="@null"
         android:layout_above="@id/nav_viewMyHabit" />-->
+    <!--<Button
+        android:id="@+id/btnTriggerNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trigger Test Notification"
+        android:onClick="triggerTestNotification"/>-->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_viewMyHabit"
@@ -84,6 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/button_color"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"
+        style="@style/BottomNavigationViewStyle"/>
 
 </RelativeLayout>

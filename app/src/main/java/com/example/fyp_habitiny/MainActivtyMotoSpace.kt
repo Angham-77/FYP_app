@@ -65,6 +65,10 @@ class MainActivtyMotoSpace : AppCompatActivity() {
                         val intent = Intent(this@MainActivtyMotoSpace, MainActivityMotoUserInput::class.java)
                         startActivity(intent)
                     }
+                    R.id.navigation_streak -> {
+                        val intent = Intent(this@MainActivtyMotoSpace, MainActivityStreakCounter::class.java)
+                        startActivity(intent)
+                    }
                 }
                 return true // True if the event was handled, false otherwise.
             }
@@ -72,8 +76,7 @@ class MainActivtyMotoSpace : AppCompatActivity() {
 
         //
 
-        motoList = dbHelper.getMotoByUserId(this) // This fetches both user and system quotes
-
+        motoList = dbHelper.getMotoByUserId(this)
         // If the list is not empty, display the first quote
         if (motoList.isNotEmpty()) {
             updateMotoText()

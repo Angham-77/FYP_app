@@ -49,7 +49,7 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: Mutab
 
         habitNameTextView.text = habit.habitName
         habitStartDateTextView.text = "Start Date: ${habit.habitStartDate}"
-        habitEndtDateTextView.text = "Start Date: ${habit.habitEndtDate}"
+        habitEndtDateTextView.text = "End Date: ${habit.habitEndtDate}"
         habitTargetTextView.text = "Target: ${habit.habittarget}"
         habitTimePrefTextView.text = "Time: ${habit.habittimePreference}"
         habitCurrentTargetCount.text = "Current Count: ${habit.habitcurrentCount}"
