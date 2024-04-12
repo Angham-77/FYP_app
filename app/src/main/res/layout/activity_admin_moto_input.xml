@@ -43,14 +43,14 @@
         android:text="Submit"
         android:onClick="saveNewMotoButton"/>
 
-    <Button
+  <!--  <Button
         android:id="@+id/buttonViewMotoAdmin"
         android:layout_width="198dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/button_color"
         android:text="View"
-        android:onClick="GoToMotoSpaceFromEdit"/>
+        android:onClick="GoToMotoSpaceFromEdit"/>-->
 
 
     <TextView
