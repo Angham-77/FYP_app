@@ -24,6 +24,8 @@
     <Button
         android:id="@+id/buttonSaveRecoHabit"
         android:layout_width="198dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_round"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/button_color"
@@ -37,6 +39,8 @@
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/button_color"
         android:text="View Habit"
+        android:background="@drawable/button_round"
+        android:layout_marginTop="15dp"
         android:onClick="viewHabitButton"/>
     <TextView
         android:id="@+id/textViewMessageRecoHabit"

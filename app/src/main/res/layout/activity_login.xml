@@ -12,6 +12,7 @@
         android:layout_width="281dp"
         android:layout_height="42dp"
         android:layout_marginStart="12dp"
+        android:layout_marginBottom="15dp"
         android:ems="10"
         android:hint="Username"
         android:inputType="text"
@@ -44,7 +45,8 @@
         android:id="@+id/buttonSignin"
         android:layout_width="201dp"
         android:layout_height="45dp"
-        android:backgroundTint="@color/button_color"
+        android:background="@drawable/button_round"
+        android:layout_marginBottom="50dp"
         android:onClick="loginButton"
         android:text="Sign in"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +60,7 @@
         android:layout_width="201dp"
         android:layout_height="45dp"
         android:layout_marginBottom="48dp"
-        android:backgroundTint="@color/button_color"
+        android:background="@drawable/button_round"
         android:onClick="registerButton"
         android:text="Sign up"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,7 +68,7 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSignin"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.161" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -109,6 +111,7 @@
         android:layout_height="42dp"
         android:layout_marginStart="12dp"
         android:layout_marginBottom="4dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"

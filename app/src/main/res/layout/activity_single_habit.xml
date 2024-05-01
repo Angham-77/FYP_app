@@ -13,29 +13,34 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/habitNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="19sp"
             android:textStyle="bold"
-            android:text="Habit Name"/>
+            android:text="Habit Name"
+            android:textColor="@color/button_color"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:id="@+id/HabitStartDateTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Start Date: 00/00/0000"/>
+            android:text="Start Date: 00/00/0000"
+            android:textStyle="italic"/>
 
         <TextView
             android:id="@+id/HabitEndtDateTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="End Date: 00/00/0000"/>
+            android:text="End Date: 00/00/0000"
+            android:textStyle="italic"/>
 
         <TextView
             android:id="@+id/HabitTargetNumber"
@@ -69,8 +74,11 @@
 
         <Button
             android:id="@+id/buttonDone"
-            android:layout_width="match_parent"
+            android:layout_width="171dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/button_round"
             android:text="Done" />
 
     </LinearLayout>

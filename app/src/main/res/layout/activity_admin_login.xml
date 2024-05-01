@@ -12,6 +12,7 @@
         android:layout_width="264dp"
         android:layout_height="43dp"
         android:layout_marginStart="12dp"
+        android:layout_marginBottom="15dp"
         android:ems="10"
         android:hint="UserName"
         android:paddingStart="8dp"
@@ -69,14 +70,15 @@
         app:layout_constraintBottom_toTopOf="@+id/textViewPasswordAdmin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.902" />
+        app:layout_constraintVertical_bias="0.85" />
 
     <Button
         android:id="@+id/buttonSignupAdmin"
         android:layout_width="201dp"
         android:layout_height="45dp"
         android:layout_marginBottom="48dp"
-        android:backgroundTint="@color/button_color"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_round"
         android:onClick="goToAdminRegister"
         android:text="Sign up"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -90,7 +92,6 @@
         android:id="@+id/buttonSigninAdmin"
         android:layout_width="201dp"
         android:layout_height="45dp"
-        android:backgroundTint="@color/button_color"
         android:onClick="adminLoginButton"
         android:text="Sign in"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -98,7 +99,9 @@
         app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewMessageMainActivityAdmin"
-        app:layout_constraintVertical_bias="0.064" />
+        app:layout_constraintVertical_bias="0.064"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_round"/>
 
     <ImageView
         android:id="@+id/imageViewAdmin"

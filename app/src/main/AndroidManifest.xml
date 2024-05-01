@@ -22,6 +22,14 @@
             </intent-filter>
         </receiver>
         <activity
+            android:name=".MainActivityEditUserPreBasic"
+            android:exported="true"
+            android:parentActivityName=".MainActivtyReadyBtn"/>
+        <activity
+            android:name=".MainActivityBasicEditUser"
+            android:exported="true"
+            android:parentActivityName=".MainActivityEditUserPreBasic"/>
+        <activity
             android:name=".MainActivityStreakCounter"
             android:exported="true"
             android:parentActivityName=".MainActivityAdminOptions"/>

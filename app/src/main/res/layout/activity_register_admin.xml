@@ -12,16 +12,20 @@
     <TextView
         android:id="@+id/textViewNewUserTitleAdmin"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="89dp"
+        android:layout_marginBottom="40dp"
         android:text="\nCreate New Admin User"
         android:textAlignment="center"
-        android:textSize="20sp" />
+        android:textColor="@color/button_color"
+        android:textSize="30dp"
+        android:textStyle="italic" />
 
     <LinearLayout
         android:id="@+id/LLH1Admin"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
 
         <EditText
             android:id="@+id/editTextFullNameAdmin"
@@ -128,7 +132,9 @@
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/button_color"
         android:onClick="saveNewAdminUserButton"
-        android:text="Save" />
+        android:text="Save"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_round"/>
 
 
 </LinearLayout>
