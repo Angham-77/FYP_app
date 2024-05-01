@@ -2,40 +2,44 @@
 <LinearLayout
     android:id="@+id/habitItemContainerArchivedHabit"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="16dp"
-    android:background = "@color/singlHabit">
+    android:background="@drawable/round">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/habitNameTextViewArchivedHabit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="19sp"
             android:textStyle="bold"
-            android:text="Habit Name"/>
+            android:text="Habit Name"
+            android:textColor="@color/button_color"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:id="@+id/HabitStartDateTextViewArchivedHabit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Start Date: 00/00/0000"/>
+            android:text="Start Date: 00/00/0000"
+            android:textStyle="italic"/>
 
         <TextView
             android:id="@+id/HabitEndtDateTextViewArchivedHabit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="End Date: 00/00/0000"/>
+            android:text="End Date: 00/00/0000"
+            android:textStyle="italic"/>
 
         <TextView
             android:id="@+id/HabitTargetNumberArchivedHabit"
@@ -72,9 +76,12 @@
 
         <Button
             android:id="@+id/buttonReactivate"
-            android:layout_width="match_parent"
+            android:layout_width="171dp"
             android:layout_height="wrap_content"
-            android:text="Reactivate" />
+            android:layout_gravity="center_horizontal"
+            android:text="Reactivate"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/button_round"/>
 
     </LinearLayout>
 

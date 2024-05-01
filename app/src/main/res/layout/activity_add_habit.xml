@@ -13,14 +13,20 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+
         <TextView
             android:id="@+id/textViewNewHabitInstructions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="Fill out the fields below to add a new habit."
+            android:layout_width="380dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/targetround"
+            android:text="Fill out the fields below to add a new habit"
             android:textAlignment="center"
-            android:textSize="18sp" />
+            android:textColor="@color/button_color"
+            android:textSize="20dp"
+            android:textStyle="italic" />
 
         <EditText
             android:id="@+id/editTextHabitName"
@@ -87,9 +93,11 @@
         <Button
             android:id="@+id/buttonSaveHabit"
             android:layout_width="198dp"
+            android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:backgroundTint="@color/button_color"
+            android:background="@drawable/button_round"
             android:onClick="saveNewHabitButton"
             android:text="Save Habit" />
 
@@ -98,6 +106,8 @@
             android:layout_width="198dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/button_round"
             android:backgroundTint="@color/button_color"
             android:onClick="viewHabitButton"
             android:text="View Habit" />

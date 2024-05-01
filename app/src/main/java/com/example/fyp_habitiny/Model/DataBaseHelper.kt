@@ -918,6 +918,67 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
             null // User not found
         }
     }
+    //get user details by user id
+    @SuppressLint("Range")
+    fun getUserDetailsByUserId(userId: Int): User? {
+        val db = this.readableDatabase
+
+        val sqlStatement = "SELECT * FROM $UserTableName WHERE $User_Column_ID = ?"
+        val param = arrayOf(userId.toString())
+        val cursor: Cursor = db.rawQuery(sqlStatement, param)
+
+        return if (cursor.moveToFirst()) {
+            val username = cursor.getString(cursor.getColumnIndex(User_Column_UserName))
+            val fullName = cursor.getString(cursor.getColumnIndex(User_Column_FullName))
+            val userEmail = cursor.getString(cursor.getColumnIndex(User_Column_Email))
+            val userPhoneNo = cursor.getString(cursor.getColumnIndex(User_Column_PhoneNo))
+            val userPassword = cursor.getString(cursor.getColumnIndex(User_Column_Password))
+
+            cursor.close()
+            db.close()
+
+            User(userId, fullName, userEmail, userPhoneNo, username, userPassword)
+        } else {
+            cursor.close()
+            db.close()
+            null // User not found
+        }
+
+    }
+  /*  @SuppressLint("Range")
+    fun getUserDetailsByUserId(userId: Int): User? {
+        val db = this.readableDatabase
+        var userID: User? = null
+
+        val cursor = db.query(
+            UserTableName, // Table name
+            arrayOf(User_Column_FullName,  User_Column_Email, User_Column_PhoneNo,
+                User_Column_UserName, User_Column_Password), // Columns to return
+            "$User_Column_ID = ?", // Selection criteria
+            arrayOf(userId.toString()), // Selection arguments
+            null, // Group by
+            null, // Having
+            null // Order by
+        )
+
+        if (cursor.moveToFirst()) {
+            val archivedHabitId = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_ID))
+            val userId = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_UserId))
+            val habitName = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_Name))
+            val startDate = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_StartDate))
+            val endDate = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_EndtDate))
+            val target = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_Target))
+            val prefTime = cursor.getString(cursor.getColumnIndex(Archive_Habit_Column_TimePreference))
+            val currentCount = cursor.getInt(cursor.getColumnIndex(Archive_Habit_Column_CurrentTargetCount))
+
+            archviedhHabit = ArchiveHabit(archivedHabitId , userId, habitId, habitName , startDate, target, prefTime, currentCount, endDate)
+
+        }
+
+        cursor.close()
+        db.close()
+        return archviedhHabit
+    }*/
    @SuppressLint("Range")
    fun getAllArchivedHabits(): List<ArchiveHabit> {
        val archivedHabitList = mutableListOf<ArchiveHabit>()
@@ -1040,6 +1101,13 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         editor.putInt("currentUserId", userId)
         editor.apply()
     }
+   /*fun saveCurrentUserId(userId: Int, username: String, context: Context) {
+       val sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+       val editor = sharedPreferences.edit()
+       editor.putInt("currentUserId", userId)
+       editor.putString("currentUsername", username)
+       editor.apply()
+   }*/
     fun getCurrentUserId(context: Context): Int {
         val sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         return sharedPreferences.getInt("currentUserId", -1) // Returns -1 if no user ID is found

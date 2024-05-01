@@ -12,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/button_color"/>
 
     <EditText
         android:id="@+id/editTextFeedback"
@@ -23,7 +24,8 @@
         android:inputType="textMultiLine"
         android:gravity="top"
         android:layout_marginTop="16dp"
-        android:layout_below="@+id/ratingBarFeedback"/>
+        android:layout_below="@+id/ratingBarFeedback"
+        android:layout_marginBottom="30dp"/>
     <TextView
         android:id="@+id/textViewMessageFeedback"
         android:layout_width="match_parent"
@@ -35,13 +37,15 @@
 
     <Button
         android:id="@+id/buttonSubmitFeedback"
+        android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewMessageFeedback"
         android:text="Submit"
-        android:layout_marginTop="16dp"
         android:backgroundTint="@color/button_color"
-        android:onClick="saveNewFeedbackButton"/>
+        android:onClick="saveNewFeedbackButton"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_round"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_viewFeedback"

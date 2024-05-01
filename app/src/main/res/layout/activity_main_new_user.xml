@@ -16,7 +16,9 @@
         android:layout_height="77dp"
         android:text="\nCreate New User"
         android:textAlignment="center"
-        android:textSize="20sp" />
+        android:textColor="@color/button_color"
+        android:textStyle="italic"
+        android:textSize="30dp"/>
 
     <LinearLayout
         android:id="@+id/LLH1"
@@ -132,9 +134,10 @@
             android:layout_width="198dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:backgroundTint="@color/button_color"
             android:onClick="saveNewUserButton"
-            android:text="Save" />
+            android:text="Save"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/button_round"/>
 
 
 </LinearLayout>

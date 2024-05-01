@@ -38,7 +38,7 @@ class MainActivtyReadyBtn : AppCompatActivity() {
             // Handle menu item clicks
             when (menuItem.itemId) {
                 R.id.nav_home_side -> {
-                    val intent = Intent(this@MainActivtyReadyBtn, MainActivityAdminEditUserPre::class.java)
+                    val intent = Intent(this@MainActivtyReadyBtn, MainActivityBasicEditUser::class.java)
                     startActivity(intent)
                 }
                 R.id.nav_settings -> {
@@ -50,6 +50,10 @@ class MainActivtyReadyBtn : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
+
+
+        //
+
     }
 
     override fun onBackPressed() {
