@@ -56,8 +56,9 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: Mutab
 
         // Check if the target is met and change the background color accordingly
         if (habit.habitcurrentCount == habit.habittarget) {
-            // Target met, change background color
-            containerLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.TargetMet)) // Example color
+            // Target met, change background color new
+            containerLayout.setBackgroundResource(R.drawable.targetround)
+           // containerLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.TargetMet)) // Example color
             //textView.setTextColor(ContextCompat.getColor(context, R.color.YOUR_DEFAULT_TEXT_COLOR));
         }
 
@@ -80,8 +81,10 @@ class HabitAdapter(context: Context, resource: Int, private val habitList: Mutab
                 Log.d("HabitAdapter", "Increased target for habit: ${habit.habitId} to ${habit.habitcurrentCount}")
                 // Check if the target is met and change the background color accordingly
                 if (habit.habitcurrentCount == habit.habittarget) {
-                    // Target met, change background color
-                    containerLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.TargetMet)) // Example color
+                    // Target met, change background color new
+                    containerLayout.setBackgroundResource(R.drawable.targetround)
+
+                   // containerLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.TargetMet)) // Example color
 
                     //
                     // Target met, show alert dialog

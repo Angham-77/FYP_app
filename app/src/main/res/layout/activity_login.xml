@@ -9,19 +9,20 @@
 
     <EditText
         android:id="@+id/editTextUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="281dp"
+        android:layout_height="42dp"
         android:layout_marginStart="12dp"
         android:ems="10"
-        android:inputType="text"
         android:hint="Username"
-        android:textColorHint ="@color/hintText"
+        android:inputType="text"
+        android:paddingStart="8dp"
+        android:textColorHint="@color/hintText"
         app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textViewUserName"
         app:layout_constraintTop_toBottomOf="@+id/textViewWelcome"
-        app:layout_constraintVertical_bias="0.817" />
+        app:layout_constraintVertical_bias="0.884" />
 
     <TextView
         android:id="@+id/textViewWelcome"
@@ -37,7 +38,7 @@
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.265" />
+        app:layout_constraintVertical_bias="0.306" />
 
     <Button
         android:id="@+id/buttonSignin"
@@ -69,34 +70,34 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="196dp"
-        android:layout_height="106dp"
+        android:layout_width="322dp"
+        android:layout_height="182dp"
         app:layout_constraintBottom_toTopOf="@+id/textViewWelcome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/appnamet" />
+        app:srcCompat="@drawable/applogo" />
 
     <ImageView
         android:id="@+id/textViewUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="24dp"
         android:src="@drawable/baseline_person_3_24"
         android:textColor="@color/TextColor"
         app:layout_constraintBottom_toTopOf="@+id/textViewPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.897" />
+        app:layout_constraintVertical_bias="0.895" />
 
     <ImageView
         android:id="@+id/textViewPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="12dp"
         android:src="@drawable/baseline_lock_24"
         android:textColor="@color/TextColor"
         app:layout_constraintBottom_toTopOf="@+id/textViewMessageMainActivity"
@@ -104,23 +105,24 @@
 
     <EditText
         android:id="@+id/editTextPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="281dp"
+        android:layout_height="42dp"
         android:layout_marginStart="12dp"
         android:layout_marginBottom="4dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:paddingStart="8dp"
         android:textColorHint="@color/hintText"
         app:layout_constraintBottom_toTopOf="@+id/textViewMessageMainActivity"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textViewPassword" />
 
     <TextView
         android:id="@+id/textViewMessageMainActivity"
-        android:layout_width="313dp"
-        android:layout_height="48dp"
+        android:layout_width="320dp"
+        android:layout_height="31dp"
         android:layout_marginBottom="252dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

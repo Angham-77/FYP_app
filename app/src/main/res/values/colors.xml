@@ -5,17 +5,21 @@
     <!--<color name="button_color">#6083a1</color>-->
   <!--  <color name="button_color">#C5EDD3</color>-->
    <!-- <color name="button_color_option">#96C8A8</color>-->
-    <color name="button_color">#001F3F</color>
-    <color name="button_color_option">#001F3F</color>
+    <!--<color name="button_color">#001F3F</color>-->
+    <color name="button_color">#F56678</color>
+    <color name="button_color_option">#F85C70</color>
+    <color name="option_backgroundr">#FABEC0</color>
    <!-- <color name="button_color_option">#FFD373</color>-->
     <color name="nav_grey">#B9B9B9</color>
     <color name="light_grey">#EBEBEB</color>
 
-    <color name="colorPrimary">#001F3F</color>
+    <!--<color name="colorPrimary">#001F3F</color>-->
+    <color name="colorPrimary">#F86F80</color>
     <color name="colorPrimaryDark">#95a7b8</color>
     <color name="colorAccent">#2196F3</color>
   <!--  <color name="TargetMet">#153C63</color>-->
-    <color name="TargetMet">#8BFCB39C</color>
+    <!--<color name="TargetMet">#8BFCB39C</color>-->
+    <color name="TargetMet">#8DF68E87</color>
 
     <color name="Round">#89a4b0</color>
     <!--<color name="singlHabit">#545555</color>-->

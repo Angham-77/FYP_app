@@ -73,7 +73,7 @@ class UserInputValidator {
         if (recoHabit.isEmpty()) {
             return "Habit is required!"
         }
-        else if (recoHabit.length < 4 || recoHabit.length > 20) {
+        else if (recoHabit.length < 3 || recoHabit.length > 20) {
             return "Habit entry must be between 4 and 20 characters."
         }
         return "Valid"
