@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".MainActivity">
+    tools:context=".MainActivityAdminOptions">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,12 +15,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="80dp">
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Options"
+                android:textColor="@color/button_color"
+                android:textSize="28sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/title"
+                android:layout_marginBottom="80dp"
+                android:orientation="vertical">
 
 
                 <androidx.cardview.widget.CardView
