@@ -18,13 +18,13 @@
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_height="72dp"
                 android:background="@drawable/round"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="Options"
                 android:textColor="@color/button_color"
-                android:textSize="28sp" />
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
