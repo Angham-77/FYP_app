@@ -22,7 +22,7 @@
     </style>
 
     <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="itemIconTint">@color/nav_grey</item>
+        <item name="itemIconTint">@color/white</item>
         <item name="itemTextColor">@color/nav_grey</item>
     </style>
 
@@ -32,6 +32,12 @@
     <style name="Theme.FYP_Habitiny.CustomToolbar" parent="Base.Theme.FYP_Habitiny">
         <!-- Customizations specific to activities that use a custom toolbar -->
     </style>
+    //new for mainactivity
+    <style name="AppThemeMainActivity" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/TextColor</item> <!-- Change the color to the desired color -->
+    </style>
+
 
     <!-- Default app theme applied to the app unless overridden -->
   <!--  <style name="AppTheme" parent="Base.Theme.FYP_Habitiny">

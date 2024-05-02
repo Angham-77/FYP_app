@@ -18,8 +18,7 @@
         android:text="\nEdit User Deatils"
         android:textAlignment="center"
         android:textColor="@color/button_color"
-        android:textStyle="italic"
-        android:textSize="30dp"
+        android:textSize="26dp"
         android:layout_marginBottom="50dp"/>
 
     <LinearLayout

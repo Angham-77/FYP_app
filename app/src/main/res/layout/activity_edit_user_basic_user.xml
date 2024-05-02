@@ -15,10 +15,10 @@
         android:id="@+id/textViewNewUserTitleEditUserBasic"
         android:layout_width="match_parent"
         android:layout_height="77dp"
-        android:text="\nEdit Your Deatils"
+        android:text="\nEdit Your Details"
         android:textAlignment="center"
         android:textColor="@color/button_color"
-        android:textStyle="italic"
+
         android:textSize="30dp"
         android:layout_marginBottom="50dp"/>
 

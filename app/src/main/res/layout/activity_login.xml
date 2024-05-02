@@ -43,12 +43,13 @@
 
     <Button
         android:id="@+id/buttonSignin"
-        android:layout_width="201dp"
-        android:layout_height="45dp"
-        android:background="@drawable/button_round"
+        android:layout_width="219dp"
+        android:layout_height="43dp"
         android:layout_marginBottom="50dp"
+        android:background="@drawable/button_round"
         android:onClick="loginButton"
         android:text="Sign in"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,12 +58,13 @@
 
     <Button
         android:id="@+id/buttonSignup"
-        android:layout_width="201dp"
-        android:layout_height="45dp"
+        android:layout_width="219dp"
+        android:layout_height="43dp"
         android:layout_marginBottom="48dp"
         android:background="@drawable/button_round"
         android:onClick="registerButton"
         android:text="Sign up"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
@@ -80,7 +82,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/applogo" />
+        app:srcCompat="@drawable/appname121" />
 
     <ImageView
         android:id="@+id/textViewUserName"

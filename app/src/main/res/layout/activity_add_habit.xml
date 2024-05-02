@@ -21,12 +21,10 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="40dp"
             android:layout_gravity="center"
-            android:background="@drawable/targetround"
-            android:text="Fill out the fields below to add a new habit"
+            android:text="Add New Habit"
             android:textAlignment="center"
             android:textColor="@color/button_color"
-            android:textSize="20dp"
-            android:textStyle="italic" />
+            android:textSize="26dp" />
 
         <EditText
             android:id="@+id/editTextHabitName"
