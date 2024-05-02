@@ -21,7 +21,7 @@
                 android:layout_height="72dp"
                 android:background="@drawable/round"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Options"
+                android:text="Admin Options"
                 android:textColor="@color/button_color"
                 android:textSize="30sp"
                 android:textStyle="bold" />
