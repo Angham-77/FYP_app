@@ -1,14 +1,18 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/Home"
         android:icon="@drawable/home"
-        android:title="" />
+        android:title=""
+        app:iconTint="@color/white"/>
     <item
         android:id="@+id/AddUser"
         android:icon="@drawable/add"
-        android:title="" />
+        android:title=""
+        app:iconTint="@color/white"/>
     <item
         android:id="@+id/AddHabit"
         android:icon="@drawable/pen"
-        android:title="" />
+        android:title=""
+        app:iconTint="@color/white"/>
 </menu>

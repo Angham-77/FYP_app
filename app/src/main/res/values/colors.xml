@@ -7,7 +7,7 @@
    <!-- <color name="button_color_option">#96C8A8</color>-->
     <!--<color name="button_color">#001F3F</color>-->
     <!--<color name="button_color">#F56678</color>-->
-    <color name="button_color">#FD6B6A</color>
+    <color name="button_color">#FD7473</color>
     <color name="button_color_option">#FD6B6A</color>
     <color name="option_backgroundr">#FABEC0</color>
    <!-- <color name="button_color_option">#FFD373</color>-->
@@ -16,7 +16,7 @@
 
     <!--<color name="colorPrimary">#001F3F</color>-->
     <!--<color name="colorPrimary">#F86F80</color>-->
-    <color name="colorPrimary">#FD6B6A</color>
+    <color name="colorPrimary">#FD7473</color>
     <color name="colorPrimaryDark">#95a7b8</color>
     <color name="colorAccent">#2196F3</color>
   <!--  <color name="TargetMet">#153C63</color>-->
@@ -26,12 +26,15 @@
 
     <color name="Round">#89a4b0</color>
     <!--<color name="singlHabit">#545555</color>-->
-    <color name="singlHabit">#72CFCFCF</color>
+    <!--<color name="singlHabit">#72CFCFCF</color>-->
+    <color name="singlHabit">#9CFFECA7</color>
+    <color name="moto">#B5FBEEBD</color>
     <color name="IsAdminText">#5c5c5b</color>
     <!--<color name="background">#001F3F</color>-->
    <!-- <color name="background">#FFFFE5</color>-->
    <!-- <color name="background">#3c3c3c</color>-->
-    <color name="background">#FFFFF7</color>
+    <!--<color name="background">#FFFFED</color>-->
+    <color name="background">#FDFDED</color>
     <!--<color name="TextColor">#95a7b8</color>-->
     <color name="TextColor">#606163</color>
     <!--<color name="TextColor">#2A2C2C</color>-->
