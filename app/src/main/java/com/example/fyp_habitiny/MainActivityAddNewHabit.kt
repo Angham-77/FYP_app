@@ -152,12 +152,17 @@ class MainActivityAddNewHabit : AppCompatActivity() {
             -1 -> message.text = "Error on creating new habit"
             -2 -> message.text = "Error can not open/create database"
             else -> {
-                message.text = "Your habit has been added to the database successfully."
+                message.text = "Your habit has been added successfully."
                 findViewById<Button>(R.id.buttonSaveHabit).isEnabled = false
                 val intent = Intent(this, MainActivtyMyHabit::class.java)
                 startActivity(intent)
             }
         }
+    }
+
+    fun viewMainHabitButton(view: View) {
+        val intent = Intent(this, MainActivtyMyHabit::class.java)
+        startActivity(intent)
     }
     fun goTStreak(view: View) {
         val intent = Intent(this, MainActivityStreakCounter::class.java)

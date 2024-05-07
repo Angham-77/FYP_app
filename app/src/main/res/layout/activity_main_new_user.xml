@@ -18,6 +18,7 @@
         android:textAlignment="center"
         android:textColor="@color/button_color"
         android:textStyle="italic"
+        android:layout_marginBottom="35dp"
         android:textSize="30dp"/>
 
     <LinearLayout
