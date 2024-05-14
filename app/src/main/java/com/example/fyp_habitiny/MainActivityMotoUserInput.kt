@@ -80,11 +80,13 @@ class MainActivityMotoUserInput: AppCompatActivity() {
             return
         }
         else { // Save data
-
-            val newMoto = Moto(-1, MotoText, -1)
-            //save data
             val mydatabase = DataBaseHelper(this)
+            val currentUserId = mydatabase.getCurrentUserId(this)
+            val newMoto = Moto(-1, MotoText, currentUserId)
+            //save data
+
             val result = mydatabase.addMoto(newMoto)
+
 
             when(result) {
 

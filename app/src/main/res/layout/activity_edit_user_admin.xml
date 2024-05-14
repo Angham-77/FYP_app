@@ -123,7 +123,11 @@
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:textColor="@color/TextColor"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"/>
 
 
 

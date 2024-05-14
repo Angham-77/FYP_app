@@ -20,8 +20,6 @@ class UserInputValidator {
                 return "Invalid email format.!"
             }
         }
-
-
         if (phoneNo.isEmpty()) {
             return "Phone No is required!"
         } else {

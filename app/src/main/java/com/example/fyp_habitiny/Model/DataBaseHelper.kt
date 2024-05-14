@@ -171,11 +171,22 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         catch (e: SQLiteException) {}
         //...........................
 
+
         //Create Moto Table
         try {
-            var sqlCreateStatement: String = "CREATE TABLE " + MotoTableName + "(" + Moto_Column_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    Moto_Column_MotoText+ "  TEXT NOT NULL "+ Moto_Column_UserID + "INTEGER, " + "FOREIGN KEY (" + Moto_Column_UserID + ") REFERENCES " +
+           /* var sqlCreateStatement: String = "CREATE TABLE " + MotoTableName + "(" + Moto_Column_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    Moto_Column_MotoText+ "  TEXT NOT NULL, "+ Moto_Column_UserID + "INTEGER, " + "FOREIGN KEY (" + Moto_Column_UserID + ") REFERENCES " +
+                    UserTableName + "(" + User_Column_ID + "))"*/
+
+            //
+            var sqlCreateStatement: String = "CREATE TABLE " + MotoTableName + "(" +
+                    Moto_Column_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    Moto_Column_MotoText+ " TEXT NOT NULL, " +
+                    Moto_Column_UserID + " INTEGER, " +
+                    "FOREIGN KEY (" + Moto_Column_UserID + ") REFERENCES " +
                     UserTableName + "(" + User_Column_ID + "))"
+
+            //
 
             db?.execSQL(sqlCreateStatement)
         }
@@ -298,6 +309,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
 
 
         cv.put(Moto_Column_MotoText, moto.motoText)
+        cv.put(Moto_Column_UserID, moto.motoUserid)
 
 
         val success = db.insert(MotoTableName, null, cv)
@@ -476,7 +488,6 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         catch(e: SQLiteException) {
             return -2
         }
-
         val userName = user.userUserName.lowercase()
         val userPassword = user.userPassword
         //val sqlStatement = "SELECT * FROM $TableName WHERE $Column_UserName = $userName AND $Column_Password = $userPassword"
@@ -495,7 +506,6 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         cursor.close()
         db.close()
         return -1 //User not found
-
     }
     fun GetUserDetails(user: User) : Int {
 
