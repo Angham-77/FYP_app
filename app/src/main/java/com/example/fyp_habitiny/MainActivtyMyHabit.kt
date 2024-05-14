@@ -106,7 +106,7 @@ class MainActivtyMyHabit : AppCompatActivity() {
             showFilterPopupMenu(view)
         }
 
-
+//Add habit to archive
         adapter.setOnAddHabitToArchiveListener { addedHabit ->
             val archivedHabit = ArchiveHabit(
                 archivedHabitId = -1,

@@ -128,7 +128,7 @@ class MainActivityAddNewHabit : AppCompatActivity() {
         val habitPref: String = if (radioGroup.checkedRadioButtonId != -1) {
             findViewById<RadioButton>(radioGroup.checkedRadioButtonId).text.toString()
         } else {
-            "" // or any default value you find appropriate
+            ""
         }
 
         if (habitName.isBlank() || habitStartDate.isBlank() || habitPref.isBlank()) {
@@ -139,7 +139,6 @@ class MainActivityAddNewHabit : AppCompatActivity() {
         val validationMessage = userInputValidator.validateHabitInput(habitName, habitStartDate, habitEndDate, habitTarget)
 
         if (validationMessage != "Valid") {
-            // If validation fails, show the error message and stop further execution
             message.text = validationMessage
             return
         }
