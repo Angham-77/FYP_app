@@ -52,9 +52,6 @@ class MainActivityNotificationTest  {
 
         notificationManager.notify(NOTIFICATION_ID, notification)
 
-        // This is where you would write assertions to check if the notification has been posted.
-        // Note: Android does not provide a direct way to check if a notification is showing.
-        // You would need to rely on manual testing or UI testing frameworks that can interact with the system UI.
     }
 
     private fun createNotificationChannel(context: Context) {
