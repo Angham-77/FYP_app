@@ -121,7 +121,6 @@ class MainActivityAdminEditUserPre : AppCompatActivity() {
         if (isUserDeleted) {
             // Success
             showToast("User deleted successfully")
-            // Optionally, you can navigate back to the previous screen or perform other actions
         } else {
             // Error
             showToast("Error deleting user")

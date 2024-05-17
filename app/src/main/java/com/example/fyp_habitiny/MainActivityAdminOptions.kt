@@ -43,7 +43,7 @@ class MainActivityAdminOptions : AppCompatActivity() {
                     val intent = Intent(this@MainActivityAdminOptions, MainActivityAdminLogin::class.java)
                     startActivity(intent)
                 }
-                // Additional cases for other menu items if necessary
+
             }
             drawerLayoutAdmin.closeDrawer(GravityCompat.START)
             true

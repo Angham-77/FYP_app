@@ -115,7 +115,7 @@ class MainActivityAdminAddRecoHabit: AppCompatActivity() {
             return
         }
 
-        // Assuming validation passed if this point is reached
+
         // Create the new habit with the current user's ID
         val newHabit = RecoHabit(-1, habitName, currentUserId)
         val result = myDataBase.addRecoHabit(newHabit)
@@ -127,7 +127,6 @@ class MainActivityAdminAddRecoHabit: AppCompatActivity() {
             else -> {
                 message.text = "Your habit has been added to the database successfully."
                 findViewById<Button>(R.id.buttonSaveRecoHabit).isEnabled = false
-                // Optionally, proceed with navigation or other steps now that the habit is saved
                 // val intent = Intent(this, MainActivityAdminRecoHabitEdit::class.java)
                 // startActivity(intent)
             }
