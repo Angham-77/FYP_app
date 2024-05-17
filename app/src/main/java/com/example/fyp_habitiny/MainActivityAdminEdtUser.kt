@@ -30,7 +30,6 @@ class MainActivityAdminEdtUser : AppCompatActivity() {
         val userDetails = intent.getParcelableExtra<User>("USER_DETAILS")
 
         if (userDetails != null) {
-            // Populate the relevant EditText views with user details
             findViewById<EditText>(R.id.editTextFullNameEditUser).setText(userDetails.userFullName)
             findViewById<EditText>(R.id.editTextTextEmailAddressEditUser).setText(userDetails.userEmail)
             findViewById<EditText>(R.id.editTextPhoneNoEditUser).setText(userDetails.userPhoneNo)
@@ -114,7 +113,6 @@ class MainActivityAdminEdtUser : AppCompatActivity() {
         if (isUserDeleted) {
             // Success
             showToast("User deleted successfully")
-            // Optionally, you can navigate back to the previous screen or perform other actions
         } else {
             // Error
             showToast("Error deleting user")

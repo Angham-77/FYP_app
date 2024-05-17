@@ -48,7 +48,6 @@ class MainActivityMotoUserInput: AppCompatActivity() {
                         val intent = Intent(this@MainActivityMotoUserInput, MainActivityStreakCounter::class.java)
                         startActivity(intent)
                     }
-                    // You can add more cases here if needed
                 }
                 return true // True if the event was handled, false otherwise.
             }
