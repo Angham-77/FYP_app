@@ -18,8 +18,8 @@ class MainActivityTest{
     }
     @Test
     fun testLogin_Successful() {
-        val username = "test"
-        val password = "test"
+        val username = "test4"
+        val password = "test4"
         Espresso.onView(withId(R.id.editTextUserName)).perform(ViewActions.typeText(username))
         Espresso.onView(withId(R.id.editTextPassword)).perform(ViewActions.typeText(password))
         Espresso.closeSoftKeyboard()

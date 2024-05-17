@@ -46,8 +46,8 @@ class NotificationScheduler (private val context: Context) {
         }
         cursor.close()
     }*/
-   @SuppressLint("Range")
-   fun checkHabitsForReminder() {
+  // @SuppressLint("Range")
+  /* fun checkHabitsForReminder() {
        // Hard-coded date known to exist in your database for testing purposes
        val hardCodedDate = "11/04/2024" // Format "dd/MM/yyyy"
 
@@ -65,9 +65,9 @@ class NotificationScheduler (private val context: Context) {
            scheduleNotification(context, habitId, habitName, hardCodedDate)
        }
        cursor.close()
-   }
+   }*/
 
-    @SuppressLint("ScheduleExactAlarm")
+    /*@SuppressLint("ScheduleExactAlarm")
     fun scheduleNotification(context: Context, habitId: Int, habitName: String, reminderDate: String) {
         Log.d("NotificationScheduler", "Scheduling notification for: " + habitName + " on " + reminderDate);
         // Define multiple trigger times
@@ -94,7 +94,7 @@ class NotificationScheduler (private val context: Context) {
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, reminderDateTime, pendingIntent)
         }
-    }
+    }*/
 
 
   /*  @SuppressLint("ScheduleExactAlarm")

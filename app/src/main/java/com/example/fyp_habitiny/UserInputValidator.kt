@@ -49,7 +49,7 @@ class UserInputValidator {
             return "Start date is required!"
         }
         if (habitEndDate.isEmpty()) {
-            return "Start date is required!"
+            return "End date is required!"
         }
 
         if (habitTarget !in 1..50) {
@@ -72,7 +72,7 @@ class UserInputValidator {
             return "Habit is required!"
         }
         else if (recoHabit.length < 3 || recoHabit.length > 20) {
-            return "Habit entry must be between 4 and 20 characters."
+            return "Habit entry must be between 3 and 20 characters."
         }
         return "Valid"
     }

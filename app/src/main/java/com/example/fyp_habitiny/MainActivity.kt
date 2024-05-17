@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     //notification
-    private fun checkAndRequestNotificationPermission() {
+   /* private fun checkAndRequestNotificationPermission() {
         when {
             ContextCompat.checkSelfPermission(
                 this,
@@ -53,15 +53,15 @@ class MainActivity : AppCompatActivity() {
                 requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
-    }
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         //
-        NotificationScheduler(this).checkHabitsForReminder()
-        checkAndRequestNotificationPermission()
-        createNotificationChannel() //step2
+       // NotificationScheduler(this).checkHabitsForReminder()
+       // checkAndRequestNotificationPermission()
+      //  createNotificationChannel() //step2
 
         // Test: Check for habits that are due tomorrow
         val reminderDate = LocalDate.now().plusDays(1) // You get the reminder date
@@ -70,11 +70,11 @@ class MainActivity : AppCompatActivity() {
 
         // You should use the formattedReminderDate you just created
         val dbHelper2 = DataBaseHelper(this)
-        val cursor = dbHelper2.getHabitsNearEndDate(formattedReminderDate)
+      //  val cursor = dbHelper2.getHabitsNearEndDate(formattedReminderDate)
 
         // Rest of your test code...
         // Ensure to close the cursor after you are done using it
-        cursor.close()
+      //  cursor.close()
         //
 
 
@@ -95,10 +95,10 @@ class MainActivity : AppCompatActivity() {
     }
     //notification
 
-    override fun onStart() {
+   /* override fun onStart() {
         super.onStart()
         showNotificationEveryTime() // Step 3: Show the notification
-    }
+    }*/
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = getString(R.string.channel_name)
@@ -146,7 +146,7 @@ class MainActivity : AppCompatActivity() {
         }
         NotificationManagerCompat.from(this).notify(NOTIFICATION_ID, notificationBuilder.build())
     }*/
-   private fun showNotificationEveryTime() {
+  /* private fun showNotificationEveryTime() {
        val dbHelper = DataBaseHelper(this)
        val currentDate = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
        val cursor = dbHelper.getHabitsNearEndDate(currentDate)
@@ -188,7 +188,7 @@ class MainActivity : AppCompatActivity() {
            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
        NotificationManagerCompat.from(this).notify(NOTIFICATION_ID, notificationBuilder.build())
-   }
+   }*/
 
 
     companion object {

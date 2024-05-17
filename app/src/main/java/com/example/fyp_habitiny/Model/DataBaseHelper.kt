@@ -1248,17 +1248,17 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context,DataBaseName,
         """
         return db.rawQuery(query, arrayOf(reminderDate))
     }*/
-    fun getHabitsNearEndDate(formattedReminderDate: String): Cursor {
+   /* fun getHabitsNearEndDate(formattedReminderDate: String): Cursor {
         val db = this.readableDatabase
         val query = """
-        SELECT $Habit_Column_ID, $Habit_Column_Name FROM $HabitTableName 
+        SELECT $Habit_Column_ID, $Habit_Column_Name FROM $HabitTableName
         WHERE $Habit_Column_EndDate = ? AND $Habit_Column_CurrentTargetCount < $Habit_Column_Target
     """
-        Log.d("DataBaseHelper", "Query: $query")
+      //  Log.d("DataBaseHelper", "Query: $query")
         val cursor = db.rawQuery(query, arrayOf(formattedReminderDate))
-        Log.d("DataBaseHelper", "Cursor count: ${cursor.count}")
+     //   Log.d("DataBaseHelper", "Cursor count: ${cursor.count}")
         return cursor
-    }
+    }*/
     companion object {
         private const val Habit_Column_Name = "HabitName"
 

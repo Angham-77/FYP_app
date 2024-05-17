@@ -229,7 +229,7 @@ class MainActivtyMyHabit : AppCompatActivity() {
         startActivity(intent)
     }
     //notification
-    @SuppressLint("ScheduleExactAlarm")
+   /* @SuppressLint("ScheduleExactAlarm")
     fun scheduleNotification(habitId: Int, habitName: String, reminderDate: String) {
         val intent = Intent(this, ReminderBroadcastReceiver::class.java).apply {
             putExtra("habitId", habitId)
@@ -240,9 +240,9 @@ class MainActivtyMyHabit : AppCompatActivity() {
 
         val reminderDateTime = LocalDate.parse(reminderDate).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, reminderDateTime, pendingIntent)
-    }
+    }*/
     //testest
-     fun triggerTestNotification(view: View?) {
+    /* fun triggerTestNotification(view: View?) {
         val scheduler = NotificationScheduler(applicationContext)
         // Manually set a habit ID, name, and a reminder date for testing
         val testHabitId = 999 // Example ID
@@ -255,5 +255,5 @@ class MainActivtyMyHabit : AppCompatActivity() {
             testHabitName,
             testReminderDate
         )
-    }
+    }*/
 }
